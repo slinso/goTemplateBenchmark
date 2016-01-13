@@ -14,6 +14,6 @@ BenchmarkGolang-8         100000             19177 ns/op            2058 B/op   
 BenchmarkEgo-8            300000              3758 ns/op             991 B/op          8 allocs/op
 BenchmarkFtmpl-8          300000              4468 ns/op            1152 B/op         12 allocs/op
 ```
-*ftmpl* performs worse than _ego_ because the Buffer is defined inside the template function which returns a string.
+*ftmpl* performs worse than _ego_ in the benchmark because the Buffer is defined inside the template function which returns a string. This is imho just a benchmark problem, because in a real application you just generate the HTML once and will print the string.
 Other than that *ftmpl* adds nice type safety, which could be implemented in _ego_ as well.
 After I refactored the generated *ftmpl* code to accept the Buffer as a parameter, the performance was on par with *ego*.
