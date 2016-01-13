@@ -16,3 +16,4 @@ BenchmarkFtmpl-8          300000              4468 ns/op            1152 B/op   
 ```
 *ftmpl* performs worse than _ego_ because the Buffer is defined inside the template function which returns a string.
 Other than that *ftmpl* adds nice type safety, which could be implemented in _ego_ as well.
+After I refactored the generated *ftmpl* code to accept the Buffer as a parameter, the performance was on par with *ego*.
