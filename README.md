@@ -1,6 +1,5 @@
 # goTemplateBenchmark
 comparing the performance of different template engines
-* Golang html/template
 * [Ace](https://github.com/yosssi/ace)
 * [Amber](https://github.com/eknkc/amber)
 * [Damsel](https://github.com/dskinner/damsel)
@@ -16,7 +15,7 @@ comparing the performance of different template engines
 
 ## Why?
 Just for fun. Go Templates work nice out of the box.
-If you really care about performance you will normally cache the rendered output using varnish or whatever.
+If you really care about performance you will usually cache the rendered output.
 
 ## Results
 Tests run on a VPS 1 CPU und 512 MB Ram
@@ -40,7 +39,7 @@ BenchmarkSoy              100000             14204 ns/op            1732 B/op   
 `go test -bench "Ego|Ftmpl|Gorazor" -benchmem -benchtime=5s`
 
 ```
-**BenchmarkEgo              500000              4076 ns/op             646 B/op          8 allocs/op**
+BenchmarkEgo              500000              4076 ns/op             646 B/op          8 allocs/op
 BenchmarkFtmpl            300000              6799 ns/op            1152 B/op         12 allocs/op
 BenchmarkGorazor          200000              5302 ns/op             656 B/op         11 allocs/op
 ```
