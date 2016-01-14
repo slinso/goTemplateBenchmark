@@ -1,0 +1,16 @@
+@{
+	import "github.com/SlinSo/goTemplateBenchmark/model"
+	var u *model.User
+}
+<html>
+    <body>
+        <h1>@u.FirstName</h1>
+
+        <p>Here's a list of your favorite colors:</p>
+        <ul>
+        @{ for _, colorName := range u.FavoriteColors {
+            <li>@colorName</li> }
+        }
+        </ul>
+    </body>
+</html>

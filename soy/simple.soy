@@ -1,0 +1,20 @@
+{namespace soy}
+
+/**
+ * Greets a person and optionally a list of other people.
+ * @param user model.User
+ */
+{template .simple}
+<html>
+    <body>
+        <h1>{$user.firstName}</h1>
+
+        <p>Here's a list of your favorite colors:</p>
+        <ul>
+        {foreach $colorName in $user.favoriteColors}
+            <li>{$colorName}</li>
+        {/foreach}
+        </ul>
+    </body>
+</html>
+{/template}

@@ -1,0 +1,12 @@
+<html>
+    <body>
+	    <h1>{{ u.FirstName }}</h1>
+
+        <p>Here's a list of your favorite colors:</p>
+        <ul>
+    	{% for colorName in u.FavoriteColors %}
+            <li>{{ colorName }}</li>
+        {% endfor %}
+        </ul>
+    </body>
+</html>
