@@ -24,24 +24,24 @@ Tests run on a VPS 1 CPU und 512 MB Ram
 `go test -bench "Ace|Amber|Damsel|Golang|Handlebars|Kasia|Mustache|Pongo2|Soy" -benchmem -benchtime=5s`
 
 ```
-BenchmarkGolang            50000             27615 ns/op            2079 B/op         38 allocs/op
-BenchmarkAce               20000             69353 ns/op            5625 B/op         77 allocs/op
-BenchmarkAmber             50000             27355 ns/op            2091 B/op         39 allocs/op
-BenchmarkDamsel            50000             47903 ns/op            2440 B/op         50 allocs/op
-BenchmarkMustache         100000             14665 ns/op            1648 B/op         28 allocs/op
-BenchmarkPongo2           100000             18367 ns/op            2997 B/op         46 allocs/op
-BenchmarkHandlebars        30000             50151 ns/op            4497 B/op         90 allocs/op
-BenchmarkKasia            200000             13861 ns/op            1829 B/op         26 allocs/op
-BenchmarkSoy              100000             14204 ns/op            1732 B/op         26 allocs/op
+BenchmarkGolang           200000             37886 ns/op            2078 B/op         38 allocs/op
+BenchmarkAce              100000             85394 ns/op            5548 B/op         77 allocs/op
+BenchmarkAmber            200000             39391 ns/op            2090 B/op         39 allocs/op
+BenchmarkDamsel           100000             62043 ns/op            2440 B/op         50 allocs/op
+BenchmarkMustache         500000             19965 ns/op            1648 B/op         28 allocs/op
+BenchmarkPongo2           200000             31120 ns/op            2997 B/op         46 allocs/op
+BenchmarkHandlebars       100000             79132 ns/op            4496 B/op         90 allocs/op
+BenchmarkKasia            500000             16305 ns/op            2187 B/op         26 allocs/op
+BenchmarkSoy              300000             19098 ns/op            1832 B/op         26 allocs/op
 ```
 
 ### Template Engines with manual precompilation
 `go test -bench "Ego|Ftmpl|Gorazor" -benchmem -benchtime=5s`
 
 ```
-BenchmarkEgo              500000              4076 ns/op             646 B/op          8 allocs/op
-BenchmarkFtmpl            300000              6799 ns/op            1152 B/op         12 allocs/op
-BenchmarkGorazor          200000              5302 ns/op             656 B/op         11 allocs/op
+BenchmarkEgo             1000000              6085 ns/op             645 B/op          8 allocs/op
+BenchmarkFtmpl           1000000              9398 ns/op            1152 B/op         12 allocs/op
+BenchmarkGorazor         1000000              7885 ns/op             656 B/op         11 allocs/op
 ```
 *ftmpl* and *gorazor* performs worse than *ego* in the benchmark because the Buffer is defined inside the template function which returns a string. This is imho just a benchmark problem, because in a real application you just generate the HTML once and will print the string.
 Other than that *ftmpl* adds nice type safety, which could be implemented in _ego_ as well.
@@ -50,3 +50,4 @@ After I refactored the generated *ftmpl* code to accept the Buffer as a paramete
 ## TODO
 - Makefile
 - Dependency Management
+- more complex test with includes
