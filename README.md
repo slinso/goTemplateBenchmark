@@ -3,7 +3,11 @@ comparing the performance of different template engines
 * Golang html/template
 * [ego](https://github.com/benbjohnson/ego)
 * [ftmpl](https://github.com/tkrajina/ftmpl)
- 
+
+## Why?
+Just for fun. Go Templates work nice out of the box.
+If you really care about performance you will normally cache the rendered output using varnish or whatever.
+
 ## Results
 Tests run on a VPS 1 CPU und 512 MB Ram
 
