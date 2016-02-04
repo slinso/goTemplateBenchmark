@@ -1,0 +1,42 @@
+@{
+	import (
+	"github.com/SlinSo/goTemplateBenchmark/model"
+	"github.com/sipin/gorazor/gorazor"
+	"github.com/SlinSo/goTemplateBenchmark/gorazor/tpl/layout/base"
+	"github.com/SlinSo/goTemplateBenchmark/gorazor/tpl/helper"
+	)
+	var u *model.User
+	var nav []*model.Navigation
+	var title string
+}
+
+<div class="content">
+	<div class="welcome">
+		<h4>Hello @u.FirstName</h4>
+		
+		<div class="raw">@raw(u.RawContent)</div>
+		<div class="enc">@u.EscapedContent</div>
+	</div>
+
+@{
+	for i := 1; i <= 5; i++ {
+		if i == 1 {
+			<p>@u.FirstName has @i message</p>
+		} else {
+			<p>@u.FirstName has @gorazor.Itoa(@i) messages</p>
+		}
+	}
+}
+</div>
+
+@section header {
+	@helper.Header(@title)
+}
+
+@section footer {
+	@helper.Footer()
+}
+
+@section navigation {
+	@helper.Navigation(nav)
+}

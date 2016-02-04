@@ -1,0 +1,34 @@
+!#extends base
+
+!#sub header
+<title>{{s title}}'s Home Page</title>
+<div class="header">Page Header</div>
+
+!#sub footer
+<div class="footer">copyright 2016</div>
+
+!#sub navigation
+<ul class="navigation">
+    {{! for _, item := range nav }}
+        	<li><a href="{{s item.Link }}">{{s item.Item }}</a></li>
+    {{!end}}
+</ul>
+
+!#sub body
+<div class="content">
+	<div class="welcome">
+		<h4>Hello {{s u.FirstName }}</h4>
+		
+		<div class="raw">{{=s u.RawContent }}</div>
+		<div class="enc">{{s u.EscapedContent }}</div>
+	</div>
+
+
+!	for i := 1; i <= 5; i++ {
+!		if i == 1 {
+			<p>{{s u.FirstName}} has {{d i}} message</p>
+!		} else {
+			<p>{{s u.FirstName}} has {{d i}} messages</p>
+!		}
+!	}
+</div>

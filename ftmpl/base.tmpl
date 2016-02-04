@@ -1,0 +1,26 @@
+!#import "github.com/SlinSo/goTemplateBenchmark/model"
+!#arg u *model.User
+!#arg nav []*model.Navigation
+!#arg title string
+<!DOCTYPE html>
+<html>
+<body>
+
+<header>
+!#include header
+</header>
+
+<nav>
+!#include navigation
+</nav>
+
+<section>
+!#include body
+</section>
+
+<footer>
+!#include footer
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+<%% import "github.com/SlinSo/goTemplateBenchmark/model" %%>
+<%! func EgoNavigation(w io.Writer, nav []*model.Navigation) error %>
+<ul class="navigation">
+<%
+	for _, item := range nav { %>
+		<li><a href="<%= item.Link %>"><%= item.Item %></a></li>
+<%	} %>
+</ul>

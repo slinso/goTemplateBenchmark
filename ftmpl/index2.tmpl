@@ -1,0 +1,29 @@
+!#extends base
+
+!#sub header
+! result.WriteString(T__header(title))
+
+!#sub footer
+! result.WriteString(T__footer())
+
+!#sub navigation
+! result.WriteString(T__navigation(nav))
+
+!#sub body
+<div class="content">
+	<div class="welcome">
+		<h4>Hello {{s u.FirstName }}</h4>
+		
+		<div class="raw">{{=s u.RawContent }}</div>
+		<div class="enc">{{s u.EscapedContent }}</div>
+	</div>
+
+
+!	for i := 1; i <= 5; i++ {
+!		if i == 1 {
+			<p>{{s u.FirstName}} has {{d i}} message</p>
+!		} else {
+			<p>{{s u.FirstName}} has {{d i}} messages</p>
+!		}
+!	}
+</div>

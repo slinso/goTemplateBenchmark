@@ -1,0 +1,41 @@
+<%% import "github.com/SlinSo/goTemplateBenchmark/model" %%>
+<%! func EgoComplex(w io.Writer, u *model.User, nav []*model.Navigation, title string) error %>
+<!DOCTYPE html>
+<html>
+<body>
+
+<header>
+<% EgoHeader(w, title) %>
+</header>
+
+<nav>
+<% EgoNavigation(w, nav) %>
+</nav>
+
+<section>
+<div class="content">
+	<div class="welcome">
+		<h4>Hello <%= u.FirstName %></h4>
+		
+		<div class="raw"><%== u.RawContent %></div>
+		<div class="enc"><%= u.EscapedContent %></div>
+	</div>
+
+<%
+	for i := 1; i <= 5; i++ {
+		if i == 1 { %>
+			<p><%=u.FirstName%> has <%=i%> message</p>
+	<%	} else { %>
+			<p><%=u.FirstName%> has <%=i%> messages</p>
+		<% }
+	}
+%>
+</div>
+</section>
+
+<footer>
+<% EgoFooter(w) %>
+</footer>
+
+</body>
+</html>

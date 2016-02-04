@@ -1,0 +1,7 @@
+{{ define "navigation" }}
+<ul class="navigation">
+{{ range .Nav }}
+	<li><a href="{{.Link}}">{{.Item}}</a></li>
+{{end}}
+</ul>
+{{ end }}

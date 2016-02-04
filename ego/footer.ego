@@ -1,0 +1,2 @@
+<%! func EgoFooter(w io.Writer) error %>
+<div class="footer">copyright 2016</div>

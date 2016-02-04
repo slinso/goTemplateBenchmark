@@ -1,0 +1,3 @@
+<%! func EgoHeader(w io.Writer, title string) error %>
+<title><%= title %>'s Home Page</title>
+<div class="header">Page Header</div>

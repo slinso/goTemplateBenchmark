@@ -1,0 +1,18 @@
+!#extends base
+
+!#sub header
+!#arg title string
+<title>{{s title}}'s Home Page</title>
+<div class="header">Page Header</div>
+
+!#sub footer
+<div class="footer">copyright 2016</div>
+
+!#sub navigation
+!#import "github.com/SlinSo/goTemplateBenchmark/model"
+!#arg nav []*model.Navigation
+<ul class="navigation">
+    {{! for _, item := range nav }}
+        	<li><a href="{{s item.Link }}">{{s item.Item }}</a></li>
+    {{!end}}
+</ul>
