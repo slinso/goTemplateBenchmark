@@ -9,6 +9,8 @@ import (
 	"github.com/SlinSo/goTemplateBenchmark/model"
 
 	"github.com/SlinSo/goTemplateBenchmark/ego"
+	"github.com/SlinSo/goTemplateBenchmark/egon"
+	"github.com/SlinSo/goTemplateBenchmark/egonslinso"
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
 	"github.com/aymerick/raymond"
@@ -92,6 +94,60 @@ func BenchmarkEgo(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		ego.EgoSimple(&buf, testData)
+	}
+}
+
+/******************************************************************************
+** Egon
+******************************************************************************/
+func TestEgon(t *testing.T) {
+	var buf bytes.Buffer
+	egon.SimpleTemplate(&buf, testData)
+
+	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkEgon(b *testing.B) {
+	var buf bytes.Buffer
+
+	for i := 0; i < b.N; i++ {
+		egon.SimpleTemplate(&buf, testData)
+	}
+}
+func BenchmarkEgonFooter(b *testing.B) {
+	var buf bytes.Buffer
+
+	for i := 0; i < b.N; i++ {
+		egon.FooterTemplate(&buf)
+	}
+}
+
+/******************************************************************************
+** EgonSlinSo
+******************************************************************************/
+func TestEgonSlinso(t *testing.T) {
+	var buf bytes.Buffer
+	egonslinso.SimpleTemplate(&buf, testData)
+
+	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkEgonSlinso(b *testing.B) {
+	var buf bytes.Buffer
+
+	for i := 0; i < b.N; i++ {
+		egonslinso.SimpleTemplate(&buf, testData)
+	}
+}
+func BenchmarkEgonSlinsoFooter(b *testing.B) {
+	var buf bytes.Buffer
+
+	for i := 0; i < b.N; i++ {
+		egonslinso.FooterTemplate(&buf)
 	}
 }
 
