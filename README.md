@@ -22,7 +22,7 @@ If you really care about performance you will usually cache the rendered output.
 
 on second thought:
 I have some templates that I cannot cache in my production code, thats why I'm interested in performant
-HTML generation from templates. After trying the code generation based projects I liked ego most, but some
+HTML generation using templates. After trying the code generation based projects I liked ego most, but some
 features where missing and generated code could be optimized further. That's why I created a fork
 and included the results in this benchmark.
 
@@ -68,3 +68,23 @@ BenchmarkComplexFtmplFctCall      200000             40946 ns/op            5745
 BenchmarkComplexMustache           50000            132716 ns/op            8451 B/op        166 allocs/op
 BenchmarkComplexGorazor           100000             61630 ns/op            8577 B/op         73 allocs/op
 ```
+
+## Security
+All packages assume that template authors are trusted. If you allow custom templates you have to sanitize your user input e.g. [bluemonday](https://github.com/microcosm-cc/bluemonday). Generally speaking I would suggest to sanitize every input not just HTML-input. 
+
+| Framework | Security | Comment |
+| --------- | -------- | ------- |
+| Ace | No | |
+| amber | No | |
+| Damsel | No | |
+| ego | Partial (html.EscapeString) | only HTML, others need to be called manually |
+| egon | Partial (html.EscapeString) | only HTML, others need to be called manually |
+| egonslinso | Partial (html.EscapeString) | only HTML, others need to be called manually |
+| ftmpl | Partial (html.EscapeString) | only HTML, others need to be called manually |
+| Go | Yes | contextual escaping [html/template Security Model](https://golang.org/pkg/html/template/#hdr-Security_Model) |
+| Gorazor | Partial (template.HTMLEscapeString) | only HTML, others need to be called manually |
+| Handlebars | Partial (raymond.escape) | only HTML |
+| Kasia | Partial (kasia.WriteEscapedHtml) | only HTML |
+| Mustache | Partial (template.HTMLEscape) | only HTML |
+| Pongo2 | Partial (pongo2.filterEscape, pongo2.filterEscapejs) | autoescape only escapes HTML, others could be implemented as pongo filters |
+| Soy | Partial (template.HTMLEscapeString, url.QueryEscape, template.JSEscapeString) | autoescape only escapes HTML, contextual escaping is defined as a project goal |
