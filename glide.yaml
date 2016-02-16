@@ -27,3 +27,4 @@ import:
 - package: github.com/dchest/htmlmin
   repo: https://github.com/dchest/htmlmin
   vcs: git
+- package: github.com/commondream/egon

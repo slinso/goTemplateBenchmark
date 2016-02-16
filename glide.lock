@@ -1,5 +1,5 @@
-hash: c931650f93a9ac5d02c2b263182c29b7f7504b8e089ea2c0ca63bd6cc86cab7f
-updated: 2016-02-01T13:00:16.776355613Z
+hash: d5e01a189cf43fd0d5e7b6739dce02695fd8371338818428f70631954c1d55db
+updated: 2016-02-16T10:05:49.756743946+01:00
 imports:
 - name: dasa.cc/damsel
   version: a93ff7112279298d61becfd501fabaa299c933c6
@@ -12,6 +12,9 @@ imports:
   subpackages:
   - ast
   - parser
+  - lexer
+- name: github.com/commondream/egon
+  version: b9680bd5dea1bc62da5c5a8a0222d589e1576c87
 - name: github.com/dchest/cssmin
   version: fb8d9b44afdc258bfff6052d3667521babcb2239
 - name: github.com/dchest/htmlmin
@@ -38,8 +41,6 @@ imports:
   version: af524a16a1b1bd467c342969bf37db23433466c4
   repo: https://github.com/hoisie/mustache
   vcs: git
-- name: github.com/hoisie/web.go
-  version: 719f814e82289c16b93cdcd1f0a1742944c69c70
 - name: github.com/robfig/soy
   version: 3d51ce6f31bd41b349a5aa9b113ddbce8aa71318
   repo: https://github.com/robfig/soy
@@ -50,14 +51,15 @@ imports:
   - parsepasses
   - soyhtml
   - template
+  - ast
+- name: github.com/sipin/gorazor
+  version: c9580eed5a9ba278c49dcdc7fec214a5bbbe1f0d
+  subpackages:
+  - gorazor
 - name: github.com/yosssi/ace
   version: 71afeb714739f9d5f7e1849bcd4a0a5938e1a70d
   repo: https://github.com/yosssi/ace
   vcs: git
-- name: github.com/yosssi/ace-proxy
-  version: ecd9b785e6023e00b1a451cdf584a30d4eff14c0
-- name: github.com/yosssi/gohtml
-  version: ccf383eafddde21dfe37c6191343813822b30e6b
 - name: github.com/ziutek/kasia.go
   version: be46c452e867a2fb4c86c47e19f64223a363c413
   repo: https://github.com/ziutek/kasia.go
@@ -67,24 +69,8 @@ imports:
   subpackages:
   - html
   - html/atom
-- name: golang.org/x/text
-  version: 15b56ecf888da757f2fce2efd90832bae25223ac
-  subpackages:
-  - encoding
-  - encoding/charmap
-  - encoding/htmlindex
-  - transform
-  - encoding/internal/identifier
-  - encoding/internal
-  - encoding/japanese
-  - encoding/korean
-  - encoding/simplifiedchinese
-  - encoding/traditionalchinese
-  - encoding/unicode
-  - language
-  - internal/utf8internal
-  - runes
-  - internal/tag
 - name: gopkg.in/fsnotify.v0
   version: ea925a0a47d225b2ca7f9932b01d2ed4f3ec74f6
+- name: gopkg.in/fsnotify.v1
+  version: 8611c35ab31c1c28aa903d33cf8b6e44a399b09e
 devImports: []
