@@ -59,7 +59,10 @@ func TestGolang(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	tmpl.Execute(&buf, testData)
+	err = tmpl.Execute(&buf, testData)
+	if err != nil {
+		t.Error(err)
+	}
 
 	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
 		t.Error(msg)
@@ -73,7 +76,10 @@ func BenchmarkGolang(b *testing.B) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		tmpl.Execute(&buf, testData)
+		err := tmpl.Execute(&buf, testData)
+		if err != nil {
+			b.Fatal(err)
+		}
 	}
 }
 
@@ -82,7 +88,10 @@ func BenchmarkGolang(b *testing.B) {
 ******************************************************************************/
 func TestEgo(t *testing.T) {
 	var buf bytes.Buffer
-	ego.EgoSimple(&buf, testData)
+	err := ego.EgoSimple(&buf, testData)
+	if err != nil {
+		t.Error(err)
+	}
 
 	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
 		t.Error(msg)
@@ -93,7 +102,10 @@ func BenchmarkEgo(b *testing.B) {
 	var buf bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		ego.EgoSimple(&buf, testData)
+		err := ego.EgoSimple(&buf, testData)
+		if err != nil {
+			b.Fatal(err)
+		}
 	}
 }
 
@@ -102,7 +114,10 @@ func BenchmarkEgo(b *testing.B) {
 ******************************************************************************/
 func TestEgon(t *testing.T) {
 	var buf bytes.Buffer
-	egon.SimpleTemplate(&buf, testData)
+	err := egon.SimpleTemplate(&buf, testData)
+	if err != nil {
+		t.Error(err)
+	}
 
 	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
 		t.Error(msg)
@@ -113,14 +128,20 @@ func BenchmarkEgon(b *testing.B) {
 	var buf bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		egon.SimpleTemplate(&buf, testData)
+		err := egon.SimpleTemplate(&buf, testData)
+		if err != nil {
+			b.Fatal(err)
+		}
 	}
 }
 func BenchmarkEgonFooter(b *testing.B) {
 	var buf bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		egon.FooterTemplate(&buf)
+		err := egon.FooterTemplate(&buf)
+		if err != nil {
+			b.Fatal(err)
+		}
 	}
 }
 
@@ -129,7 +150,10 @@ func BenchmarkEgonFooter(b *testing.B) {
 ******************************************************************************/
 func TestEgonSlinso(t *testing.T) {
 	var buf bytes.Buffer
-	egonslinso.SimpleTemplate(&buf, testData)
+	err := egonslinso.SimpleTemplate(&buf, testData)
+	if err != nil {
+		t.Error(err)
+	}
 
 	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
 		t.Error(msg)
@@ -140,14 +164,20 @@ func BenchmarkEgonSlinso(b *testing.B) {
 	var buf bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		egonslinso.SimpleTemplate(&buf, testData)
+		err := egonslinso.SimpleTemplate(&buf, testData)
+		if err != nil {
+			b.Fatal(err)
+		}
 	}
 }
 func BenchmarkEgonSlinsoFooter(b *testing.B) {
 	var buf bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		egonslinso.FooterTemplate(&buf)
+		err := egonslinso.FooterTemplate(&buf)
+		if err != nil {
+			b.Fatal(err)
+		}
 	}
 }
 
@@ -155,7 +185,10 @@ func BenchmarkEgonSlinsoFooter(b *testing.B) {
 ** ftmpl
 ******************************************************************************/
 func TestFtmpl(t *testing.T) {
-	result := ftmpl.T__simple(testData)
+	result, err := ftmpl.TE__simple(testData)
+	if err != nil {
+		t.Error(err)
+	}
 
 	if msg, ok := linesEquals(result, expectedtResult); !ok {
 		t.Error(msg)
@@ -164,7 +197,10 @@ func TestFtmpl(t *testing.T) {
 
 func BenchmarkFtmpl(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		_ = ftmpl.T__simple(testData)
+		_, err := ftmpl.TE__simple(testData)
+		if err != nil {
+			b.Fatal(err)
+		}
 	}
 }
 
@@ -191,11 +227,17 @@ func TestAce(t *testing.T) {
 func BenchmarkAce(b *testing.B) {
 	var buf bytes.Buffer
 
-	tpl, _ := ace.Load("ace/simple", "", nil)
+	tpl, err := ace.Load("ace/simple", "", nil)
+	if err != nil {
+		b.Fatal(err)
+	}
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		tpl.Execute(&buf, testData)
+		err := tpl.Execute(&buf, testData)
+		if err != nil {
+			b.Fatal(err)
+		}
 	}
 }
 
@@ -226,7 +268,10 @@ func BenchmarkAmber(b *testing.B) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		tpl.Execute(&buf, testData)
+		err := tpl.Execute(&buf, testData)
+		if err != nil {
+			b.Fatal(err)
+		}
 	}
 }
 
@@ -257,7 +302,10 @@ func BenchmarkDamsel(b *testing.B) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		tpl.Execute(testData)
+		_, err := tpl.Execute(testData)
+		if err != nil {
+			b.Fatal(err)
+		}
 	}
 }
 
@@ -314,7 +362,10 @@ func BenchmarkPongo2(b *testing.B) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		tpl.ExecuteWriterUnbuffered(pongo2.Context{"u": testData}, &buf)
+		err := tpl.ExecuteWriterUnbuffered(pongo2.Context{"u": testData}, &buf)
+		if err != nil {
+			b.Fatal(err)
+		}
 	}
 }
 
@@ -342,7 +393,10 @@ func BenchmarkHandlebars(b *testing.B) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		tpl.Exec(testData)
+		_, err := tpl.Exec(testData)
+		if err != nil {
+			b.Fatal(err)
+		}
 	}
 }
 
@@ -391,7 +445,10 @@ func BenchmarkKasia(b *testing.B) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		tpl.Execute(&buf, testData)
+		err := tpl.Execute(&buf, testData)
+		if err != nil {
+			b.Fatal(err)
+		}
 	}
 }
 
@@ -428,7 +485,10 @@ func BenchmarkSoy(b *testing.B) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		tofu.Render(&buf, "soy.simple", soyData)
+		err := tofu.Render(&buf, "soy.simple", soyData)
+		if err != nil {
+			b.Fatal(err)
+		}
 	}
 }
 
