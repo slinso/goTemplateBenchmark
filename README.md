@@ -36,7 +36,7 @@ PASS
 BenchmarkGolang           100000             34999 ns/op            2078 B/op         38 allocs/op
 BenchmarkAce               50000             78572 ns/op            5549 B/op         77 allocs/op
 BenchmarkAmber            100000             37048 ns/op            2090 B/op         39 allocs/op
-BenchmarkDamsel           100000             54046 ns/op            2440 B/op         50 allocs/op
+BenchmarkDamsel            30000            214564 ns/op           11164 B/op        165 allocs/op
 BenchmarkMustache         200000             19565 ns/op            1648 B/op         28 allocs/op
 BenchmarkPongo2           200000             23062 ns/op            2997 B/op         46 allocs/op
 BenchmarkHandlebars       100000             65334 ns/op            4496 B/op         90 allocs/op
