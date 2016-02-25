@@ -1,27 +1,32 @@
 # goTemplateBenchmark
 comparing the performance of different template engines
+
+## full featured template engines
 * [Ace](https://github.com/yosssi/ace)
 * [Amber](https://github.com/eknkc/amber)
-* [Damsel](https://github.com/dskinner/damsel)
-* [ego](https://github.com/benbjohnson/ego)
-* [egon](https://github.com/commondream/egon)
-* [egonslinso](https://github.com/SlinSo/egon)
-* [ftmpl](https://github.com/tkrajina/ftmpl)
 * [Go](https://golang.org/pkg/html/template)
-* [Gorazor](https://github.com/sipin/gorazor)
 * [Handlebars](https://github.com/aymerick/raymond)
 * [Kasia](https://github.com/ziutek/kasia.go)
 * [Mustache](https://github.com/hoisie/mustache)
 * [Pongo2](https://github.com/flosch/pongo2)
 * [Soy](https://github.com/robfig/soy)
 
+## precompilation to Go code
+* [ego](https://github.com/benbjohnson/ego)
+* [egon](https://github.com/commondream/egon)
+* [egonslinso](https://github.com/SlinSo/egon)
+* [ftmpl](https://github.com/tkrajina/ftmpl)
+* [Gorazor](https://github.com/sipin/gorazor)
+
+## transpiling to HTML
+* [Damsel](https://github.com/dskinner/damsel)
+
 ## Why?
-first thought:
-Just for fun. Go Templates work nice out of the box.
-If you really care about performance you will usually cache the rendered output.
+Just for fun. Go Templates work nice out of the box and should be used for rendering from a security point of view.
+If you really care about performance you should cache the rendered output.
 
 on second thought:
-I have some templates that I cannot cache in my production code, thats why I'm interested in performant
+I have some templates that cannot be cached in my production code, thats why I'm interested in performant
 HTML generation using templates. After trying the code generation based projects I liked ego most, but some
 features where missing and generated code could be optimized further. That's why I created a fork
 and included the results in this benchmark.
@@ -29,14 +34,13 @@ and included the results in this benchmark.
 ## Results
 Tests run on a VPS 1 CPU und 512 MB Ram
 
-### normal Template Engines
+### full featured template engines
 ```
 go test -bench "k[Ace|Amber|Damsel|Golang|Handlebars|Kasia|Mustache|Pongo2|Soy]" -benchmem -benchtime=3s
 PASS
 BenchmarkGolang           100000             34999 ns/op            2078 B/op         38 allocs/op
 BenchmarkAce               50000             78572 ns/op            5549 B/op         77 allocs/op
 BenchmarkAmber            100000             37048 ns/op            2090 B/op         39 allocs/op
-BenchmarkDamsel            30000            214564 ns/op           11164 B/op        165 allocs/op
 BenchmarkMustache         200000             19565 ns/op            1648 B/op         28 allocs/op
 BenchmarkPongo2           200000             23062 ns/op            2997 B/op         46 allocs/op
 BenchmarkHandlebars       100000             65334 ns/op            4496 B/op         90 allocs/op
@@ -44,7 +48,7 @@ BenchmarkKasia            300000             15852 ns/op            2028 B/op   
 BenchmarkSoy              200000             19451 ns/op            1732 B/op         26 allocs/op
 ```
 
-### Template Engines with manual precompilation
+### precompilation to Go code
 ```
 go test -bench "kEgo$|kEgon$|kEgonSlinso$|kFtmpl|kGorazor" -benchmem -benchtime=3s
 PASS
@@ -54,6 +58,9 @@ BenchmarkEgonSlinso      2000000              2619 ns/op             517 B/op   
 BenchmarkFtmpl           1000000              8400 ns/op            1152 B/op         12 allocs/op
 BenchmarkGorazor          500000              7249 ns/op             656 B/op         11 allocs/op
 ```
+
+### transpiling to HTML
+I removed Damsel, because transpilation should just happen once at startup. If you cache the transpilation result, which is recommended, you would have the same performance numbers as html/template for rendering.
 
 ### more complex test with template inheritance (if possible)
 ```
@@ -76,7 +83,7 @@ All packages assume that template authors are trusted. If you allow custom templ
 | --------- | -------- | ------- |
 | Ace | No | |
 | amber | No | |
-| Damsel | No | |
+| Damsel | Yes, if html/template is used for executing | Damsel transpiles to HTML |
 | ego | Partial (html.EscapeString) | only HTML, others need to be called manually |
 | egon | Partial (html.EscapeString) | only HTML, others need to be called manually |
 | egonslinso | Partial (html.EscapeString) | only HTML, others need to be called manually |
