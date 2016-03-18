@@ -17,6 +17,7 @@ comparing the performance of different template engines
 * [egonslinso](https://github.com/SlinSo/egon)
 * [ftmpl](https://github.com/tkrajina/ftmpl)
 * [Gorazor](https://github.com/sipin/gorazor)
+* [Quicktemplate](https://github.com/valyala/quicktemplate)
 
 ## transpiling to HTML
 * [Damsel](https://github.com/dskinner/damsel)
@@ -50,13 +51,14 @@ BenchmarkSoy              200000             19451 ns/op            1732 B/op   
 
 ### precompilation to Go code
 ```
-go test -bench "kEgo$|kEgon$|kEgonSlinso$|kFtmpl|kGorazor" -benchmem -benchtime=3s
+go test -bench "kEgo$|kEgon$|kEgonSlinso$|kFtmpl|kGorazor|kQuick" -benchmem -benchtime=3s
 PASS
-BenchmarkEgo             1000000              5017 ns/op             645 B/op          8 allocs/op
-BenchmarkEgon             500000             10755 ns/op             870 B/op         22 allocs/op
-BenchmarkEgonSlinso      2000000              2619 ns/op             517 B/op          0 allocs/op
-BenchmarkFtmpl           1000000              8400 ns/op            1152 B/op         12 allocs/op
-BenchmarkGorazor          500000              7249 ns/op             656 B/op         11 allocs/op
+BenchmarkEgo             1000000              4952 ns/op             645 B/op          8 allocs/op
+BenchmarkEgon             500000              9989 ns/op             870 B/op         22 allocs/op
+BenchmarkEgonSlinso      2000000              2629 ns/op             517 B/op          0 allocs/op
+BenchmarkQuicktemplate   2000000              2727 ns/op             999 B/op          0 allocs/op
+BenchmarkFtmpl            500000              7232 ns/op            1152 B/op         12 allocs/op
+BenchmarkGorazor         1000000              6370 ns/op             656 B/op         11 allocs/op
 ```
 
 ### transpiling to HTML
@@ -64,16 +66,17 @@ I removed Damsel, because transpilation should just happen once at startup. If y
 
 ### more complex test with template inheritance (if possible)
 ```
-go test . -bench="Complex" -benchmem -benchtime=5s
+go test . -bench="Complex" -benchmem -benchtime=3s
 PASS
-BenchmarkComplexGolang             30000            276809 ns/op           12532 B/op        295 allocs/op
-BenchmarkComplexEgo               300000             27030 ns/op            4039 B/op         41 allocs/op
-BenchmarkComplexEgon              200000             50424 ns/op            4206 B/op        101 allocs/op
-BenchmarkComplexEgoSlinso         500000             13977 ns/op            2145 B/op          7 allocs/op
-BenchmarkComplexFtmpl             200000             38427 ns/op            5201 B/op         40 allocs/op
-BenchmarkComplexFtmplFctCall      200000             40946 ns/op            5745 B/op         48 allocs/op
-BenchmarkComplexMustache           50000            132716 ns/op            8451 B/op        166 allocs/op
-BenchmarkComplexGorazor           100000             61630 ns/op            8577 B/op         73 allocs/op
+BenchmarkComplexGolang             20000            264423 ns/op           13502 B/op        295 allocs/op
+BenchmarkComplexEgo               200000             24062 ns/op            3245 B/op         41 allocs/op
+BenchmarkComplexEgon              100000             47226 ns/op            4206 B/op        101 allocs/op
+BenchmarkComplexEgoSlinso         500000             12191 ns/op            2145 B/op          7 allocs/op
+BenchmarkComplexQuicktemplate     300000             11454 ns/op            3153 B/op          0 allocs/op
+BenchmarkComplexFtmpl             200000             30969 ns/op            5201 B/op         40 allocs/op
+BenchmarkComplexFtmplFctCall      200000             34471 ns/op            5745 B/op         48 allocs/op
+BenchmarkComplexMustache           50000            111647 ns/op            8449 B/op        166 allocs/op
+BenchmarkComplexGorazor           100000             54235 ns/op            8577 B/op         73 allocs/op
 ```
 
 ## Security
@@ -94,4 +97,5 @@ All packages assume that template authors are trusted. If you allow custom templ
 | Kasia | Partial (kasia.WriteEscapedHtml) | only HTML |
 | Mustache | Partial (template.HTMLEscape) | only HTML |
 | Pongo2 | Partial (pongo2.filterEscape, pongo2.filterEscapejs) | autoescape only escapes HTML, others could be implemented as pongo filters |
+| Quicktemplate | Partial (html.EscapeString) | only HTML, others need to be called manually |
 | Soy | Partial (template.HTMLEscapeString, url.QueryEscape, template.JSEscapeString) | autoescape only escapes HTML, contextual escaping is defined as a project goal |
