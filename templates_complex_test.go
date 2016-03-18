@@ -13,6 +13,7 @@ import (
 	"github.com/SlinSo/goTemplateBenchmark/egonslinso"
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
+	"github.com/SlinSo/goTemplateBenchmark/quicktemplate"
 	"github.com/hoisie/mustache"
 
 )
@@ -174,6 +175,26 @@ func BenchmarkComplexEgo(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		ego.EgoComplex(&buf, testComplexUser, testComplexNav, testComplexTitle)
+	}
+}
+
+/******************************************************************************
+** Quicktemplate
+******************************************************************************/
+func TestComplexQuicktemplate(t *testing.T) {
+	var buf bytes.Buffer
+	quicktemplate.WriteIndex(&buf, testComplexUser, testComplexNav, testComplexTitle)
+
+	if msg, ok := linesEquals(buf.String(), expectedtComplexResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkComplexQuicktemplate(b *testing.B) {
+	var buf bytes.Buffer
+
+	for i := 0; i < b.N; i++ {
+		quicktemplate.WriteIndex(&buf, testComplexUser, testComplexNav, testComplexTitle)
 	}
 }
 

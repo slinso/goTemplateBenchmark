@@ -1,0 +1,40 @@
+{% import "github.com/SlinSo/goTemplateBenchmark/model" %}
+{% func Index(u *model.User, nav []*model.Navigation, title string) %}
+<!DOCTYPE html>
+<html>
+<body>
+
+<header>
+{%= Header(title) %}
+</header>
+
+<nav>
+{%= Navigation(nav) %}
+</nav>
+
+<section>
+<div class="content">
+	<div class="welcome">
+		<h4>Hello {%s u.FirstName %}</h4>
+		
+		<div class="raw">{%s= u.RawContent %}</div>
+		<div class="enc">{%s u.EscapedContent %}</div>
+	</div>
+
+{% for i := 1; i <= 5; i++ %}
+		{% if i == 1 %}
+			<p>{%s u.FirstName %} has {%d i %} message</p>
+		{% else %}
+			<p>{%s u.FirstName %} has {%d i %} messages</p>
+		{% endif %}
+{% endfor %}
+</div>
+</section>
+
+<footer>
+{%= Footer() %}
+</footer>
+
+</body>
+</html>
+{% endfunc %}

@@ -1,0 +1,8 @@
+{% import "github.com/SlinSo/goTemplateBenchmark/model" %}
+{% func Navigation(nav []*model.Navigation) %}
+<ul class="navigation">
+{% for _, item := range nav %}
+	<li><a href="{%s item.Link %}">{%s item.Item %}</a></li>
+{% endfor %}
+</ul>
+{% endfunc %}

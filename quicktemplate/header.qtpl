@@ -1,0 +1,4 @@
+{% func Header(title string) %}
+<title>{%s title %}'s Home Page</title>
+<div class="header">Page Header</div>
+{% endfunc %}

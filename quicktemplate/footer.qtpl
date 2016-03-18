@@ -1,0 +1,3 @@
+{% func Footer() %}
+<div class="footer">copyright 2016</div>
+{% endfunc %}

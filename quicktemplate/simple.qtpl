@@ -1,0 +1,15 @@
+{% import "github.com/SlinSo/goTemplateBenchmark/model" %}
+{% func SimpleQtc(u *model.User) %}
+<html>
+    <body>
+        <h1>{%s u.FirstName %}</h1>
+
+        <p>Here's a list of your favorite colors:</p>
+        <ul>
+        {% for _, colorName := range u.FavoriteColors %}
+            <li>{%s colorName %}</li>
+        {% endfor %}
+        </ul>
+    </body>
+</html>
+{% endfunc %}

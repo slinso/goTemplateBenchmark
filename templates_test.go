@@ -13,6 +13,7 @@ import (
 	"github.com/SlinSo/goTemplateBenchmark/egonslinso"
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
+	"github.com/SlinSo/goTemplateBenchmark/quicktemplate"
 	"github.com/aymerick/raymond"
 	"github.com/dskinner/damsel"
 	"github.com/eknkc/amber"
@@ -178,6 +179,26 @@ func BenchmarkEgonSlinsoFooter(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+	}
+}
+
+/******************************************************************************
+** Quicktemplate
+******************************************************************************/
+func TestQuicktemplate(t *testing.T) {
+	var buf bytes.Buffer
+	quicktemplate.WriteSimpleQtc(&buf, testData)
+	
+	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkQuicktemplate(b *testing.B) {
+	var buf bytes.Buffer
+
+	for i := 0; i < b.N; i++ {
+		quicktemplate.WriteSimpleQtc(&buf, testData)
 	}
 }
 
