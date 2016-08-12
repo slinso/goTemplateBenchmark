@@ -10,14 +10,8 @@ import (
 
 func Index(u *model.User, nav []*model.Navigation, title string) string {
 	var _buffer bytes.Buffer
-
-	username := u.FirstName
-	if u.Email != "" {
-		username += "(" + u.Email + ")"
-	}
-
 	_buffer.WriteString("\n\n<div class=\"content\">\n\t<div class=\"welcome\">\n\t\t<h4>Hello ")
-	_buffer.WriteString(gorazor.HTMLEscape(username))
+	_buffer.WriteString(gorazor.HTMLEscape(u.FirstName))
 	_buffer.WriteString("</h4>\n\t\t\n\t\t<div class=\"raw\">")
 	_buffer.WriteString((u.RawContent))
 	_buffer.WriteString("</div>\n\t\t<div class=\"enc\">")

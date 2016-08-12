@@ -1,13 +1,13 @@
 !#extends base
 
 !#sub header
-! result.WriteString(T__header(title))
+{{!#insert "header.tmpl" }}
 
 !#sub footer
-! result.WriteString(T__footer())
+{{!#insert "footer.tmpl" }}
 
 !#sub navigation
-! result.WriteString(T__navigation(nav))
+{{!#insert "navigation.tmpl" }}
 
 !#sub body
 <div class="content">

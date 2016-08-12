@@ -3,8 +3,8 @@ package main_test
 import (
 	"bytes"
 	"html/template"
+	"path/filepath"
 	"testing"
-    "path/filepath"
 
 	"github.com/SlinSo/goTemplateBenchmark/model"
 
@@ -15,43 +15,45 @@ import (
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
 	"github.com/SlinSo/goTemplateBenchmark/quicktemplate"
 	"github.com/hoisie/mustache"
-
 )
 
-	type tmplData struct {
-		User *model.User
-		Nav []*model.Navigation
-		Title string
-		Messages []struct{
-			I int
-			Plural bool
-		}
+type tmplData struct {
+	User     *model.User
+	Nav      []*model.Navigation
+	Title    string
+	Messages []struct {
+		I      int
+		Plural bool
 	}
-	
+}
+
 var (
 	testComplexUser = &model.User{
 		FirstName:      "Bob",
 		FavoriteColors: []string{"blue", "green", "mauve"},
-		RawContent:"<div><p>Raw Content to be displayed</p></div>",
-		EscapedContent:"<div><div><div>Escaped</div></div></div>",
+		RawContent:     "<div><p>Raw Content to be displayed</p></div>",
+		EscapedContent: "<div><div><div>Escaped</div></div></div>",
 	}
-	
+
 	testComplexNav = []*model.Navigation{{
-		Item:"Link 1",
-		Link:"http://www.mytest.com/",},{
-		Item:"Link 2",
-		Link:"http://www.mytest.com/",},{
-		Item:"Link 3",
-		Link:"http://www.mytest.com/",},
+		Item: "Link 1",
+		Link: "http://www.mytest.com/"}, {
+		Item: "Link 2",
+		Link: "http://www.mytest.com/"}, {
+		Item: "Link 3",
+		Link: "http://www.mytest.com/"},
 	}
 	testComplexTitle = testComplexUser.FirstName
 
-	testComplexData  = tmplData{
-	
-	User: testComplexUser,
-	Nav: testComplexNav,
-	Title: testComplexTitle,
-	Messages: []struct{I int; Plural bool}{{1, false},{2, true},{3, true},{4, true},{5, true}},
+	testComplexData = tmplData{
+
+		User:  testComplexUser,
+		Nav:   testComplexNav,
+		Title: testComplexTitle,
+		Messages: []struct {
+			I      int
+			Plural bool
+		}{{1, false}, {2, true}, {3, true}, {4, true}, {5, true}},
 	}
 
 	expectedtComplexResult = `<!DOCTYPE html>
@@ -94,31 +96,31 @@ var (
 ** Go
 ******************************************************************************/
 func TestComplexGolang(t *testing.T) {
-	
+
 	var buf bytes.Buffer
-	
+
 	funcMap := template.FuncMap{
-        "safehtml": func(text string) template.HTML { return template.HTML(text) },
-    }
-    
-    templates := make(map[string]*template.Template)
-    templatesDir := "go/"
+		"safehtml": func(text string) template.HTML { return template.HTML(text) },
+	}
 
-    layouts, err := filepath.Glob(templatesDir + "layout/*.tmpl")
-    if err != nil {
-        panic(err)
-    }
+	templates := make(map[string]*template.Template)
+	templatesDir := "go/"
 
-    includes, err := filepath.Glob(templatesDir + "includes/*.tmpl")
-    if err != nil {
-        panic(err)
-    }
+	layouts, err := filepath.Glob(templatesDir + "layout/*.tmpl")
+	if err != nil {
+		panic(err)
+	}
 
-    // Generate our templates map from our layouts/ and includes/ directories
-    for _, layout := range layouts {
-        files := append(includes, layout)
-        templates[filepath.Base(layout)] = template.Must(template.New("").Funcs(funcMap).ParseFiles(files...))
-    }
+	includes, err := filepath.Glob(templatesDir + "includes/*.tmpl")
+	if err != nil {
+		panic(err)
+	}
+
+	// Generate our templates map from our layouts/ and includes/ directories
+	for _, layout := range layouts {
+		files := append(includes, layout)
+		templates[filepath.Base(layout)] = template.Must(template.New("").Funcs(funcMap).ParseFiles(files...))
+	}
 	templates["index.tmpl"].ExecuteTemplate(&buf, "base", testComplexData)
 
 	if msg, ok := linesEquals(buf.String(), expectedtComplexResult); !ok {
@@ -130,27 +132,27 @@ func BenchmarkComplexGolang(b *testing.B) {
 	var buf bytes.Buffer
 
 	funcMap := template.FuncMap{
-        "safehtml": func(text string) template.HTML { return template.HTML(text) },
-    }
-    
-    templates := make(map[string]*template.Template)
-    templatesDir := "go/"
+		"safehtml": func(text string) template.HTML { return template.HTML(text) },
+	}
 
-    layouts, err := filepath.Glob(templatesDir + "layout/*.tmpl")
-    if err != nil {
-        panic(err)
-    }
+	templates := make(map[string]*template.Template)
+	templatesDir := "go/"
 
-    includes, err := filepath.Glob(templatesDir + "includes/*.tmpl")
-    if err != nil {
-        panic(err)
-    }
+	layouts, err := filepath.Glob(templatesDir + "layout/*.tmpl")
+	if err != nil {
+		panic(err)
+	}
 
-    // Generate our templates map from our layouts/ and includes/ directories
-    for _, layout := range layouts {
-        files := append(includes, layout)
-        templates[filepath.Base(layout)] = template.Must(template.New("").Funcs(funcMap).ParseFiles(files...))
-    }
+	includes, err := filepath.Glob(templatesDir + "includes/*.tmpl")
+	if err != nil {
+		panic(err)
+	}
+
+	// Generate our templates map from our layouts/ and includes/ directories
+	for _, layout := range layouts {
+		files := append(includes, layout)
+		templates[filepath.Base(layout)] = template.Must(template.New("").Funcs(funcMap).ParseFiles(files...))
+	}
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
@@ -237,11 +239,12 @@ func BenchmarkComplexEgoSlinso(b *testing.B) {
 		egonslinso.IndexTemplate(&buf, testComplexUser, testComplexNav, testComplexTitle)
 	}
 }
+
 /******************************************************************************
 ** ftmpl
 ******************************************************************************/
 func TestComplexFtmpl(t *testing.T) {
-	result := ftmpl.T__index(testComplexUser, testComplexNav, testComplexTitle)
+	result := ftmpl.TMPLindex(testComplexUser, testComplexNav, testComplexTitle)
 
 	if msg, ok := linesEquals(result, expectedtComplexResult); !ok {
 		t.Error(msg)
@@ -250,12 +253,12 @@ func TestComplexFtmpl(t *testing.T) {
 
 func BenchmarkComplexFtmpl(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		_ = ftmpl.T__index(testComplexUser, testComplexNav, testComplexTitle)
+		_ = ftmpl.TMPLindex(testComplexUser, testComplexNav, testComplexTitle)
 	}
 }
 
 func TestComplexFtmplFctCall(t *testing.T) {
-	result := ftmpl.T__index2(testComplexUser, testComplexNav, testComplexTitle)
+	result := ftmpl.TMPLindex2(testComplexUser, testComplexNav, testComplexTitle)
 
 	if msg, ok := linesEquals(result, expectedtComplexResult); !ok {
 		t.Error(msg)
@@ -264,7 +267,7 @@ func TestComplexFtmplFctCall(t *testing.T) {
 
 func BenchmarkComplexFtmplFctCall(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		_ = ftmpl.T__index2(testComplexUser, testComplexNav, testComplexTitle)
+		_ = ftmpl.TMPLindex2(testComplexUser, testComplexNav, testComplexTitle)
 	}
 }
 
@@ -276,12 +279,12 @@ func TestComplexMustache(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-    tmpl, err := mustache.ParseFile("mustache/index.mustache")
+	tmpl, err := mustache.ParseFile("mustache/index.mustache")
 	if err != nil {
 		t.Error(err)
 	}
 
-	result :=  tmpl.RenderInLayout(layoutTmpl, testComplexData)
+	result := tmpl.RenderInLayout(layoutTmpl, testComplexData)
 
 	if msg, ok := linesEquals(result, expectedtComplexResult); !ok {
 		t.Error(msg)
@@ -290,7 +293,7 @@ func TestComplexMustache(t *testing.T) {
 
 func BenchmarkComplexMustache(b *testing.B) {
 	layoutTmpl, _ := mustache.ParseFile("mustache/base.mustache")
-    tmpl, _ := mustache.ParseFile("mustache/index.mustache")
+	tmpl, _ := mustache.ParseFile("mustache/index.mustache")
 
 	b.ResetTimer()
 

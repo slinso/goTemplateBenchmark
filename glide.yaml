@@ -28,3 +28,4 @@ import:
   repo: https://github.com/dchest/htmlmin
   vcs: git
 - package: github.com/commondream/egon
+- package: github.com/CloudyKit/jet

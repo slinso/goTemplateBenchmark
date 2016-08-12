@@ -188,7 +188,7 @@ func BenchmarkEgonSlinsoFooter(b *testing.B) {
 func TestQuicktemplate(t *testing.T) {
 	var buf bytes.Buffer
 	quicktemplate.WriteSimpleQtc(&buf, testData)
-	
+
 	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
 		t.Error(msg)
 	}
@@ -206,7 +206,7 @@ func BenchmarkQuicktemplate(b *testing.B) {
 ** ftmpl
 ******************************************************************************/
 func TestFtmpl(t *testing.T) {
-	result, err := ftmpl.TE__simple(testData)
+	result, err := ftmpl.TMPLERRsimple(testData)
 	if err != nil {
 		t.Error(err)
 	}
@@ -218,10 +218,11 @@ func TestFtmpl(t *testing.T) {
 
 func BenchmarkFtmpl(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		_, err := ftmpl.TE__simple(testData)
+		_, err := ftmpl.TMPLERRsimple(testData)
 		if err != nil {
 			b.Fatal(err)
 		}
+
 	}
 }
 
