@@ -257,7 +257,7 @@ func BenchmarkComplexFtmpl(b *testing.B) {
 	}
 }
 
-func TestComplexFtmplFctCall(t *testing.T) {
+func TestComplexFtmplInclude(t *testing.T) {
 	result := ftmpl.TMPLindex2(testComplexUser, testComplexNav, testComplexTitle)
 
 	if msg, ok := linesEquals(result, expectedtComplexResult); !ok {
@@ -265,7 +265,7 @@ func TestComplexFtmplFctCall(t *testing.T) {
 	}
 }
 
-func BenchmarkComplexFtmplFctCall(b *testing.B) {
+func BenchmarkComplexFtmplInclude(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_ = ftmpl.TMPLindex2(testComplexUser, testComplexNav, testComplexTitle)
 	}
