@@ -33,33 +33,36 @@ features where missing and generated code could be optimized further. That's why
 and included the results in this benchmark.
 
 ## Results
-Tests run on a VPS 1 CPU und 512 MB Ram
+Changed the environment to my local dev laptop: i7-6700T  16GB Mem
+Golang: 1.7rc6
 
 ### full featured template engines
 ```
-go test -bench "k[Ace|Amber|Damsel|Golang|Handlebars|Kasia|Mustache|Pongo2|Soy]" -benchmem -benchtime=3s
-PASS
-BenchmarkGolang           100000             34999 ns/op            2078 B/op         38 allocs/op
-BenchmarkAce               50000             78572 ns/op            5549 B/op         77 allocs/op
-BenchmarkAmber            100000             37048 ns/op            2090 B/op         39 allocs/op
-BenchmarkMustache         200000             19565 ns/op            1648 B/op         28 allocs/op
-BenchmarkPongo2           200000             23062 ns/op            2997 B/op         46 allocs/op
-BenchmarkHandlebars       100000             65334 ns/op            4496 B/op         90 allocs/op
-BenchmarkKasia            300000             15852 ns/op            2028 B/op         26 allocs/op
-BenchmarkSoy              200000             19451 ns/op            1732 B/op         26 allocs/op
+go test -bench "k(Ace|Amber|Golang|Handlebars|Kasia|Mustache|Pongo2|Soy)$" -benchmem -benchtime=3s
 ```
+| Name           |      Runs |  µs/op |  B/op | allocations/op |
+| -------------- | --------- | ------ | ----- | -------------- |
+| Ace            |   300,000 | 16.232 | 5,608 |             77 |
+| Amber          | 1,000,000 |  5.537 | 1,929 |             39 |
+| Golang         | 1,000,000 |  5.392 | 1,904 |             38 |
+| Handlebars     |   500,000 | 13.094 | 4,260 |             90 |
+| **Kasia**         | 1,000,000 |  3.159 | 2,147 |             26 |
+| Mustache       | 1,000,000 |  4.148 | 1,569 |             28 |
+| Pongo2         | 1,000,000 |  4.289 | 3,302 |             46 |
+| **Soy**            | 1,000,000 |  3.083 | 1,863 |             26 |
 
 ### precompilation to Go code
 ```
-go test -bench "kEgo$|kEgon$|kEgonSlinso$|kFtmpl|kGorazor|kQuick" -benchmem -benchtime=3s
-PASS
-BenchmarkEgo             1000000              4952 ns/op             645 B/op          8 allocs/op
-BenchmarkEgon             500000              9989 ns/op             870 B/op         22 allocs/op
-BenchmarkEgonSlinso      2000000              2629 ns/op             517 B/op          0 allocs/op
-BenchmarkQuicktemplate   2000000              2727 ns/op             999 B/op          0 allocs/op
-BenchmarkFtmpl            500000              7232 ns/op            1152 B/op         12 allocs/op
-BenchmarkGorazor         1000000              6370 ns/op             656 B/op         11 allocs/op
+go test -bench "k(Ego|Egon|EgonSlinso|Quicktemplate|Ftmpl|Gorazor)$" -benchmem -benchtime=3s
 ```
+| Name              |       Runs | µs/op |  B/op | allocations/op |
+| ----------------- | ---------- | ----- | ----- | -------------- |
+| Ego               |  5,000,000 | 1.032 |   914 |              8 |
+| Egon              |  2,000,000 | 2.274 |   827 |             22 |
+| **EgonSlinso**        | 10,000,000 | 0.541 |   828 |              0 |
+| Ftmpl             |  3,000,000 | 1.779 | 1,142 |             12 |
+| Gorazor           |  3,000,000 | 1.655 |   613 |             11 |
+| **Quicktemplate**     | 10,000,000 | 0.446 |   799 |              0 |
 
 ### transpiling to HTML
 I removed Damsel, because transpilation should just happen once at startup. If you cache the transpilation result, which is recommended, you would have the same performance numbers as html/template for rendering.
@@ -67,17 +70,18 @@ I removed Damsel, because transpilation should just happen once at startup. If y
 ### more complex test with template inheritance (if possible)
 ```
 go test . -bench="Complex" -benchmem -benchtime=3s
-PASS
-BenchmarkComplexGolang             20000            264423 ns/op           13502 B/op        295 allocs/op
-BenchmarkComplexEgo               200000             24062 ns/op            3245 B/op         41 allocs/op
-BenchmarkComplexEgon              100000             47226 ns/op            4206 B/op        101 allocs/op
-BenchmarkComplexEgoSlinso         500000             12191 ns/op            2145 B/op          7 allocs/op
-BenchmarkComplexQuicktemplate     300000             11454 ns/op            3153 B/op          0 allocs/op
-BenchmarkComplexFtmpl             200000             30969 ns/op            5201 B/op         40 allocs/op
-BenchmarkComplexFtmplFctCall      200000             34471 ns/op            5745 B/op         48 allocs/op
-BenchmarkComplexMustache           50000            111647 ns/op            8449 B/op        166 allocs/op
-BenchmarkComplexGorazor           100000             54235 ns/op            8577 B/op         73 allocs/op
 ```
+| Name                     |      Runs |  µs/op |   B/op | allocations/op |
+| ------------------------ | --------- | ------ | ------ | -------------- |
+| ComplexEgo               | 1,000,000 |  4.899 |  2,561 |             41 |
+| **ComplexEgoSlinso**         | 2,000,000 |  2.338 |  2,070 |              7 |
+| ComplexEgon              |   500,000 | 10.148 |  3,521 |            101 |
+| ComplexFtmpl             |   500,000 |  8.639 |  5,300 |             48 |
+| ComplexFtmplInclude      |   500,000 |  8.269 |  5,300 |             48 |
+| ComplexGolang            |   100,000 | 43.787 | 12,415 |            295 |
+| ComplexGorazor           |   300,000 | 12.573 |  8,327 |             73 |
+| ComplexMustache          |   200,000 | 26.876 |  7,856 |            166 |
+| **ComplexQuicktemplate**     | 2,000,000 |  2.442 |  1,892 |              0 |
 
 ## Security
 All packages assume that template authors are trusted. If you allow custom templates you have to sanitize your user input e.g. [bluemonday](https://github.com/microcosm-cc/bluemonday). Generally speaking I would suggest to sanitize every input not just HTML-input. 
