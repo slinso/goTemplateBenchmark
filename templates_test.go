@@ -24,6 +24,7 @@ import (
 	"github.com/yosssi/ace"
 	"github.com/ziutek/kasia.go"
 
+	"github.com/CloudyKit/jet"
 	"github.com/dchest/htmlmin"
 )
 
@@ -508,6 +509,42 @@ func BenchmarkSoy(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		err := tofu.Render(&buf, "soy.simple", soyData)
+		if err != nil {
+			b.Fatal(err)
+		}
+	}
+}
+
+/******************************************************************************
+** Jet
+******************************************************************************/
+var jetSet = jet.NewHTMLSet("./jet")
+
+func TestJetHTML(t *testing.T) {
+	var buf bytes.Buffer
+
+	tmpl, err := jetSet.GetTemplate("simple.jet")
+	if err != nil {
+		t.Error(err)
+	}
+	err = tmpl.Execute(&buf, nil, testData)
+	if err != nil {
+		t.Error(err)
+	}
+
+	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkJetHTML(b *testing.B) {
+	var buf bytes.Buffer
+
+	tmpl, _ := jetSet.GetTemplate("simple.jet")
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		err := tmpl.Execute(&buf, nil, testData)
 		if err != nil {
 			b.Fatal(err)
 		}
