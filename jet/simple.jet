@@ -1,0 +1,11 @@
+<html>
+    <body>
+        <h1>{{ .FirstName }}</h1>
+
+        <p>Here's a list of your favorite colors:</p>
+        <ul>
+        {{ range .FavoriteColors }}
+            <li>{{ . }}</li>{{ end }}
+        </ul>
+    </body>
+</html>
