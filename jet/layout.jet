@@ -1,0 +1,23 @@
+{{import "blocks.jet"}}
+<!DOCTYPE html>
+<html>
+<body>
+
+<header>
+{{yield header()}}
+</header>
+
+<nav>
+{{yield navigation()}}
+</nav>
+
+<section>
+{{yield Body()}}
+</section>
+
+<footer>
+{{yield footer()}}
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{{extends "layout.jet"}}
+{{block Body()}}
+
+<div class="content">
+  <div class="welcome">
+    <h4>Hello {{ .User.FirstName }}</h4>
+
+    <div class="raw">{{ .User.RawContent|unsafe }}</div>
+    <div class="enc">{{ .User.EscapedContent }}</div>
+  </div>
+
+  {{range m := .Messages}}
+    {{if m.Plural}}
+      <p>{{ .User.FirstName }} has {{ m.I }} messages</p>
+    {{else}}
+      <p>{{ .User.FirstName }} has {{ m.I }} message</p>
+    {{end}}
+  {{end}}
+</div>
+{{end}}

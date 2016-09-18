@@ -1,0 +1,16 @@
+{{block header()}}
+<title>{{ .Title }}'s Home Page</title>
+<div class="header">Page Header</div>
+{{end}}
+
+{{block navigation()}}
+<ul class="navigation">
+  {{range .Nav}}
+    <li><a href="{{ .Link }}">{{ .Item }}</a></li>
+  {{end}}
+</ul>
+{{end}}
+
+{{block footer()}}
+<div class="footer">copyright 2016</div>
+{{end}}
