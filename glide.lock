@@ -1,12 +1,16 @@
 hash: d144ebfe727f7a0ee38c2eec5392f184121bd767e95219803f6c54b3795d0cae
-updated: 2016-08-12T08:56:19.56790393+02:00
+updated: 2016-09-18T06:17:00.82169896+02:00
 imports:
 - name: github.com/aymerick/raymond
   version: a2232af10b53ef1ae5a767f5178db3a6c1dab655
   repo: https://github.com/aymerick/raymond
   vcs: git
+  subpackages:
+  - ast
+  - lexer
+  - parser
 - name: github.com/CloudyKit/jet
-  version: 09277d7d5183370b87ebd475e7dfd4cea685b497
+  version: 186ebf44adb0bdd7299c68ae6e7e1083c41cd792
 - name: github.com/commondream/egon
   version: b9680bd5dea1bc62da5c5a8a0222d589e1576c87
 - name: github.com/dchest/htmlmin
@@ -21,8 +25,10 @@ imports:
   version: 7875e9689d335cd15294cd6f4f0ef8322ce4c8e7
   repo: https://github.com/eknkc/amber
   vcs: git
+  subpackages:
+  - parser
 - name: github.com/flosch/pongo2
-  version: 5e20832cab69d8dc4453e2403804e451a26d1277
+  version: 22499f94d3d56c7238591344a6902715d0b8fbbf
   repo: https://github.com/flosch/pongo2
   vcs: git
 - name: github.com/hoisie/mustache
@@ -33,14 +39,21 @@ imports:
   version: 3d51ce6f31bd41b349a5aa9b113ddbce8aa71318
   repo: https://github.com/robfig/soy
   vcs: git
+  subpackages:
+  - ast
+  - data
+  - parse
+  - parsepasses
+  - soyhtml
+  - template
 - name: github.com/sipin/gorazor
   version: cfcf2db74a170747830822495a7cc059124af962
   subpackages:
   - gorazor
 - name: github.com/valyala/bytebufferpool
-  version: 8ebd0474e5a2f0a5c7a74ad2bf421a1d1a90264f
+  version: e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7
 - name: github.com/valyala/quicktemplate
-  version: 621a99ae6bd320b2af730306caeb11b8c6b1db0f
+  version: 9890c4fd2f8730d091d9ae1a311b05f40b03da77
 - name: github.com/yosssi/ace
   version: ea038f4770b6746c3f8f84f14fa60d9fe1205b56
   repo: https://github.com/yosssi/ace
@@ -50,9 +63,26 @@ imports:
   repo: https://github.com/ziutek/kasia.go
   vcs: git
 - name: golang.org/x/sys
-  version: a646d33e2ee3172a661fc09bca23bb4889a41bc8
+  version: 30de6d19a3bd89a5f38ae4028e23aaa5582648af
   subpackages:
   - unix
 - name: gopkg.in/fsnotify.v1
   version: a8a77c9133d2d6fd8334f3260d06f60e8d80a5fb
-testImports: []
+testImports:
+- name: dasa.cc/damsel
+  version: 0eb663c5b10e488abe6d35f19544595074e1880f
+  subpackages:
+  - parse
+- name: github.com/CloudyKit/fastprinter
+  version: ee06c58b09065598339804adaf79c31ff25ecf7a
+- name: github.com/dchest/cssmin
+  version: fb8d9b44afdc258bfff6052d3667521babcb2239
+- name: github.com/dchest/jsmin
+  version: faeced8839472f349011f4c4c5441bbc28d02191
+- name: golang.org/x/net
+  version: 9313baa13d9262e49d07b20ed57dceafcd7240cc
+  subpackages:
+  - html
+  - html/atom
+- name: gopkg.in/fsnotify.v0
+  version: ea925a0a47d225b2ca7f9932b01d2ed4f3ec74f6
