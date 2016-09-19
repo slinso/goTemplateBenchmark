@@ -1,13 +1,15 @@
 #!/bin/bash
 # generate github compatible output
 
-echo "simple"
-go test -bench "k(Ace|Amber|Golang|Handlebars|Kasia|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime=3s | pb | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'
+RUNTIME=3s
 
-echo ""
-echo "simple precompiled"
-go test -bench "k(Ego|Egon|EgonSlinso|Quicktemplate|Ftmpl|Gorazor)$" -benchmem -benchtime=3s | pb | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'
+cd ~/gocode/src/github.com/SlinSo/goTemplateBenchmark
 
-echo ""
-echo "complex"
-go test . -bench="Complex" -benchmem -benchtime=3s | pb | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'
+echo "simple:"
+go test -bench "k(Ace|Amber|Golang|Handlebars|Kasia|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime=${RUNTIME} | pb | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'
+
+echo "simple precompiled:"
+go test -bench "k(Ego|Egon|EgonSlinso|Quicktemplate|Ftmpl|Gorazor)$" -benchmem -benchtime=${RUNTIME} | pb | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'
+
+echo "complex:"
+go test . -bench="Complex" -benchmem -benchtime=${RUNTIME} | pb | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'
