@@ -318,3 +318,38 @@ func BenchmarkComplexGorazor(b *testing.B) {
 		gorazor.Index(testComplexUser, testComplexNav, testComplexTitle)
 	}
 }
+
+/******************************************************************************
+** Jet
+******************************************************************************/
+
+func TestComplexJetHTML(t *testing.T) {
+	var buf bytes.Buffer
+
+	tmpl, err := jetSet.GetTemplate("index.jet")
+	if err != nil {
+		t.Error(err)
+	}
+	err = tmpl.Execute(&buf, nil, testComplexData)
+	if err != nil {
+		t.Error(err)
+	}
+
+	if msg, ok := linesEquals(buf.String(), expectedtComplexResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkComplexJetHTML(b *testing.B) {
+	var buf bytes.Buffer
+
+	tmpl, _ := jetSet.GetTemplate("index.jet")
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		err := tmpl.Execute(&buf, nil, testComplexData)
+		if err != nil {
+			b.Fatal(err)
+		}
+	}
+}
