@@ -1,8 +1,8 @@
-hash: d144ebfe727f7a0ee38c2eec5392f184121bd767e95219803f6c54b3795d0cae
-updated: 2016-09-18T06:17:00.82169896+02:00
+hash: 2c3805fb35dcd11f0debc8b8174a1e950ce0392a045502e50bc57b5b276a8d54
+updated: 2017-01-16T09:25:57.745563409+01:00
 imports:
 - name: github.com/aymerick/raymond
-  version: a2232af10b53ef1ae5a767f5178db3a6c1dab655
+  version: 72acac2207479d21dd45898c2a4264246c818148
   repo: https://github.com/aymerick/raymond
   vcs: git
   subpackages:
@@ -10,19 +10,15 @@ imports:
   - lexer
   - parser
 - name: github.com/CloudyKit/jet
-  version: 186ebf44adb0bdd7299c68ae6e7e1083c41cd792
+  version: 76abb1a47ef00783ce9e4481f930d762533bf4cf
 - name: github.com/commondream/egon
   version: b9680bd5dea1bc62da5c5a8a0222d589e1576c87
 - name: github.com/dchest/htmlmin
   version: e254725e81ac4ff4079c06cb49513138c9afc444
   repo: https://github.com/dchest/htmlmin
   vcs: git
-- name: github.com/dskinner/damsel
-  version: 0eb663c5b10e488abe6d35f19544595074e1880f
-  repo: https://github.com/dskinner/damsel
-  vcs: git
 - name: github.com/eknkc/amber
-  version: 7875e9689d335cd15294cd6f4f0ef8322ce4c8e7
+  version: 9be5e8aae85904f63d505e0c00e5e0881d44ef4d
   repo: https://github.com/eknkc/amber
   vcs: git
   subpackages:
@@ -36,7 +32,7 @@ imports:
   repo: https://github.com/hoisie/mustache
   vcs: git
 - name: github.com/robfig/soy
-  version: 3d51ce6f31bd41b349a5aa9b113ddbce8aa71318
+  version: 9d92c1999f49cbdcf4239b5e5f6845b7d391f175
   repo: https://github.com/robfig/soy
   vcs: git
   subpackages:
@@ -53,7 +49,7 @@ imports:
 - name: github.com/valyala/bytebufferpool
   version: e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7
 - name: github.com/valyala/quicktemplate
-  version: 9890c4fd2f8730d091d9ae1a311b05f40b03da77
+  version: 23fa366b12e538aeda01aa072f7583faf764559f
 - name: github.com/yosssi/ace
   version: ea038f4770b6746c3f8f84f14fa60d9fe1205b56
   repo: https://github.com/yosssi/ace
@@ -63,16 +59,12 @@ imports:
   repo: https://github.com/ziutek/kasia.go
   vcs: git
 - name: golang.org/x/sys
-  version: 30de6d19a3bd89a5f38ae4028e23aaa5582648af
+  version: d75a52659825e75fff6158388dddc6a5b04f9ba5
   subpackages:
   - unix
 - name: gopkg.in/fsnotify.v1
-  version: a8a77c9133d2d6fd8334f3260d06f60e8d80a5fb
+  version: 629574ca2a5df945712d3079857300b5e4da0236
 testImports:
-- name: dasa.cc/damsel
-  version: 0eb663c5b10e488abe6d35f19544595074e1880f
-  subpackages:
-  - parse
 - name: github.com/CloudyKit/fastprinter
   version: ee06c58b09065598339804adaf79c31ff25ecf7a
 - name: github.com/dchest/cssmin
@@ -80,7 +72,7 @@ testImports:
 - name: github.com/dchest/jsmin
   version: faeced8839472f349011f4c4c5441bbc28d02191
 - name: golang.org/x/net
-  version: 9313baa13d9262e49d07b20ed57dceafcd7240cc
+  version: f2499483f923065a842d38eb4c7f1927e6fc6e6d
   subpackages:
   - html
   - html/atom

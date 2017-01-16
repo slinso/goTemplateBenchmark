@@ -1,8 +1,0 @@
-%html
-  %body
-    %h1 {.FirstName}
-
-    %p Here's a list of your favorite colors:
-    %ul {range .FavoriteColors}
-        %li {.}
-    {end}

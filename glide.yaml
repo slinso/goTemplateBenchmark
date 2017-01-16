@@ -3,9 +3,6 @@ import:
 - package: github.com/aymerick/raymond
   repo: https://github.com/aymerick/raymond
   vcs: git
-- package: github.com/dskinner/damsel
-  repo: https://github.com/dskinner/damsel
-  vcs: git
 - package: github.com/eknkc/amber
   repo: https://github.com/eknkc/amber
   vcs: git

@@ -15,7 +15,6 @@ import (
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
 	"github.com/SlinSo/goTemplateBenchmark/quicktemplate"
 	"github.com/aymerick/raymond"
-	"github.com/dskinner/damsel"
 	"github.com/eknkc/amber"
 	"github.com/flosch/pongo2"
 	"github.com/hoisie/mustache"
@@ -299,40 +298,6 @@ func BenchmarkAmber(b *testing.B) {
 }
 
 /******************************************************************************
-** Damsel
-******************************************************************************/
-func TestDamsel(t *testing.T) {
-	dmsl, err := damsel.ParseFile("damsel/simple.dmsl")
-	if err != nil {
-		t.Error(err)
-	}
-
-	tpl := damsel.NewHtmlTemplate(dmsl)
-	result, err := tpl.Execute(testData)
-	if err != nil {
-		t.Error(err)
-	}
-
-	if msg, ok := linesEquals(result, expectedtResult); !ok {
-		t.Error(msg)
-	}
-}
-
-func BenchmarkDamsel(b *testing.B) {
-	dmsl, _ := damsel.ParseFile("damsel/simple.dmsl")
-
-	tpl := damsel.NewHtmlTemplate(dmsl)
-	b.ResetTimer()
-
-	for i := 0; i < b.N; i++ {
-		_, err := tpl.Execute(testData)
-		if err != nil {
-			b.Fatal(err)
-		}
-	}
-}
-
-/******************************************************************************
 ** Mustache
 ******************************************************************************/
 func TestMustache(t *testing.T) {
@@ -396,7 +361,7 @@ func BenchmarkPongo2(b *testing.B) {
 ** Handlebars
 ******************************************************************************/
 func TestHandlebars(t *testing.T) {
-	tpl, err := raymond.ParseFile("handlebars/simple.handle")
+	tpl, err := raymond.ParseFile("raymond/simple.handle")
 	if err != nil {
 		t.Error(err)
 	}
@@ -412,7 +377,7 @@ func TestHandlebars(t *testing.T) {
 }
 
 func BenchmarkHandlebars(b *testing.B) {
-	tpl, _ := raymond.ParseFile("handlebars/simple.handle")
+	tpl, _ := raymond.ParseFile("raymond/simple.handle")
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
