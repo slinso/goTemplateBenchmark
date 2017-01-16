@@ -35,7 +35,7 @@ and included the results in this benchmark.
 
 ## Results
 Changed the environment to my local dev laptop: i7-6700T  16GB Mem
-Golang: 1.7.1
+Golang: 1.8rc1
 
 ### full featured template engines
 ```
@@ -43,29 +43,31 @@ go test -bench "k(Ace|Amber|Golang|Handlebars|Kasia|Mustache|Pongo2|Soy|JetHTML)
 ```
 | Name           |      Runs |  µs/op |  B/op | allocations/op |
 | --- | --- | --- | --- | --- |
-| Ace            |   300,000 | 16.234 | 5,608 |             77 |
-| Amber          | 1,000,000 |  5.438 | 1,929 |             39 |
-| Golang         | 1,000,000 |  5.366 | 1,904 |             38 |
-| Handlebars     |   300,000 | 12.630 | 4,260 |             90 |
-| **JetHTML**        | 3,000,000 |  1.441 |   691 |              0 |
-| Kasia          | 1,000,000 |  3.194 | 2,147 |             26 |
-| Mustache       | 1,000,000 |  4.253 | 1,569 |             28 |
-| Pongo2         | 1,000,000 |  4.402 | 3,302 |             46 |
-| Soy            | 1,000,000 |  3.108 | 1,863 |             26 |
+| Ace            |   300,000 | 14.572 | 5,608 |             77 |
+| Amber          | 1,000,000 |  5.165 | 1,929 |             39 |
+| Golang         | 1,000,000 |  4.988 | 1,904 |             38 |
+| Handlebars     |   500,000 | 12.733 | 4,260 |             90 |
+| **JetHTML        | 3,000,000 |  1.290 |   691 |              0** |
+| Kasia          | 2,000,000 |  2.993 | 2,147 |             26 |
+| Mustache       | 1,000,000 |  4.151 | 1,569 |             28 |
+| Pongo2         | 1,000,000 |  4.382 | 3,318 |             47 |
+| Soy            | 1,000,000 |  3.000 | 1,863 |             26 |
+
 
 
 ### precompilation to Go code
 ```
 go test -bench "k(Ego|Egon|EgonSlinso|Quicktemplate|Ftmpl|Gorazor)$" -benchmem -benchtime=3s | pb
 ```
-|  Name              |       Runs | µs/op |  B/op | allocations/op |
+| Name              |       Runs | µs/op |  B/op | allocations/op |
 | --- | --- | --- | --- | --- |
-| Ego               |  5,000,000 | 1.169 |   914 |              8 |
-| Egon              |  2,000,000 | 2.290 |   827 |             22 |
-| **EgonSlinso**        | 10,000,000 | 0.629 |   828 |              0 |
-| Ftmpl             |  3,000,000 | 1.683 | 1,142 |             12 |
-| Gorazor           |  3,000,000 | 1.632 |   613 |             11 |
-| **Quicktemplate**     | 10,000,000 | 0.452 |   799 |              0 |
+| Ego               |  5,000,000 | 0.991 |   914 |              8 |
+| Egon              |  2,000,000 | 2.081 |   827 |             22 |
+| **EgonSlinso        | 10,000,000 | 0.518 |   828 |              0** |
+| Ftmpl             |  3,000,000 | 1.536 | 1,142 |             12 |
+| Gorazor           |  3,000,000 | 1.370 |   613 |             11 |
+| **Quicktemplate     | 10,000,000 | 0.415 |   799 |              0** |
+
 
 
 ### transpiling to HTML
@@ -77,16 +79,16 @@ go test . -bench="Complex" -benchmem -benchtime=3s | pb
 ```
 | Name                     |      Runs |  µs/op |   B/op | allocations/op |
 | --- | --- | --- | --- | --- |
-| ComplexEgo               | 1,000,000 |  5.305 |  2,561 |             41 |
-| **ComplexEgoSlinso**         | 2,000,000 |  2.346 |  2,070 |              7 |
-| ComplexEgon              |   300,000 | 10.206 |  4,792 |            101 |
-| ComplexFtmpl             |   500,000 |  8.487 |  5,300 |             48 |
-| ComplexFtmplInclude      |   500,000 |  9.522 |  5,300 |             48 |
-| ComplexGolang            |   100,000 | 44.813 | 12,415 |            295 |
-| ComplexGorazor           |   300,000 | 13.306 |  8,327 |             73 |
-| ComplexJetHTML           |   500,000 | 10.537 |  4,164 |              5 |
-| ComplexMustache          |   200,000 | 27.743 |  7,856 |            166 |
-| **ComplexQuicktemplate**     | 2,000,000 |  2.610 |  1,892 |              0 |
+| ComplexEgo               | 1,000,000 |  4.854 |  2,561 |             41 |
+| **ComplexEgoSlinso         | 2,000,000 |  2.193 |  2,070 |              7** |
+| ComplexEgon              |   500,000 |  9.438 |  3,521 |            101 |
+| ComplexFtmpl             | 1,000,000 |  6.769 |  5,044 |             48 |
+| ComplexFtmplInclude      |   500,000 |  7.076 |  5,044 |             48 |
+| ComplexGolang            |   100,000 | 44.924 | 12,855 |            300 |
+| ComplexGorazor           |   300,000 | 11.446 |  8,455 |             73 |
+| ComplexJetHTML           |   500,000 | 10.738 |  4,163 |              5 |
+| ComplexMustache          |   200,000 | 26.303 |  7,856 |            166 |
+| **ComplexQuicktemplate     | 2,000,000 |  2.300 |  1,892 |              0** |
 
 ## Security
 All packages assume that template authors are trusted. If you allow custom templates you have to sanitize your user input e.g. [bluemonday](https://github.com/microcosm-cc/bluemonday). Generally speaking I would suggest to sanitize every input not just HTML-input. 
@@ -95,7 +97,6 @@ All packages assume that template authors are trusted. If you allow custom templ
 | --------- | -------- | ------- |
 | Ace | No | |
 | amber | No | |
-| Damsel | Yes, if html/template is used for execution | Damsel transpiles to HTML |
 | ego | Partial (html.EscapeString) | only HTML, others need to be called manually |
 | egon | Partial (html.EscapeString) | only HTML, others need to be called manually |
 | egonslinso | Partial (html.EscapeString) | only HTML, others need to be called manually |
