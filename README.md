@@ -47,7 +47,7 @@ go test -bench "k(Ace|Amber|Golang|Handlebars|Kasia|Mustache|Pongo2|Soy|JetHTML)
 | Amber          | 1,000,000 |  5.165 | 1,929 |             39 |
 | Golang         | 1,000,000 |  4.988 | 1,904 |             38 |
 | Handlebars     |   500,000 | 12.733 | 4,260 |             90 |
-| **JetHTML        | 3,000,000 |  1.290 |   691 |              0** |
+| **JetHTML**        | 3,000,000 |  1.290 |   691 |              0 |
 | Kasia          | 2,000,000 |  2.993 | 2,147 |             26 |
 | Mustache       | 1,000,000 |  4.151 | 1,569 |             28 |
 | Pongo2         | 1,000,000 |  4.382 | 3,318 |             47 |
@@ -63,10 +63,10 @@ go test -bench "k(Ego|Egon|EgonSlinso|Quicktemplate|Ftmpl|Gorazor)$" -benchmem -
 | --- | --- | --- | --- | --- |
 | Ego               |  5,000,000 | 0.991 |   914 |              8 |
 | Egon              |  2,000,000 | 2.081 |   827 |             22 |
-| **EgonSlinso        | 10,000,000 | 0.518 |   828 |              0** |
+| **EgonSlinso**        | 10,000,000 | 0.518 |   828 |              0 |
 | Ftmpl             |  3,000,000 | 1.536 | 1,142 |             12 |
 | Gorazor           |  3,000,000 | 1.370 |   613 |             11 |
-| **Quicktemplate     | 10,000,000 | 0.415 |   799 |              0** |
+| **Quicktemplate**     | 10,000,000 | 0.415 |   799 |              0 |
 
 
 
@@ -80,7 +80,7 @@ go test . -bench="Complex" -benchmem -benchtime=3s | pb
 | Name                     |      Runs |  µs/op |   B/op | allocations/op |
 | --- | --- | --- | --- | --- |
 | ComplexEgo               | 1,000,000 |  4.854 |  2,561 |             41 |
-| **ComplexEgoSlinso         | 2,000,000 |  2.193 |  2,070 |              7** |
+| **ComplexEgoSlinso**         | 2,000,000 |  2.193 |  2,070 |              7 |
 | ComplexEgon              |   500,000 |  9.438 |  3,521 |            101 |
 | ComplexFtmpl             | 1,000,000 |  6.769 |  5,044 |             48 |
 | ComplexFtmplInclude      |   500,000 |  7.076 |  5,044 |             48 |
@@ -88,7 +88,7 @@ go test . -bench="Complex" -benchmem -benchtime=3s | pb
 | ComplexGorazor           |   300,000 | 11.446 |  8,455 |             73 |
 | ComplexJetHTML           |   500,000 | 10.738 |  4,163 |              5 |
 | ComplexMustache          |   200,000 | 26.303 |  7,856 |            166 |
-| **ComplexQuicktemplate     | 2,000,000 |  2.300 |  1,892 |              0** |
+| **ComplexQuicktemplate**     | 2,000,000 |  2.300 |  1,892 |              0 |
 
 ## Security
 All packages assume that template authors are trusted. If you allow custom templates you have to sanitize your user input e.g. [bluemonday](https://github.com/microcosm-cc/bluemonday). Generally speaking I would suggest to sanitize every input not just HTML-input. 
