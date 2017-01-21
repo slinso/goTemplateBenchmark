@@ -14,6 +14,7 @@ import (
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
 	"github.com/SlinSo/goTemplateBenchmark/quicktemplate"
+	herotmpl "github.com/SlinSo/goTemplateBenchmark/hero"
 	"github.com/aymerick/raymond"
 	"github.com/eknkc/amber"
 	"github.com/flosch/pongo2"
@@ -23,6 +24,7 @@ import (
 	"github.com/yosssi/ace"
 	"github.com/ziutek/kasia.go"
 
+	"github.com/shiyanhui/hero"
 	"github.com/CloudyKit/jet"
 	"github.com/dchest/htmlmin"
 )
@@ -36,10 +38,10 @@ var (
 	expectedtResult = `<html>
 	<body>
 		<h1>Bob</h1>
-		
+
 		<p>Here's a list of your favorite colors:</p>
 		<ul>
-			
+
 			<li>blue</li>
 			<li>green</li>
 			<li>mauve</li>
@@ -513,6 +515,25 @@ func BenchmarkJetHTML(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+	}
+}
+
+/******************************************************************************
+** Hero
+******************************************************************************/
+func TestHero(t *testing.T) {
+	buf := herotmpl.SimpleQtc(testData)
+	defer hero.PutBuffer(buf)
+
+	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkHero(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		buf := herotmpl.SimpleQtc(testData)
+		hero.PutBuffer(buf)
 	}
 }
 
