@@ -10,7 +10,7 @@ echo "simple:"
 go test -bench "k(Ace|Amber|Golang|Handlebars|Kasia|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime=${RUNTIME} | tee /tmp/old1.txt | pb | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'
 
 echo "simple precompiled:"
-go test -bench "k(Ego|Egon|EgonSlinso|Quicktemplate|Ftmpl|Gorazor)$" -benchmem -benchtime=${RUNTIME} | tee /tmp/old2.txt | pb | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'
+go test -bench "k(Ego|Egon|EgonSlinso|Quicktemplate|Ftmpl|Gorazor|Hero)$" -benchmem -benchtime=${RUNTIME} | tee /tmp/old2.txt | pb | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'
 
 echo "complex:"
 go test . -bench="Complex" -benchmem -benchtime=${RUNTIME} | tee /tmp/old3.txt | pb | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'
@@ -23,7 +23,7 @@ echo "simple:"
 ${NEXT} test -bench "k(Ace|Amber|Golang|Handlebars|Kasia|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime=${RUNTIME} | tee /tmp/new1.txt | pb | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'
 
 echo "simple precompiled:"
-${NEXT} test -bench "k(Ego|Egon|EgonSlinso|Quicktemplate|Ftmpl|Gorazor)$" -benchmem -benchtime=${RUNTIME} | tee /tmp/new2.txt | pb | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'
+${NEXT} test -bench "k(Ego|Egon|EgonSlinso|Quicktemplate|Ftmpl|Gorazor|Hero)$" -benchmem -benchtime=${RUNTIME} | tee /tmp/new2.txt | pb | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'
 
 echo "complex:"
 ${NEXT} test . -bench="Complex" -benchmem -benchtime=${RUNTIME} | tee /tmp/new3.txt | pb | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'

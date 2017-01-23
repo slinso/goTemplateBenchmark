@@ -1,5 +1,5 @@
 hash: 34db27ce278394126d360796cd987ebb2701adf81ebf58ab5dfd769f86d34e62
-updated: 2017-01-22T00:12:40.127462136+08:00
+updated: 2017-01-23T07:55:26.853315466+01:00
 imports:
 - name: github.com/aymerick/raymond
   version: 72acac2207479d21dd45898c2a4264246c818148
@@ -61,7 +61,7 @@ imports:
   repo: https://github.com/ziutek/kasia.go
   vcs: git
 - name: golang.org/x/sys
-  version: d75a52659825e75fff6158388dddc6a5b04f9ba5
+  version: 9bb9f0998d48b31547d975974935ae9b48c7a03c
   subpackages:
   - unix
 - name: gopkg.in/fsnotify.v1
@@ -74,7 +74,7 @@ testImports:
 - name: github.com/dchest/jsmin
   version: faeced8839472f349011f4c4c5441bbc28d02191
 - name: golang.org/x/net
-  version: f2499483f923065a842d38eb4c7f1927e6fc6e6d
+  version: 1d7a0b2100da090d8b02afcfb42f97e2c77e71a4
   subpackages:
   - html
   - html/atom
