@@ -57,7 +57,7 @@ go test -bench "k(Ace|Amber|Golang|Handlebars|Kasia|Mustache|Pongo2|Soy|JetHTML)
 
 ### precompilation to Go code
 ```
-go test -bench "k(Ego|Egon|EgonSlinso|Quicktemplate|Ftmpl|Gorazor)$" -benchmem -benchtime=3s | pb
+go test -bench "k(Ego|Egon|EgonSlinso|Quicktemplate|Ftmpl|Gorazor|Hero)$" -benchmem -benchtime=3s | pb
 ```
 | Name              |       Runs | µs/op |  B/op | allocations/op |
 | --- | --- | --- | --- | --- |
@@ -67,6 +67,7 @@ go test -bench "k(Ego|Egon|EgonSlinso|Quicktemplate|Ftmpl|Gorazor)$" -benchmem -
 | Ftmpl             |  3,000,000 | 1.536 | 1,142 |             12 |
 | Gorazor           |  3,000,000 | 1.370 |   613 |             11 |
 | **Quicktemplate**     | 10,000,000 | 0.415 |   799 |              0 |
+| **Hero** | 20,000,000 | 0.248 | 0 | 0 |
 
 
 
@@ -89,9 +90,10 @@ go test . -bench="Complex" -benchmem -benchtime=3s | pb
 | ComplexJetHTML           |   500,000 | 10.738 |  4,163 |              5 |
 | ComplexMustache          |   200,000 | 26.303 |  7,856 |            166 |
 | **ComplexQuicktemplate**     | 2,000,000 |  2.300 |  1,892 |              0 |
+| **ComplexHero** | 3,000,000 | 1.559 | 165 | 7 |
 
 ## Security
-All packages assume that template authors are trusted. If you allow custom templates you have to sanitize your user input e.g. [bluemonday](https://github.com/microcosm-cc/bluemonday). Generally speaking I would suggest to sanitize every input not just HTML-input. 
+All packages assume that template authors are trusted. If you allow custom templates you have to sanitize your user input e.g. [bluemonday](https://github.com/microcosm-cc/bluemonday). Generally speaking I would suggest to sanitize every input not just HTML-input.
 
 | Framework | Security | Comment |
 | --------- | -------- | ------- |

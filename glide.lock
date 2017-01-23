@@ -1,5 +1,5 @@
-hash: 2c3805fb35dcd11f0debc8b8174a1e950ce0392a045502e50bc57b5b276a8d54
-updated: 2017-01-16T09:25:57.745563409+01:00
+hash: 34db27ce278394126d360796cd987ebb2701adf81ebf58ab5dfd769f86d34e62
+updated: 2017-01-22T00:12:40.127462136+08:00
 imports:
 - name: github.com/aymerick/raymond
   version: 72acac2207479d21dd45898c2a4264246c818148
@@ -42,6 +42,8 @@ imports:
   - parsepasses
   - soyhtml
   - template
+- name: github.com/shiyanhui/hero
+  version: b609cf13d34e84e438bb1e60ea982eb0495ea475
 - name: github.com/sipin/gorazor
   version: cfcf2db74a170747830822495a7cc059124af962
   subpackages:

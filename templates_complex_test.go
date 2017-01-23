@@ -14,7 +14,10 @@ import (
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
 	"github.com/SlinSo/goTemplateBenchmark/quicktemplate"
+	herotmpl "github.com/SlinSo/goTemplateBenchmark/hero"
 	"github.com/hoisie/mustache"
+
+	"github.com/shiyanhui/hero"
 )
 
 type tmplData struct {
@@ -351,5 +354,25 @@ func BenchmarkComplexJetHTML(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+	}
+}
+
+
+/******************************************************************************
+** Hero
+******************************************************************************/
+func TestComplexHero(t *testing.T) {
+	buf := herotmpl.Index(testComplexUser, testComplexNav, testComplexTitle)
+	defer hero.PutBuffer(buf)
+
+	if msg, ok := linesEquals(buf.String(), expectedtComplexResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkComplexHero(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		buf := herotmpl.Index(testComplexUser, testComplexNav, testComplexTitle)
+		hero.PutBuffer(buf)
 	}
 }
