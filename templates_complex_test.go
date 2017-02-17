@@ -13,8 +13,8 @@ import (
 	"github.com/SlinSo/goTemplateBenchmark/egonslinso"
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
-	"github.com/SlinSo/goTemplateBenchmark/quicktemplate"
 	herotmpl "github.com/SlinSo/goTemplateBenchmark/hero"
+	"github.com/SlinSo/goTemplateBenchmark/quicktemplate"
 	"github.com/hoisie/mustache"
 
 	"github.com/shiyanhui/hero"
@@ -160,6 +160,7 @@ func BenchmarkComplexGolang(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		templates["index.tmpl"].ExecuteTemplate(&buf, "base", testComplexData)
+		buf.Reset()
 	}
 }
 
@@ -180,6 +181,7 @@ func BenchmarkComplexEgo(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		ego.EgoComplex(&buf, testComplexUser, testComplexNav, testComplexTitle)
+		buf.Reset()
 	}
 }
 
@@ -200,6 +202,7 @@ func BenchmarkComplexQuicktemplate(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		quicktemplate.WriteIndex(&buf, testComplexUser, testComplexNav, testComplexTitle)
+		buf.Reset()
 	}
 }
 
@@ -220,6 +223,7 @@ func BenchmarkComplexEgon(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		egon.IndexTemplate(&buf, testComplexUser, testComplexNav, testComplexTitle)
+		buf.Reset()
 	}
 }
 
@@ -240,6 +244,7 @@ func BenchmarkComplexEgoSlinso(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		egonslinso.IndexTemplate(&buf, testComplexUser, testComplexNav, testComplexTitle)
+		buf.Reset()
 	}
 }
 
@@ -354,9 +359,9 @@ func BenchmarkComplexJetHTML(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+		buf.Reset()
 	}
 }
-
 
 /******************************************************************************
 ** Hero

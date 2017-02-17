@@ -13,8 +13,8 @@ import (
 	"github.com/SlinSo/goTemplateBenchmark/egonslinso"
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
-	"github.com/SlinSo/goTemplateBenchmark/quicktemplate"
 	herotmpl "github.com/SlinSo/goTemplateBenchmark/hero"
+	"github.com/SlinSo/goTemplateBenchmark/quicktemplate"
 	"github.com/aymerick/raymond"
 	"github.com/eknkc/amber"
 	"github.com/flosch/pongo2"
@@ -24,9 +24,9 @@ import (
 	"github.com/yosssi/ace"
 	"github.com/ziutek/kasia.go"
 
-	"github.com/shiyanhui/hero"
 	"github.com/CloudyKit/jet"
 	"github.com/dchest/htmlmin"
+	"github.com/shiyanhui/hero"
 )
 
 var (
@@ -83,6 +83,7 @@ func BenchmarkGolang(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+		buf.Reset()
 	}
 }
 
@@ -109,6 +110,7 @@ func BenchmarkEgo(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+		buf.Reset()
 	}
 }
 
@@ -135,16 +137,7 @@ func BenchmarkEgon(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
-	}
-}
-func BenchmarkEgonFooter(b *testing.B) {
-	var buf bytes.Buffer
-
-	for i := 0; i < b.N; i++ {
-		err := egon.FooterTemplate(&buf)
-		if err != nil {
-			b.Fatal(err)
-		}
+		buf.Reset()
 	}
 }
 
@@ -171,16 +164,7 @@ func BenchmarkEgonSlinso(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
-	}
-}
-func BenchmarkEgonSlinsoFooter(b *testing.B) {
-	var buf bytes.Buffer
-
-	for i := 0; i < b.N; i++ {
-		err := egonslinso.FooterTemplate(&buf)
-		if err != nil {
-			b.Fatal(err)
-		}
+		buf.Reset()
 	}
 }
 
@@ -201,6 +185,7 @@ func BenchmarkQuicktemplate(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		quicktemplate.WriteSimpleQtc(&buf, testData)
+		buf.Reset()
 	}
 }
 
@@ -262,6 +247,7 @@ func BenchmarkAce(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+		buf.Reset()
 	}
 }
 
@@ -296,6 +282,7 @@ func BenchmarkAmber(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+		buf.Reset()
 	}
 }
 
@@ -356,6 +343,7 @@ func BenchmarkPongo2(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+		buf.Reset()
 	}
 }
 
@@ -439,6 +427,7 @@ func BenchmarkKasia(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+		buf.Reset()
 	}
 }
 
@@ -479,6 +468,7 @@ func BenchmarkSoy(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+		buf.Reset()
 	}
 }
 
@@ -515,6 +505,7 @@ func BenchmarkJetHTML(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+		buf.Reset()
 	}
 }
 

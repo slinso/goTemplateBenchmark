@@ -1,5 +1,5 @@
 hash: 34db27ce278394126d360796cd987ebb2701adf81ebf58ab5dfd769f86d34e62
-updated: 2017-01-23T07:55:26.853315466+01:00
+updated: 2017-02-17T07:32:15.759344064+01:00
 imports:
 - name: github.com/aymerick/raymond
   version: 72acac2207479d21dd45898c2a4264246c818148
@@ -10,7 +10,7 @@ imports:
   - lexer
   - parser
 - name: github.com/CloudyKit/jet
-  version: 76abb1a47ef00783ce9e4481f930d762533bf4cf
+  version: c2dc1007f7100db0044c979e1184b70b9595167b
 - name: github.com/commondream/egon
   version: b9680bd5dea1bc62da5c5a8a0222d589e1576c87
 - name: github.com/dchest/htmlmin
@@ -24,7 +24,7 @@ imports:
   subpackages:
   - parser
 - name: github.com/flosch/pongo2
-  version: 22499f94d3d56c7238591344a6902715d0b8fbbf
+  version: 17d7c034174b22592c187661011b02fd7e7c3a83
   repo: https://github.com/flosch/pongo2
   vcs: git
 - name: github.com/hoisie/mustache
@@ -43,7 +43,7 @@ imports:
   - soyhtml
   - template
 - name: github.com/shiyanhui/hero
-  version: b609cf13d34e84e438bb1e60ea982eb0495ea475
+  version: 919e183490ac1f6cd78bef8e77c7f3b76d5fbe79
 - name: github.com/sipin/gorazor
   version: cfcf2db74a170747830822495a7cc059124af962
   subpackages:
@@ -61,20 +61,22 @@ imports:
   repo: https://github.com/ziutek/kasia.go
   vcs: git
 - name: golang.org/x/sys
-  version: 9bb9f0998d48b31547d975974935ae9b48c7a03c
+  version: 075e574b89e4c2d22f2286a7e2b919519c6f3547
   subpackages:
   - unix
 - name: gopkg.in/fsnotify.v1
   version: 629574ca2a5df945712d3079857300b5e4da0236
 testImports:
 - name: github.com/CloudyKit/fastprinter
-  version: ee06c58b09065598339804adaf79c31ff25ecf7a
+  version: 74b38d55f37af5d6c05ca11147d616b613a3420e
 - name: github.com/dchest/cssmin
   version: fb8d9b44afdc258bfff6052d3667521babcb2239
 - name: github.com/dchest/jsmin
   version: faeced8839472f349011f4c4c5441bbc28d02191
+- name: github.com/juju/errors
+  version: 6f54ff6318409d31ff16261533ce2c8381a4fd5d
 - name: golang.org/x/net
-  version: 1d7a0b2100da090d8b02afcfb42f97e2c77e71a4
+  version: b4690f45fa1cafc47b1c280c2e75116efe40cc13
   subpackages:
   - html
   - html/atom

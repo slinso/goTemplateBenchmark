@@ -21,74 +21,63 @@ comparing the performance of different template engines
 * [Quicktemplate](https://github.com/valyala/quicktemplate)
 * [Hero](https://github.com/shiyanhui/hero)
 
-## transpiling to HTML
+## transpiling to Go Template
 * [Damsel](https://github.com/dskinner/damsel)
+I won't benchmark transpiling engines, because transpilation should just happen once at startup. If you cache the transpilation result, which is recommended, you would have the same performance numbers as html/template for rendering.
+
 
 ## Why?
 Just for fun. Go Templates work nice out of the box and should be used for rendering from a security point of view.
-If you really care about performance you should cache the rendered output.
+If you care about performance you should cache the rendered output.
 
-on second thought:
-I have some templates that cannot be cached in my production code, thats why I'm interested in performant
-HTML generation using templates. After trying the code generation based projects I liked ego most, but some
-features where missing and generated code could be optimized further. That's why I created a fork
-and included the results in this benchmark.
+Sometimes there are templates that cannot be reasonably cached. Then you possibly need a really fast template engine with code generation.
+
 
 ## Results dev machine
 Changed the environment to my local dev laptop: i7-6700T  16GB Mem
-Golang: 1.8rc1
+Golang: 1.8
 
 ### full featured template engines
-```
-go test -bench "k(Ace|Amber|Golang|Handlebars|Kasia|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime=3s | pb
-```
 | Name           |      Runs |  µs/op |  B/op | allocations/op |
 | --- | --- | --- | --- | --- |
-| Ace            |   300,000 | 14.572 | 5,608 |             77 |
-| Amber          | 1,000,000 |  5.165 | 1,929 |             39 |
-| Golang         | 1,000,000 |  4.988 | 1,904 |             38 |
-| Handlebars     |   500,000 | 12.733 | 4,260 |             90 |
-| **JetHTML**        | 3,000,000 |  1.290 |   691 |              0 |
-| Kasia          | 2,000,000 |  2.993 | 2,147 |             26 |
-| Mustache       | 1,000,000 |  4.151 | 1,569 |             28 |
-| Pongo2         | 1,000,000 |  4.382 | 3,318 |             47 |
-| Soy            | 1,000,000 |  3.000 | 1,863 |             26 |
+| Ace            |   300,000 | 15.124 | 5,210 |             77 |
+| Amber          | 1,000,000 |  5.257 | 1,448 |             39 |
+| Golang         | 1,000,000 |  5.171 | 1,368 |             38 |
+| Handlebars     |   500,000 | 10.589 | 4,258 |             90 |
+| **JetHTML**        | 5,000,000 |  1.167 |     0 |              0 |
+| Kasia          | 1,000,000 |  3.216 | 1,192 |             26 |
+| Mustache       | 1,000,000 |  3.365 | 1,568 |             28 |
+| Pongo2         | 1,000,000 |  4.895 | 2,376 |             47 |
+| Soy            | 1,000,000 |  3.178 | 1,384 |             26 |
+
 
 ### precompilation to Go code
-```
-go test -bench "k(Ego|Egon|EgonSlinso|Quicktemplate|Ftmpl|Gorazor|Hero)$" -benchmem -benchtime=3s | pb
-```
 | Name              |       Runs | µs/op |  B/op | allocations/op |
 | --- | --- | --- | --- | --- |
-| Ego               |  5,000,000 | 1.252 |   914 |              8 |
-| Egon              |  2,000,000 | 2.514 |   827 |             22 |
-| EgonSlinso        | 10,000,000 | 0.608 |   828 |              0 |
-| Ftmpl             |  3,000,000 | 1.698 | 1,142 |             12 |
-| Gorazor           |  3,000,000 | 1.459 |   613 |             11 |
-| **Hero**              | 20,000,000 | 0.254 |     0 |              0 |
-| Quicktemplate     | 10,000,000 | 0.525 |   799 |              0 |
+| Ego               |  5,000,000 | 0.890 |    85 |              8 |
+| Egon              |  2,000,000 | 1.997 |   309 |             22 |
+| EgonSlinso        | 20,000,000 | 0.362 |     0 |              0 |
+| Ftmpl             |  3,000,000 | 1.394 | 1,141 |             12 |
+| Gorazor           |  3,000,000 | 1.212 |   613 |             11 |
+| **Hero**              | 20,000,000 | 0.201 |     0 |              0 |
+| Quicktemplate     | 20,000,000 | 0.324 |     0 |              0 |
 
-
-### transpiling to HTML
-I removed Damsel, because transpilation should just happen once at startup. If you cache the transpilation result, which is recommended, you would have the same performance numbers as html/template for rendering.
 
 ### more complex test with template inheritance (if possible)
-```
-go test . -bench="Complex" -benchmem -benchtime=3s | pb
-```
 | Name                     |      Runs |  µs/op |   B/op | allocations/op |
 | --- | --- | --- | --- | --- |
-| ComplexEgo               | 1,000,000 |  5.626 |  2,561 |             41 |
-| ComplexEgoSlinso         | 2,000,000 |  2.678 |  2,070 |              7 |
-| ComplexEgon              |   300,000 | 11.765 |  4,792 |            101 |
-| ComplexFtmpl             | 1,000,000 |  6.600 |  5,044 |             48 |
-| ComplexFtmplInclude      | 1,000,000 |  6.801 |  5,044 |             48 |
-| ComplexGolang            |   100,000 | 54.368 | 12,855 |            300 |
-| ComplexGorazor           |   500,000 | 10.051 |  8,455 |             73 |
-| **ComplexHero**              | 3,000,000 |  1.576 |    165 |              7 |
-| ComplexJetHTML           |   300,000 | 12.643 |  3,561 |              5 |
-| ComplexMustache          |   200,000 | 26.413 |  7,856 |            166 |
-| ComplexQuicktemplate     | 2,000,000 |  2.780 |  1,892 |              0 |
+| ComplexEgo               | 1,000,000 |  4.300 |    656 |             41 |
+| ComplexEgoSlinso         | 2,000,000 |  1.955 |    165 |              7 |
+| ComplexEgon              |   500,000 |  9.098 |  1,617 |            101 |
+| ComplexFtmpl             | 1,000,000 |  6.553 |  5,043 |             48 |
+| ComplexFtmplInclude      | 1,000,000 |  6.490 |  5,043 |             48 |
+| ComplexGolang            |   100,000 | 42.322 | 10,535 |            300 |
+| ComplexGorazor           |   500,000 |  9.013 |  8,453 |             73 |
+| **ComplexHero**              | 3,000,000 |  1.290 |    165 |              7 |
+| ComplexJetHTML           |   500,000 |  9.914 |    546 |              5 |
+| ComplexMustache          |   200,000 | 21.313 |  7,854 |            166 |
+| ComplexQuicktemplate     | 2,000,000 |  1.920 |      0 |              0 |
+
 
 ## Results small VPS 
 single CPU, 1GB RAM
