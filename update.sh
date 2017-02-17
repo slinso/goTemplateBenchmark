@@ -2,7 +2,7 @@
 
 glide cc
 glide up
-alias gg=`go get -u -v`
+alias gg='go get -u -v'
 
 gg github.com/tkrajina/ftmpl
 go install github.com/tkrajina/ftmpl
