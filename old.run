@@ -1,0 +1,31 @@
+BenchmarkComplexGolang-8          	  100000	     39964 ns/op	   12855 B/op	     300 allocs/op
+BenchmarkComplexEgo-8             	 1000000	      4328 ns/op	    2561 B/op	      41 allocs/op
+BenchmarkComplexQuicktemplate-8   	 2000000	      2134 ns/op	    1892 B/op	       0 allocs/op
+BenchmarkComplexEgon-8            	  500000	      8920 ns/op	    3521 B/op	     101 allocs/op
+BenchmarkComplexEgoSlinso-8       	 2000000	      2078 ns/op	    2070 B/op	       7 allocs/op
+BenchmarkComplexFtmpl-8           	 1000000	      5877 ns/op	    5042 B/op	      48 allocs/op
+BenchmarkComplexFtmplInclude-8    	 1000000	      6479 ns/op	    5042 B/op	      48 allocs/op
+BenchmarkComplexMustache-8        	  200000	     22180 ns/op	    7853 B/op	     166 allocs/op
+BenchmarkComplexGorazor-8         	  500000	      9553 ns/op	    8452 B/op	      73 allocs/op
+BenchmarkComplexJetHTML-8         	  500000	     10087 ns/op	    4163 B/op	       5 allocs/op
+BenchmarkComplexHero-8            	 2000000	      2528 ns/op	    1832 B/op	      11 allocs/op
+BenchmarkGolang-8                 	 1000000	      5200 ns/op	    1904 B/op	      38 allocs/op
+BenchmarkEgo-8                    	 5000000	       936 ns/op	     914 B/op	       8 allocs/op
+BenchmarkEgon-8                   	 2000000	      1997 ns/op	     827 B/op	      22 allocs/op
+BenchmarkEgonFooter-8             	50000000	       119 ns/op	     155 B/op	       1 allocs/op
+BenchmarkEgonSlinso-8             	10000000	       430 ns/op	     828 B/op	       0 allocs/op
+BenchmarkEgonSlinsoFooter-8       	100000000	        46.9 ns/op	     139 B/op	       0 allocs/op
+BenchmarkQuicktemplate-8          	10000000	       407 ns/op	     799 B/op	       0 allocs/op
+BenchmarkFtmpl-8                  	 3000000	      1414 ns/op	    1141 B/op	      12 allocs/op
+BenchmarkAce-8                    	  300000	     14783 ns/op	    5608 B/op	      77 allocs/op
+BenchmarkAmber-8                  	 1000000	      5168 ns/op	    1929 B/op	      39 allocs/op
+BenchmarkMustache-8               	 1000000	      3239 ns/op	    1568 B/op	      28 allocs/op
+BenchmarkPongo2-8                 	 1000000	      4367 ns/op	    3318 B/op	      47 allocs/op
+BenchmarkHandlebars-8             	  500000	     10388 ns/op	    4258 B/op	      90 allocs/op
+BenchmarkGorazor-8                	 5000000	      1183 ns/op	     613 B/op	      11 allocs/op
+BenchmarkKasia-8                  	 1000000	      3054 ns/op	    2147 B/op	      26 allocs/op
+BenchmarkSoy-8                    	 2000000	      2933 ns/op	    1863 B/op	      26 allocs/op
+BenchmarkJetHTML-8                	 5000000	      1211 ns/op	     829 B/op	       0 allocs/op
+BenchmarkHero-8                   	 5000000	       954 ns/op	     884 B/op	       3 allocs/op
+PASS
+ok  	bitbucket.com/goTemplateBenchmark	158.578s
