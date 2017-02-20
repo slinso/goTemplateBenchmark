@@ -26,7 +26,6 @@ import (
 
 	"github.com/CloudyKit/jet"
 	"github.com/dchest/htmlmin"
-	"github.com/shiyanhui/hero"
 )
 
 var (
@@ -513,8 +512,9 @@ func BenchmarkJetHTML(b *testing.B) {
 ** Hero
 ******************************************************************************/
 func TestHero(t *testing.T) {
-	buf := herotmpl.SimpleQtc(testData)
-	defer hero.PutBuffer(buf)
+	var buf bytes.Buffer
+
+	herotmpl.SimpleQtc(testData, &buf)
 
 	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
 		t.Error(msg)
@@ -522,9 +522,11 @@ func TestHero(t *testing.T) {
 }
 
 func BenchmarkHero(b *testing.B) {
+	var buf bytes.Buffer
+
 	for i := 0; i < b.N; i++ {
-		buf := herotmpl.SimpleQtc(testData)
-		hero.PutBuffer(buf)
+		herotmpl.SimpleQtc(testData, &buf)
+		buf.Reset()
 	}
 }
 
