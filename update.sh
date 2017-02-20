@@ -1,4 +1,5 @@
 #!/bin/bash -e
+shopt -s expand_aliases
 
 glide cc
 glide up
@@ -18,4 +19,4 @@ go install github.com/shiyanhui/hero/hero
 qtc -dir quicktemplate
 ftmpl ftmpl/
 gorazor gorazor gorazor
-
+hero -source hero/

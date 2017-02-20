@@ -1,5 +1,5 @@
 hash: 34db27ce278394126d360796cd987ebb2701adf81ebf58ab5dfd769f86d34e62
-updated: 2017-02-17T07:32:15.759344064+01:00
+updated: 2017-02-20T13:41:42.294842317+01:00
 imports:
 - name: github.com/aymerick/raymond
   version: 72acac2207479d21dd45898c2a4264246c818148
@@ -10,7 +10,7 @@ imports:
   - lexer
   - parser
 - name: github.com/CloudyKit/jet
-  version: c2dc1007f7100db0044c979e1184b70b9595167b
+  version: fdfbcb06b7e0334f70ce4d6eadb754ee095ec4e1
 - name: github.com/commondream/egon
   version: b9680bd5dea1bc62da5c5a8a0222d589e1576c87
 - name: github.com/dchest/htmlmin
@@ -43,7 +43,7 @@ imports:
   - soyhtml
   - template
 - name: github.com/shiyanhui/hero
-  version: 919e183490ac1f6cd78bef8e77c7f3b76d5fbe79
+  version: 13388ec75acb968f8754631bad15faa062544251
 - name: github.com/sipin/gorazor
   version: cfcf2db74a170747830822495a7cc059124af962
   subpackages:
@@ -76,7 +76,7 @@ testImports:
 - name: github.com/juju/errors
   version: 6f54ff6318409d31ff16261533ce2c8381a4fd5d
 - name: golang.org/x/net
-  version: b4690f45fa1cafc47b1c280c2e75116efe40cc13
+  version: 6b27048ae5e6ad1ef927e72e437531493de612fe
   subpackages:
   - html
   - html/atom

@@ -40,43 +40,43 @@ Golang: 1.8
 ### full featured template engines
 | Name           |      Runs |  µs/op |  B/op | allocations/op |
 | --- | --- | --- | --- | --- |
-| Ace            |   300,000 | 15.124 | 5,210 |             77 |
-| Amber          | 1,000,000 |  5.257 | 1,448 |             39 |
-| Golang         | 1,000,000 |  5.171 | 1,368 |             38 |
-| Handlebars     |   500,000 | 10.589 | 4,258 |             90 |
-| **JetHTML**        | 5,000,000 |  1.167 |     0 |              0 |
-| Kasia          | 1,000,000 |  3.216 | 1,192 |             26 |
-| Mustache       | 1,000,000 |  3.365 | 1,568 |             28 |
-| Pongo2         | 1,000,000 |  4.895 | 2,376 |             47 |
-| Soy            | 1,000,000 |  3.178 | 1,384 |             26 |
-
+| Ace            |   300,000 | 16.360 | 5,210 |             77 |
+| Amber          | 1,000,000 |  5.743 | 1,448 |             39 |
+| Golang         | 1,000,000 |  5.388 | 1,368 |             38 |
+| Handlebars     |   300,000 | 11.100 | 4,258 |             90 |
+| **JetHTML**        | 3,000,000 |  1.261 |     0 |              0 |
+| Kasia          | 1,000,000 |  3.322 | 1,192 |             26 |
+| Mustache       | 1,000,000 |  3.618 | 1,568 |             28 |
+| Pongo2         | 1,000,000 |  5.122 | 2,376 |             47 |
+| Soy            | 1,000,000 |  3.474 | 1,384 |             26 |
 
 ### precompilation to Go code
 | Name              |       Runs | µs/op |  B/op | allocations/op |
 | --- | --- | --- | --- | --- |
-| Ego               |  5,000,000 | 0.890 |    85 |              8 |
-| Egon              |  2,000,000 | 1.997 |   309 |             22 |
-| EgonSlinso        | 20,000,000 | 0.362 |     0 |              0 |
-| Ftmpl             |  3,000,000 | 1.394 | 1,141 |             12 |
-| Gorazor           |  3,000,000 | 1.212 |   613 |             11 |
-| **Hero**              | 20,000,000 | 0.201 |     0 |              0 |
-| Quicktemplate     | 20,000,000 | 0.324 |     0 |              0 |
+| Ego               |  5,000,000 | 0.975 |    85 |              8 |
+| Egon              |  2,000,000 | 2.220 |   309 |             22 |
+| EgonSlinso        | 10,000,000 | 0.394 |     0 |              0 |
+| Ftmpl             |  3,000,000 | 1.527 | 1,141 |             12 |
+| Gorazor           |  3,000,000 | 1.264 |   613 |             11 |
+| **Hero**              | 20,000,000 | 0.212 |     0 |              0 |
+| Quicktemplate     | 20,000,000 | 0.354 |     0 |              0 |
 
 
 ### more complex test with template inheritance (if possible)
 | Name                     |      Runs |  µs/op |   B/op | allocations/op |
 | --- | --- | --- | --- | --- |
-| ComplexEgo               | 1,000,000 |  4.300 |    656 |             41 |
-| ComplexEgoSlinso         | 2,000,000 |  1.955 |    165 |              7 |
-| ComplexEgon              |   500,000 |  9.098 |  1,617 |            101 |
-| ComplexFtmpl             | 1,000,000 |  6.553 |  5,043 |             48 |
-| ComplexFtmplInclude      | 1,000,000 |  6.490 |  5,043 |             48 |
-| ComplexGolang            |   100,000 | 42.322 | 10,535 |            300 |
-| ComplexGorazor           |   500,000 |  9.013 |  8,453 |             73 |
-| **ComplexHero**              | 3,000,000 |  1.290 |    165 |              7 |
-| ComplexJetHTML           |   500,000 |  9.914 |    546 |              5 |
-| ComplexMustache          |   200,000 | 21.313 |  7,854 |            166 |
-| ComplexQuicktemplate     | 2,000,000 |  1.920 |      0 |              0 |
+| ComplexEgo               | 1,000,000 |  4.353 |    656 |             41 |
+| ComplexEgoSlinso         | 2,000,000 |  1.984 |    165 |              7 |
+| ComplexEgon              |   500,000 |  9.260 |  1,617 |            101 |
+| ComplexFtmpl             | 1,000,000 |  6.513 |  5,043 |             48 |
+| ComplexFtmplInclude      | 1,000,000 |  6.347 |  5,043 |             48 |
+| ComplexGolang            |   100,000 | 43.811 | 10,535 |            300 |
+| ComplexGorazor           |   500,000 |  9.585 |  8,453 |             73 |
+| **ComplexHero**              | 3,000,000 |  1.427 |      0 |              0 |
+| ComplexJetHTML           |   500,000 |  9.958 |    546 |              5 |
+| ComplexMustache          |   200,000 | 21.787 |  7,854 |            166 |
+| ComplexQuicktemplate     | 2,000,000 |  1.908 |      0 |              0 |
+
 
 
 ## Results small VPS 
@@ -86,44 +86,43 @@ Golang: 1.8
 ### full featured template engines
 | Name           |    Runs |   µs/op |  B/op | allocations/op |
 | --- | --- | --- | --- | --- |
-| Ace            |  10,000 | 108.212 | 5,208 |             77 |
-| Amber          |  30,000 |  38.085 | 1,448 |             39 |
-| Golang         |  50,000 |  45.915 | 1,368 |             38 |
-| Handlebars     |  20,000 |  71.592 | 4,256 |             90 |
-| **JetHTML**        | 200,000 |   6.628 |     0 |              0 |
-| Kasia          | 100,000 |  19.993 | 1,192 |             26 |
-| Mustache       | 100,000 |  20.597 | 1,568 |             28 |
-| Pongo2         |  50,000 |  32.215 | 2,376 |             47 |
-| Soy            | 100,000 |  18.052 | 1,384 |             26 |
+| Ace            |  20,000 | 107.627 | 5,208 |             77 |
+| Amber          |  30,000 |  37.748 | 1,448 |             39 |
+| Golang         |  30,000 |  41.577 | 1,368 |             38 |
+| Handlebars     |  20,000 |  64.995 | 4,256 |             90 |
+| JetHTML        | 200,000 |   7.530 |     0 |              0 |
+| Kasia          | 100,000 |  19.165 | 1,192 |             26 |
+| Mustache       | 100,000 |  19.828 | 1,568 |             28 |
+| Pongo2         | 100,000 |  44.673 | 2,376 |             47 |
+| Soy            | 100,000 |  18.591 | 1,384 |             26 |
 
 
 ### precompilation to Go code
-| Name              |      Runs | µs/op |  B/op | allocations/op |
+| Name              |      Runs |  µs/op |  B/op | allocations/op |
 | --- | --- | --- | --- | --- |
-| Ego               |   300,000 | 4.339 |    85 |              8 |
-| Egon              |   200,000 | 9.939 |   309 |             22 |
-| EgonSlinso        | 1,000,000 | 1.560 |     0 |              0 |
-| Ftmpl             |   200,000 | 9.901 | 1,141 |             12 |
-| Gorazor           |   200,000 | 6.419 |   613 |             11 |
-| **Hero**              | 2,000,000 | 1.014 |     0 |              0 |
-| Quicktemplate     | 1,000,000 | 1.421 |     0 |              0 |
-
+| Ego               | 1,000,000 |  4.810 |    85 |              8 |
+| Egon              |   200,000 | 10.859 |   309 |             22 |
+| EgonSlinso        | 1,000,000 |  1.894 |     0 |              0 |
+| Ftmpl             |   200,000 |  9.350 | 1,141 |             12 |
+| Gorazor           |   200,000 |  7.134 |   613 |             11 |
+| **Hero**              | 1,000,000 |  1.252 |     0 |              0 |
+| Quicktemplate     | 1,000,000 |  1.406 |     0 |              0 |
 
 
 ### more complex test with template inheritance (if possible)
 | Name                     |    Runs |   µs/op |   B/op | allocations/op |
 | --- | --- | --- | --- | --- |
-| ComplexEgo               |  50,000 |  25.561 |    656 |             41 |
-| ComplexEgoSlinso         | 200,000 |  10.873 |    165 |              7 |
-| ComplexEgon              |  20,000 |  54.666 |  1,616 |            101 |
-| ComplexFtmpl             |  30,000 |  39.898 |  5,040 |             48 |
-| ComplexFtmplInclude      |  50,000 |  38.558 |  5,040 |             48 |
-| ComplexGolang            |   5,000 | 324.229 | 10,534 |            300 |
-| ComplexGorazor           |  20,000 |  65.143 |  8,449 |             73 |
-| **ComplexHero**              | 200,000 |   8.248 |    165 |              7 |
-| ComplexJetHTML           |  20,000 |  57.318 |    545 |              5 |
-| ComplexMustache          |  10,000 | 135.291 |  7,849 |            166 |
-| ComplexQuicktemplate     | 200,000 |   9.650 |      0 |              0 |
+| ComplexEgo               | 100,000 |  25.522 |    656 |             41 |
+| ComplexEgoSlinso         | 200,000 |  10.051 |    165 |              7 |
+| ComplexEgon              |  30,000 |  48.603 |  1,616 |            101 |
+| ComplexFtmpl             |  50,000 |  38.582 |  5,040 |             48 |
+| ComplexFtmplInclude      |  30,000 |  46.322 |  5,040 |             48 |
+| ComplexGolang            |  10,000 | 298.372 | 10,531 |            300 |
+| ComplexGorazor           |  20,000 |  70.508 |  8,449 |             73 |
+| **ComplexHero**              | 200,000 |   8.085 |      0 |              0 |
+| ComplexJetHTML           |  30,000 |  66.645 |    544 |              5 |
+| ComplexMustache          |  10,000 | 141.660 |  7,849 |            166 |
+| ComplexQuicktemplate     | 300,000 |  10.346 |      0 |              0 |
 
 
 ## Security
