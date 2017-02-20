@@ -1,4 +1,5 @@
-<%: func Index(u *model.User, nav []*model.Navigation, title string) *bytes.Buffer %>
+<%: func Index(u *model.User, nav []*model.Navigation, title string, buffer *bytes.Buffer) %>
+
 <%!
     import "github.com/SlinSo/goTemplateBenchmark/model"
 %>
@@ -24,13 +25,13 @@
 		<div class="enc"><%= u.EscapedContent %></div>
 	</div>
 
-<% for i := 1; i <= 5; i++ { %>
-		<% if i == 1 { %>
-			<p><%= u.FirstName %> has <%=i i %> message</p>
-		<% } else { %>
-			<p><%= u.FirstName %> has <%=i i %> messages</p>
-		<% } %>
-<% } %>
+    <% for i := 1; i <= 5; i++ { %>
+        <% if i == 1 { %>
+            <p><%= u.FirstName %> has <%=i i %> message</p>
+        <% } else { %>
+            <p><%= u.FirstName %> has <%=i i %> messages</p>
+        <% } %>
+    <% } %>
 </div>
 </section>
 

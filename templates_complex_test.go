@@ -16,8 +16,6 @@ import (
 	herotmpl "github.com/SlinSo/goTemplateBenchmark/hero"
 	"github.com/SlinSo/goTemplateBenchmark/quicktemplate"
 	"github.com/hoisie/mustache"
-
-	"github.com/shiyanhui/hero"
 )
 
 type tmplData struct {
@@ -367,8 +365,9 @@ func BenchmarkComplexJetHTML(b *testing.B) {
 ** Hero
 ******************************************************************************/
 func TestComplexHero(t *testing.T) {
-	buf := herotmpl.Index(testComplexUser, testComplexNav, testComplexTitle)
-	defer hero.PutBuffer(buf)
+	var buf bytes.Buffer
+
+	herotmpl.Index(testComplexUser, testComplexNav, testComplexTitle, &buf)
 
 	if msg, ok := linesEquals(buf.String(), expectedtComplexResult); !ok {
 		t.Error(msg)
@@ -376,8 +375,10 @@ func TestComplexHero(t *testing.T) {
 }
 
 func BenchmarkComplexHero(b *testing.B) {
+	var buf bytes.Buffer
+
 	for i := 0; i < b.N; i++ {
-		buf := herotmpl.Index(testComplexUser, testComplexNav, testComplexTitle)
-		hero.PutBuffer(buf)
+		herotmpl.Index(testComplexUser, testComplexNav, testComplexTitle, &buf)
+		buf.Reset()
 	}
 }
