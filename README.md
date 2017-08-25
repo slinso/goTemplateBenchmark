@@ -35,47 +35,50 @@ Sometimes there are templates that cannot be reasonably cached. Then you possibl
 
 ## Results dev machine
 Changed the environment to my local dev laptop: i7-6700T  16GB Mem
-Golang: 1.8
+Golang: 1.1
+
+## Changes with 1.9
+There are quite some impressive performance improvements. At the moment I don't know where they are coming from. Almost all pre compilation engines gained 10%-20%.
 
 ### full featured template engines
-| Name           |      Runs |  µs/op |  B/op | allocations/op |
-| --- | --- | --- | --- | --- |
-| Ace            |   300,000 | 16.360 | 5,210 |             77 |
-| Amber          | 1,000,000 |  5.743 | 1,448 |             39 |
-| Golang         | 1,000,000 |  5.388 | 1,368 |             38 |
-| Handlebars     |   300,000 | 11.100 | 4,258 |             90 |
-| **JetHTML**        | 3,000,000 |  1.261 |     0 |              0 |
-| Kasia          | 1,000,000 |  3.322 | 1,192 |             26 |
-| Mustache       | 1,000,000 |  3.618 | 1,568 |             28 |
-| Pongo2         | 1,000,000 |  5.122 | 2,376 |             47 |
-| Soy            | 1,000,000 |  3.474 | 1,384 |             26 |
+| Name           |      Runs |  µs/op |  B/op | allocations/op | 
+| --- | --- | --- | --- | --- |                                                    
+| Ace            |   500,000 |  8.972 | 1,712 |             42 |                  
+| Amber          | 1,000,000 |  5.628 | 1,440 |             38 |                  
+| Golang         | 1,000,000 |  5.379 | 1,360 |             37 |                  
+| Handlebars     |   500,000 | 10.174 | 4,210 |             82 |                  
+| **JetHTML**        | 3,000,000 |  1.209 |     0 |              0 |                  
+| Kasia          | 1,000,000 |  3.351 | 1,184 |             25 |                  
+| Mustache       | 1,000,000 |  3.544 | 1,568 |             28 |                  
+| Pongo2         | 1,000,000 |  4.681 | 2,360 |             46 |                  
+| Soy            | 1,000,000 |  3.067 | 1,376 |             25 |                 
 
 ### precompilation to Go code
-| Name              |       Runs | µs/op |  B/op | allocations/op |
-| --- | --- | --- | --- | --- |
-| Ego               |  5,000,000 | 0.975 |    85 |              8 |
-| Egon              |  2,000,000 | 2.220 |   309 |             22 |
-| EgonSlinso        | 10,000,000 | 0.394 |     0 |              0 |
-| Ftmpl             |  3,000,000 | 1.527 | 1,141 |             12 |
-| Gorazor           |  3,000,000 | 1.264 |   613 |             11 |
-| **Hero**              | 20,000,000 | 0.212 |     0 |              0 |
-| Quicktemplate     | 20,000,000 | 0.354 |     0 |              0 |
+| Name              |       Runs | µs/op |  B/op | allocations/op |                
+| --- | --- | --- | --- | --- |                                                    
+| Ego               |  5,000,000 | 0.793 |    85 |              8 |                
+| Egon              |  3,000,000 | 1.541 |   149 |             12 |                
+| EgonSlinso        | 20,000,000 | 0.311 |     0 |              0 |                
+| Ftmpl             |  3,000,000 | 1.298 | 1,141 |             12 |                
+| Gorazor           |  5,000,000 | 1.014 |   613 |             11 |                
+| **Hero**              | 30,000,000 | 0.162 |     0 |              0 |                
+| Quicktemplate     | 20,000,000 | 0.289 |     0 |              0 |
 
 
 ### more complex test with template inheritance (if possible)
-| Name                     |      Runs |  µs/op |   B/op | allocations/op |
+| Name                      |        Runs |  µs/op |   B/op | allocations/op |
 | --- | --- | --- | --- | --- |
-| ComplexEgo               | 1,000,000 |  4.353 |    656 |             41 |
-| ComplexEgoSlinso         | 2,000,000 |  1.984 |    165 |              7 |
-| ComplexEgon              |   500,000 |  9.260 |  1,617 |            101 |
-| ComplexFtmpl             | 1,000,000 |  6.513 |  5,043 |             48 |
-| ComplexFtmplInclude      | 1,000,000 |  6.347 |  5,043 |             48 |
-| ComplexGolang            |   100,000 | 43.811 | 10,535 |            300 |
-| ComplexGorazor           |   500,000 |  9.585 |  8,453 |             73 |
-| **ComplexHero**              | 3,000,000 |  1.427 |      0 |              0 |
-| ComplexJetHTML           |   500,000 |  9.958 |    546 |              5 |
-| ComplexMustache          |   200,000 | 21.787 |  7,854 |            166 |
-| ComplexQuicktemplate     | 2,000,000 |  1.908 |      0 |              0 |
+| ComplexEgo                |   1,000,000 |  3.718 |    656 |             41 |
+| ComplexEgoSlinso          |   3,000,000 |  1.619 |    160 |              2 |
+| ComplexEgon               |   1,000,000 |  6.708 |    960 |             60 |
+| ComplexFtmpl              |   1,000,000 |  5.486 |  5,042 |             48 |
+| ComplexFtmplInclude       |   1,000,000 |  5.479 |  5,042 |             48 |
+| ComplexGolang             |     100,000 | 41.529 | 10,518 |            298 |
+| ComplexGorazor            |     500,000 |  8.362 |  8,452 |             69 |
+| **ComplexHero**               |   5,000,000 |  1.180 |      0 |              0 |
+| ComplexJetHTML            |     500,000 |  9.521 |    546 |              5 |
+| ComplexMustache           |     200,000 | 22.101 |  7,853 |            166 |
+| ComplexQuicktemplate      |   3,000,000 |  1.588 |      0 |              0 |
 
 
 
