@@ -51,7 +51,8 @@ There are quite some impressive performance improvements. Almost all pre compila
 
 ### special cases
 | Name           |      Runs |  µs/op |  B/op | allocations/op | 
-| --- | --- | --- | --- | --- |                   | GoDirectBuffer      | 50,000,000 | 0.097 |     0 |              0 |
+| --- | --- | --- | --- | --- |                   
+| SimpleGoDirectBuffer      | 50,000,000 | 0.097 |     0 |              0 |
 | ComplexGoDirectBuffer     |  10,000,000 | 0.621 |     0 |              0 |
 | ComplexGoStaticString     | 200,000,000 | 0.024 |     0 |              0 |
 
