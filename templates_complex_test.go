@@ -2,11 +2,15 @@ package main_test
 
 import (
 	"bytes"
+	"html"
 	"html/template"
 	"path/filepath"
 	"testing"
+	text "text/template"
 
+	"github.com/SlinSo/goTemplateBenchmark/golang"
 	"github.com/SlinSo/goTemplateBenchmark/model"
+	"github.com/valyala/bytebufferpool"
 
 	"github.com/SlinSo/goTemplateBenchmark/ego"
 	"github.com/SlinSo/goTemplateBenchmark/egon"
@@ -128,7 +132,42 @@ func TestComplexGolang(t *testing.T) {
 		t.Error(msg)
 	}
 }
+func TestComplexGolangText(t *testing.T) {
 
+	var buf bytes.Buffer
+
+	funcMap := text.FuncMap{
+		"safehtml": func(s string) string { return s },
+	}
+
+	templates := make(map[string]*text.Template)
+	templatesDir := "go/"
+
+	layouts, err := filepath.Glob(templatesDir + "layout/*.tmpl")
+	if err != nil {
+		panic(err)
+	}
+
+	includes, err := filepath.Glob(templatesDir + "includes/*.tmpl")
+	if err != nil {
+		panic(err)
+	}
+
+	tempData := testComplexData.User.EscapedContent
+	testComplexData.User.EscapedContent = text.HTMLEscapeString(testComplexData.User.EscapedContent)
+
+	// Generate our templates map from our layouts/ and includes/ directories
+	for _, layout := range layouts {
+		files := append(includes, layout)
+		templates[filepath.Base(layout)] = text.Must(text.New("").Funcs(funcMap).ParseFiles(files...))
+	}
+	templates["index.tmpl"].ExecuteTemplate(&buf, "base", testComplexData)
+
+	if msg, ok := linesEquals(buf.String(), expectedtComplexResult); !ok {
+		t.Error(msg)
+	}
+	testComplexData.User.EscapedContent = tempData
+}
 func BenchmarkComplexGolang(b *testing.B) {
 	var buf bytes.Buffer
 
@@ -160,6 +199,43 @@ func BenchmarkComplexGolang(b *testing.B) {
 		templates["index.tmpl"].ExecuteTemplate(&buf, "base", testComplexData)
 		buf.Reset()
 	}
+}
+
+func BenchmarkComplexGolangText(b *testing.B) {
+	var buf bytes.Buffer
+
+	funcMap := text.FuncMap{
+		"safehtml": func(s string) string { return s },
+	}
+
+	templates := make(map[string]*text.Template)
+	templatesDir := "go/"
+
+	layouts, err := filepath.Glob(templatesDir + "layout/*.tmpl")
+	if err != nil {
+		panic(err)
+	}
+
+	includes, err := filepath.Glob(templatesDir + "includes/*.tmpl")
+	if err != nil {
+		panic(err)
+	}
+
+	tempData := testComplexData.User.EscapedContent
+	testComplexData.User.EscapedContent = text.HTMLEscapeString(testComplexData.User.EscapedContent)
+
+	// Generate our templates map from our layouts/ and includes/ directories
+	for _, layout := range layouts {
+		files := append(includes, layout)
+		templates[filepath.Base(layout)] = text.Must(text.New("").Funcs(funcMap).ParseFiles(files...))
+	}
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		templates["index.tmpl"].ExecuteTemplate(&buf, "base", testComplexData)
+		buf.Reset()
+	}
+	testComplexData.User.EscapedContent = tempData
 }
 
 /******************************************************************************
@@ -381,4 +457,122 @@ func BenchmarkComplexHero(b *testing.B) {
 		herotmpl.Index(testComplexUser, testComplexNav, testComplexTitle, &buf)
 		buf.Reset()
 	}
+}
+
+/******************************************************************************
+** Go func
+******************************************************************************/
+func TestComplexGoFunc(t *testing.T) {
+	bb := bytebufferpool.Get()
+
+	golang.Index(bb, testComplexUser, testComplexNav, testComplexTitle)
+
+	if msg, ok := linesEquals(bb.String(), expectedtComplexResult); !ok {
+		t.Error(msg)
+	}
+	bb.Reset()
+
+	golang.Index2(bb, testComplexUser, testComplexNav, testComplexTitle)
+
+	if msg, ok := linesEquals(bb.String(), expectedtComplexResult); !ok {
+		t.Error(msg)
+	}
+	bb.Reset()
+
+	golang.Index3(bb, testComplexUser, testComplexNav, testComplexTitle)
+
+	if msg, ok := linesEquals(bb.String(), expectedtComplexResult); !ok {
+		t.Error(msg)
+	}
+	bytebufferpool.Put(bb)
+}
+
+func BenchmarkComplexGoDirectBuffer(b *testing.B) {
+	bb := bytebufferpool.Get()
+
+	for i := 0; i < b.N; i++ {
+		golang.Index(bb, testComplexUser, testComplexNav, testComplexTitle)
+		bb.Reset()
+	}
+	bytebufferpool.Put(bb)
+}
+
+func BenchmarkComplexGoHyperscript(b *testing.B) {
+	bb := bytebufferpool.Get()
+
+	for i := 0; i < b.N; i++ {
+		golang.Index2(bb, testComplexUser, testComplexNav, testComplexTitle)
+		bb.Reset()
+	}
+	bytebufferpool.Put(bb)
+}
+
+func BenchmarkComplexGoStaticString(b *testing.B) {
+	bb := bytebufferpool.Get()
+
+	for i := 0; i < b.N; i++ {
+		golang.Index3(bb, testComplexUser, testComplexNav, testComplexTitle)
+		bb.Reset()
+	}
+	bytebufferpool.Put(bb)
+}
+
+func BenchmarkComplexEscapeHTML(b *testing.B) {
+	bb := bytebufferpool.Get()
+
+	for i := 0; i < b.N; i++ {
+		golang.EscapeHTML(testComplexData.User.EscapedContent, bb)
+		bb.Reset()
+	}
+	bytebufferpool.Put(bb)
+}
+
+func BenchmarkComplexEscape(b *testing.B) {
+	bb := bytebufferpool.Get()
+
+	for i := 0; i < b.N; i++ {
+		golang.Escape(bb, golang.UnsafeStrToBytes(testComplexData.User.EscapedContent))
+		bb.Reset()
+	}
+	bytebufferpool.Put(bb)
+}
+
+func BenchmarkComplexEscapeGo(b *testing.B) {
+	bb := bytebufferpool.Get()
+
+	for i := 0; i < b.N; i++ {
+		bb.WriteString(html.EscapeString(testComplexData.User.EscapedContent))
+		bb.Reset()
+	}
+	bytebufferpool.Put(bb)
+}
+
+func BenchmarkComplexEscapeHTMLNoop(b *testing.B) {
+	bb := bytebufferpool.Get()
+
+	for i := 0; i < b.N; i++ {
+		golang.EscapeHTML(testComplexData.User.FirstName, bb)
+		bb.Reset()
+	}
+	bytebufferpool.Put(bb)
+}
+
+func BenchmarkComplexEscapeNoop(b *testing.B) {
+	bb := bytebufferpool.Get()
+
+	for i := 0; i < b.N; i++ {
+		golang.Escape(bb, golang.UnsafeStrToBytes(testComplexData.User.FirstName))
+		bb.Reset()
+	}
+	bytebufferpool.Put(bb)
+}
+
+func BenchmarkComplexEscapeGoNoop(b *testing.B) {
+	bb := bytebufferpool.Get()
+
+	for i := 0; i < b.N; i++ {
+		bb.WriteString(html.EscapeString(testComplexData.User.FirstName))
+		bb.Reset()
+	}
+	bytebufferpool.Put(bb)
 }

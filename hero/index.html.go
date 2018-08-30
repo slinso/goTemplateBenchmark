@@ -24,7 +24,6 @@ func Index(u *model.User, nav []*model.Navigation, title string, buffer *bytes.B
 	buffer.WriteString(`'s Home Page</title>
 <div class="header">Page Header</div>
 `)
-
 	buffer.WriteString(`
 </header>
 
@@ -44,7 +43,6 @@ func Index(u *model.User, nav []*model.Navigation, title string, buffer *bytes.B
 	buffer.WriteString(`
 </ul>
 `)
-
 	buffer.WriteString(`
 </nav>
 
@@ -91,7 +89,6 @@ func Index(u *model.User, nav []*model.Navigation, title string, buffer *bytes.B
     `)
 	buffer.WriteString(`<div class="footer">copyright 2016</div>
 `)
-
 	buffer.WriteString(`
 </footer>
 

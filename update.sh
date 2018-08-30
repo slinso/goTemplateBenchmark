@@ -1,8 +1,7 @@
 #!/bin/bash -e
 shopt -s expand_aliases
 
-glide cc
-glide up
+#dep ensure -update
 alias gg='go get -u -v'
 
 gg github.com/tkrajina/ftmpl

@@ -21,6 +21,11 @@ comparing the performance of different template engines
 * [Quicktemplate](https://github.com/valyala/quicktemplate)
 * [Hero](https://github.com/shiyanhui/hero)
 
+## special benchmarks for comparison
+* Go text/template (do not use this for HTML) 
+* StaticString - Use one static string for the whole Template to have a base time
+* DirectBuffer - Use go to write the HTML by hand to the buffer
+
 ## transpiling to Go Template
 * [Damsel](https://github.com/dskinner/damsel)
 I won't benchmark transpiling engines, because transpilation should just happen once at startup. If you cache the transpilation result, which is recommended, you would have the same performance numbers as html/template for rendering.
@@ -35,51 +40,69 @@ Sometimes there are templates that cannot be reasonably cached. Then you possibl
 
 ## Results dev machine
 Changed the environment to my local dev laptop: i7-6700T  16GB Mem
-Golang: 1.1
+Golang: 1.11
+
+
+## Changes with 1.11
+* Pongo and Soy got about 25% improved
 
 ## Changes with 1.9
-There are quite some impressive performance improvements. At the moment I don't know where they are coming from. Almost all pre compilation engines gained 10%-20%.
+There are quite some impressive performance improvements. Almost all pre compilation engines gained 10%-20%.
+
+### special cases
+| Name           |      Runs |  µs/op |  B/op | allocations/op | 
+| --- | --- | --- | --- | --- |                   | GoDirectBuffer      | 50,000,000 | 0.097 |     0 |              0 |
+| ComplexGoDirectBuffer     |  10,000,000 | 0.621 |     0 |              0 |
+| ComplexGoStaticString     | 200,000,000 | 0.024 |     0 |              0 |
+
 
 ### full featured template engines
 | Name           |      Runs |  µs/op |  B/op | allocations/op | 
 | --- | --- | --- | --- | --- |                                                    
-| Ace            |   500,000 |  8.972 | 1,712 |             42 |                  
+| Ace            |   500,000 |  8.597 | 1,712 |             42 |
 | Amber          | 1,000,000 |  5.628 | 1,440 |             38 |                  
-| Golang         | 1,000,000 |  5.379 | 1,360 |             37 |                  
-| Handlebars     |   500,000 | 10.174 | 4,210 |             82 |                  
-| **JetHTML**        | 3,000,000 |  1.209 |     0 |              0 |                  
-| Kasia          | 1,000,000 |  3.351 | 1,184 |             25 |                  
-| Mustache       | 1,000,000 |  3.544 | 1,568 |             28 |                  
-| Pongo2         | 1,000,000 |  4.681 | 2,360 |             46 |                  
-| Soy            | 1,000,000 |  3.067 | 1,376 |             25 |                 
+| Golang         | 1,000,000 | 5.247 | 1,360 |             37 |
+| GolangText     | 3,000,000 | 1.930 |   144 |              9 |
+| Handlebars     |   500,000 | 9.793 | 4,226 |             83 |
+| **JetHTML**        | 3,000,000 | 1.238 |     0 |              0 |
+| Kasia          | 1,000,000 | 3.091 | 1,184 |             25 |
+| Mustache       | 1,000,000 |  3.117 | 1,568 |             28 |
+| Pongo2         | 1,000,000 |  3.864 | 2,136 |             32 |
+| Soy            | 2,000,000 |  2.572 | 1,392 |             25 |
 
 ### precompilation to Go code
 | Name              |       Runs | µs/op |  B/op | allocations/op |                
 | --- | --- | --- | --- | --- |                                                    
-| Ego               |  5,000,000 | 0.793 |    85 |              8 |                
-| Egon              |  3,000,000 | 1.541 |   149 |             12 |                
-| EgonSlinso        | 20,000,000 | 0.311 |     0 |              0 |                
-| Ftmpl             |  3,000,000 | 1.298 | 1,141 |             12 |                
-| Gorazor           |  5,000,000 | 1.014 |   613 |             11 |                
-| **Hero**              | 30,000,000 | 0.162 |     0 |              0 |                
-| Quicktemplate     | 20,000,000 | 0.289 |     0 |              0 |
+| Ego                 |  5,000,000 | 0.822 |    85 |              8 |
+| Egon                |  3,000,000 | 1.478 |   149 |             12 |
+| EgonSlinso          | 20,000,000 | 0.334 |     0 |              0 |
+| Ftmpl               |  3,000,000 | 1.318 | 1,141 |             12 |
+| Gorazor             |  5,000,000 | 1.096 |   613 |             11 |
+| **Hero**                | 30,000,000 | 0.177 |     0 |              0 |
+| Quicktemplate       | 20,000,000 | 0.290 |     0 |              0 |
 
 
 ### more complex test with template inheritance (if possible)
-| Name                      |        Runs |  µs/op |   B/op | allocations/op |
+### full featured template engines
+| Name                  |    Runs |  µs/op |   B/op | allocations/op |
 | --- | --- | --- | --- | --- |
-| ComplexEgo                |   1,000,000 |  3.718 |    656 |             41 |
-| ComplexEgoSlinso          |   3,000,000 |  1.619 |    160 |              2 |
-| ComplexEgon               |   1,000,000 |  6.708 |    960 |             60 |
-| ComplexFtmpl              |   1,000,000 |  5.486 |  5,042 |             48 |
-| ComplexFtmplInclude       |   1,000,000 |  5.479 |  5,042 |             48 |
-| ComplexGolang             |     100,000 | 41.529 | 10,518 |            298 |
-| ComplexGorazor            |     500,000 |  8.362 |  8,452 |             69 |
-| **ComplexHero**               |   5,000,000 |  1.180 |      0 |              0 |
-| ComplexJetHTML            |     500,000 |  9.521 |    546 |              5 |
-| ComplexMustache           |     200,000 | 22.101 |  7,853 |            166 |
-| ComplexQuicktemplate      |   3,000,000 |  1.588 |      0 |              0 |
+| ComplexGolang         | 100,000 | 45.252 | 10,478 |            293 |
+| ComplexGolangText     | 200,000 | 19.980 |  2,793 |            113 |
+| **ComplexJetHTML**        | 500,000 | 10.155 |    546 |              5 |
+| ComplexMustache       | 200,000 | 20.542 |  7,813 |            161 |
 
+### more complex test with template inheritance (if possible)
+### precompilation to Go code
+ 
+| Name                      |        Runs | µs/op |  B/op | allocations/op |
+| --- | --- | --- | --- | --- |
+| ComplexEgo                |   1,000,000 | 3.967 |   656 |             36 |
+| ComplexEgoSlinso          |   3,000,000 | 1.746 |   160 |              2 |
+| ComplexEgon               |   1,000,000 | 6.803 |   960 |             55 |
+| ComplexFtmpl              |   1,000,000 | 5.593 | 5,042 |             43 |
+| ComplexGorazor            |     500,000 | 8.741 | 8,444 |             64 |
+| **ComplexHero**               |   3,000,000 | 1.192 |     0 |              0 |
+| ComplexQuicktemplate      |   3,000,000 | 1.590 |     0 |              0 |
 
 
 ## Results small VPS 
@@ -130,6 +153,8 @@ Golang: 1.8
 
 ## Security
 All packages assume that template authors are trusted. If you allow custom templates you have to sanitize your user input e.g. [bluemonday](https://github.com/microcosm-cc/bluemonday). Generally speaking I would suggest to sanitize every input not just HTML-input.
+
+### Attention: This part is not updated since 2016.
 
 | Framework | Security | Comment |
 | --------- | -------- | ------- |

@@ -5,8 +5,11 @@ import (
 	"fmt"
 	"html/template"
 	"testing"
+	text "text/template"
 
+	"github.com/SlinSo/goTemplateBenchmark/golang"
 	"github.com/SlinSo/goTemplateBenchmark/model"
+	"github.com/valyala/bytebufferpool"
 
 	"github.com/SlinSo/goTemplateBenchmark/ego"
 	"github.com/SlinSo/goTemplateBenchmark/egon"
@@ -70,6 +73,22 @@ func TestGolang(t *testing.T) {
 		t.Error(msg)
 	}
 }
+func TestGolangText(t *testing.T) {
+	var buf bytes.Buffer
+
+	tmpl, err := text.ParseFiles("go/simple.tmpl")
+	if err != nil {
+		t.Error(err)
+	}
+	err = tmpl.Execute(&buf, testData)
+	if err != nil {
+		t.Error(err)
+	}
+
+	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
+		t.Error(msg)
+	}
+}
 
 func BenchmarkGolang(b *testing.B) {
 	var buf bytes.Buffer
@@ -82,6 +101,78 @@ func BenchmarkGolang(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+		buf.Reset()
+	}
+}
+
+func BenchmarkGolangText(b *testing.B) {
+	var buf bytes.Buffer
+
+	tmpl, _ := text.ParseFiles("go/simple.tmpl")
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		err := tmpl.Execute(&buf, testData)
+		if err != nil {
+			b.Fatal(err)
+		}
+		buf.Reset()
+	}
+}
+
+/******************************************************************************
+** GoFunctions
+******************************************************************************/
+func TestGoFunc(t *testing.T) {
+	bb := bytebufferpool.Get()
+	golang.WriteSimpleGolang(bb, testData)
+
+	if msg, ok := linesEquals(bb.String(), expectedtResult); !ok {
+		t.Error(msg)
+	}
+	bb.Reset()
+	g := golang.NewGoFunc(bb)
+
+	golang.GoFuncElem(g, testData)
+	if msg, ok := linesEquals(bb.String(), expectedtResult); !ok {
+		t.Error(msg)
+	}
+	bb.Reset()
+	g = golang.NewGoFunc(bb)
+
+	golang.GoFuncFunc(g, testData)
+	if msg, ok := linesEquals(bb.String(), expectedtResult); !ok {
+		t.Error(msg)
+	}
+
+	bytebufferpool.Put(bb)
+}
+
+func BenchmarkGoDirectBuffer(b *testing.B) {
+	bb := bytebufferpool.Get()
+
+	for i := 0; i < b.N; i++ {
+		golang.WriteSimpleGolang(bb, testData)
+		bb.Reset()
+	}
+}
+
+func BenchmarkGoCustomHtmlAPI(b *testing.B) {
+	buf := bytebufferpool.Get()
+	g := golang.NewGoFunc(buf)
+
+	for i := 0; i < b.N; i++ {
+		golang.GoFuncElem(g, testData)
+		buf.Reset()
+	}
+}
+
+func BenchmarkGoFunc3(b *testing.B) {
+	buf := bytebufferpool.Get()
+	g := golang.NewGoFunc(buf)
+
+	for i := 0; i < b.N; i++ {
+		golang.GoFuncFunc(g, testData)
 		buf.Reset()
 	}
 }
@@ -338,7 +429,7 @@ func BenchmarkPongo2(b *testing.B) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		err := tpl.ExecuteWriterUnbuffered(pongo2.Context{"u": testData}, &buf)
+		err := tpl.ExecuteWriter(pongo2.Context{"u": testData}, &buf)
 		if err != nil {
 			b.Fatal(err)
 		}
