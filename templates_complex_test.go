@@ -18,6 +18,7 @@ import (
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
 	herotmpl "github.com/SlinSo/goTemplateBenchmark/hero"
+	"github.com/SlinSo/goTemplateBenchmark/jade"
 	"github.com/SlinSo/goTemplateBenchmark/quicktemplate"
 	"github.com/hoisie/mustache"
 )
@@ -455,6 +456,28 @@ func BenchmarkComplexHero(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		herotmpl.Index(testComplexUser, testComplexNav, testComplexTitle, &buf)
+		buf.Reset()
+	}
+}
+
+/******************************************************************************
+** Jade
+******************************************************************************/
+func TestComplexJade(t *testing.T) {
+	var buf = bytebufferpool.Get()
+
+	jade.Index(testComplexUser, testComplexNav, testComplexTitle, buf)
+
+	if msg, ok := linesEquals(buf.String(), expectedtComplexResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkComplexJade(b *testing.B) {
+	var buf = bytebufferpool.Get()
+
+	for i := 0; i < b.N; i++ {
+		jade.Index(testComplexUser, testComplexNav, testComplexTitle, buf)
 		buf.Reset()
 	}
 }
