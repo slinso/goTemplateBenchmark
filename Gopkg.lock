@@ -99,11 +99,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:1261ccace00babbf02bb702e71c85c8e81f65bad7bdb98c12c7a409c14de1d86"
+  digest = "1:cdc32003a67007f608c767cfbea5b7a07ed7418ec9aed579707e3185086a6878"
   name = "github.com/juju/errors"
   packages = ["."]
   pruneopts = "UT"
-  revision = "22422dad46e14561a0854ad42497a75af9b61909"
+  revision = "a4583d0a56eac4bdd939e38050d0c69abe0a9b41"
 
 [[projects]]
   branch = "master"
@@ -133,27 +133,27 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:80d9587c1cfd5c4a6fa6a7ff167cbe60c0de9d79bdf8c1de6a42a1dd87db7b90"
+  digest = "1:e051b7c0f5cdbebf777a32fca64944de3c451d9183e5380f782d6c9447058b6a"
   name = "github.com/sipin/gorazor"
   packages = ["gorazor"]
   pruneopts = "UT"
-  revision = "6213c2ce68c23487b7bc2df670e67beab1dd6918"
+  revision = "1c9f25bda2949f70274d3f349f90100d22f8da8b"
 
 [[projects]]
   branch = "master"
-  digest = "1:c468422f334a6b46a19448ad59aaffdfc0a36b08fdcc1c749a0b29b6453d7e59"
+  digest = "1:f52b91ab1b58aa5217d6094865dda519f75296c3884380526cd127bc19f02461"
   name = "github.com/valyala/bytebufferpool"
   packages = ["."]
   pruneopts = "UT"
-  revision = "e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7"
+  revision = "cdfbe9377474227bb42120c1e22fd4433e7f69bf"
 
 [[projects]]
   branch = "master"
-  digest = "1:32d2f43eeabdd833532d3cdba387de156e69996858be76d45989ce490644e2b4"
+  digest = "1:a647a40b351dc882b9a9f2e76604115f4dd512df2c22a49f43bb31d91afffb66"
   name = "github.com/valyala/quicktemplate"
   packages = ["."]
   pruneopts = "UT"
-  revision = "ff58753897b6cbb02abc005b244fd77814b67acd"
+  revision = "dc50ff9977a68a543145ce34e0e0030bebcc89be"
 
 [[projects]]
   digest = "1:9027c04a37010d3440f2474c7ee6dfc926b88dee07a764fe6f8d308c82e47e07"
@@ -173,22 +173,22 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:0185c27476ac2aa653c9b932843b41409b9a42a8f38b09c8e25c8fb1fcd499c5"
+  digest = "1:1a1ecfa7b54ca3f7a0115ab5c578d7d6a5d8b605839c549e80260468c42f8be7"
   name = "golang.org/x/net"
   packages = [
     "html",
     "html/atom",
   ]
   pruneopts = "UT"
-  revision = "8a410e7b638dca158bf9e766925842f6651ff828"
+  revision = "03003ca0c849e57b6ea29a4bab8d3cb6e4d568fe"
 
 [[projects]]
   branch = "master"
-  digest = "1:4b487c782bc804d994e91adbd3d2a8a77a482671efd87b2fde0805adb01a39c0"
+  digest = "1:7ba061af4131fb44b30448572acd0d6fefbf63a61b97b7ef1dea0be5871c2742"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "d99a578cf41bfccdeaf48b0845c823a4b8b0ad5e"
+  revision = "66b7b1311ac80bbafcd2daeef9a5e6e2cd1e2399"
 
 [[projects]]
   digest = "1:abeb38ade3f32a92943e5be54f55ed6d6e3b6602761d74b4aab4c9dd45c18abd"

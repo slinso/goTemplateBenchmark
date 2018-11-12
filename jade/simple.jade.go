@@ -18,12 +18,12 @@ const (
 func Simple(u *model.User, buffer *pool.ByteBuffer) {
 
 	buffer.WriteString(simple__0)
-	WriteAll(u.FirstName, true, buffer)
+	WriteEscString(u.FirstName, buffer)
 	buffer.WriteString(simple__1)
 
 	for _, colorName := range u.FavoriteColors {
 		buffer.WriteString(simple__3)
-		WriteAll(colorName, true, buffer)
+		WriteEscString(colorName, buffer)
 		buffer.WriteString(simple__4)
 	}
 	buffer.WriteString(simple__2)

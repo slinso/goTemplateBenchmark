@@ -32,31 +32,31 @@ func Index(u *model.User, nav []*model.Navigation, title string, buffer *pool.By
 
 	for _, item := range nav {
 		buffer.WriteString(index__7)
-		WriteAll(item.Link, true, buffer)
+		WriteEscString(item.Link, buffer)
 		buffer.WriteString(index__8)
-		WriteAll(item.Item, true, buffer)
+		WriteEscString(item.Item, buffer)
 		buffer.WriteString(index__9)
 
 	}
 	buffer.WriteString(index__2)
-	WriteAll(u.FirstName, true, buffer)
+	WriteEscString(u.FirstName, buffer)
 	buffer.WriteString(index__3)
-	WriteAll(u.RawContent, false, buffer)
+	buffer.WriteString(u.RawContent)
 	buffer.WriteString(index__4)
-	WriteAll(u.EscapedContent, true, buffer)
+	WriteEscString(u.EscapedContent, buffer)
 	buffer.WriteString(index__5)
 
 	for i := 1; i <= 5; i++ {
 		if i == 1 {
 			buffer.WriteString(index__10)
-			WriteAll(u.FirstName, true, buffer)
+			WriteEscString(u.FirstName, buffer)
 			buffer.WriteString(index__11)
 			WriteInt(int64(i), buffer)
 			buffer.WriteString(index__12)
 
 		} else {
 			buffer.WriteString(index__10)
-			WriteAll(u.FirstName, true, buffer)
+			WriteEscString(u.FirstName, buffer)
 			buffer.WriteString(index__11)
 			WriteInt(int64(i), buffer)
 			buffer.WriteString(index__15)
