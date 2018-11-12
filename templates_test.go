@@ -17,6 +17,7 @@ import (
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
 	herotmpl "github.com/SlinSo/goTemplateBenchmark/hero"
+	"github.com/SlinSo/goTemplateBenchmark/jade"
 	"github.com/SlinSo/goTemplateBenchmark/quicktemplate"
 	"github.com/aymerick/raymond"
 	"github.com/eknkc/amber"
@@ -617,6 +618,28 @@ func BenchmarkHero(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		herotmpl.SimpleQtc(testData, &buf)
+		buf.Reset()
+	}
+}
+
+/******************************************************************************
+** Jade
+******************************************************************************/
+func TestJade(t *testing.T) {
+	var buf = bytebufferpool.Get()
+
+	jade.Simple(testData, buf)
+
+	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkJade(b *testing.B) {
+	var buf = bytebufferpool.Get()
+
+	for i := 0; i < b.N; i++ {
+		jade.Simple(testData, buf)
 		buf.Reset()
 	}
 }

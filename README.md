@@ -20,6 +20,7 @@ comparing the performance of different template engines
 * [Gorazor](https://github.com/sipin/gorazor)
 * [Quicktemplate](https://github.com/valyala/quicktemplate)
 * [Hero](https://github.com/shiyanhui/hero)
+* [Jade](https://github.com/Joker/jade)
 
 ## special benchmarks for comparison
 * Go text/template (do not use this for HTML) 
@@ -80,6 +81,7 @@ There are quite some impressive performance improvements. Almost all pre compila
 | Ftmpl               |  3,000,000 | 1.318 | 1,141 |             12 |
 | Gorazor             |  5,000,000 | 1.096 |   613 |             11 |
 | **Hero**                | 30,000,000 | 0.177 |     0 |              0 |
+| **Jade**                | 50,000,000 | 0.129 |     0 |              0 |
 | Quicktemplate       | 20,000,000 | 0.290 |     0 |              0 |
 
 
@@ -103,6 +105,7 @@ There are quite some impressive performance improvements. Almost all pre compila
 | ComplexFtmpl              |   1,000,000 | 5.593 | 5,042 |             43 |
 | ComplexGorazor            |     500,000 | 8.741 | 8,444 |             64 |
 | **ComplexHero**               |   3,000,000 | 1.192 |     0 |              0 |
+| **ComplexJade**               |   3,000,000 |   920 |     0 |              0 |
 | ComplexQuicktemplate      |   3,000,000 | 1.590 |     0 |              0 |
 
 
@@ -134,7 +137,7 @@ Performance increased for every engine because the hardware got updated since th
 | Ftmpl               |  1,000,000 | 5.897 | 1,141 |             12 |
 | GoDirectBuffer      | 20,000,000 | 0.325 |     0 |              0 |
 | Gorazor             |  1,000,000 | 4.326 |   613 |             11 |
-|** Hero**                | 10,000,000 | 0.729 |     0 |              0 |
+| **Hero**                | 10,000,000 | 0.729 |     0 |              0 |
 | Quicktemplate       |  5,000,000 | 0.762 |     0 |              0 |
 
 ### more complex test with template inheritance (if possible)
@@ -179,6 +182,7 @@ All packages assume that template authors are trusted. If you allow custom templ
 | Gorazor | Partial (template.HTMLEscapeString) | only HTML, others need to be called manually |
 | Handlebars | Partial (raymond.escape) | only HTML |
 | Hero | Partial (html.EscapeString) | only HTML, others need to be called manually |
+| Jade | Partial (html.EscapeString) | Autoescape for HTML, others need to be called manually |
 | Jet | Partial (html.EscapeString) | Autoescape for HTML, others need to be called manually |
 | Kasia | Partial (kasia.WriteEscapedHtml) | only HTML |
 | Mustache | Partial (template.HTMLEscape) | only HTML |
