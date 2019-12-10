@@ -56,6 +56,20 @@ Golang: 1.11
 
 There are quite some impressive performance improvements. Almost all pre compilation engines gained 10%-20%.
 
+## special benchmarks
+
+| Name                  | Runs        | ns/op | B/op | allocations/op |
+| --------------------- | ----------- | ----- | ---- | -------------- |
+| ComplexGoDirectBuffer | 5,925,524   | 590   | 0    | 0              |
+| ComplexGoStaticString | 198,012,804 | 19    | 0    | 0              |
+
+```
+comparing: 1.11 to 1.13.5
+benchmark                            old ns/op     new ns/op     delta
+BenchmarkComplexGoDirectBuffer-8     621           590           -4.99%
+BenchmarkComplexGoStaticString-8     24.0          18.5          -22.92%
+```
+
 ## simple benchmarks
 
 ### full featured template engines
@@ -73,6 +87,7 @@ There are quite some impressive performance improvements. Almost all pre compila
 | Soy         | 1,321,779 | 2.766 | 1,392 | 25             |
 
 ```
+comparing: 1.11 to 1.13.5
 benchmark                 old ns/op     new ns/op     delta
 BenchmarkAce-8            8970          8873          -1.08%
 BenchmarkAmber-8          5386          5674          +5.35%
@@ -98,6 +113,7 @@ BenchmarkSoy-8            2795          2766          -1.04%
 | Quicktemplate | 12,412,521 | 0.285 | 0     | 0              |
 
 ```
+comparing: 1.11 to 1.13.5
 ignoring BenchmarkEgon-8: before has 1 instances, after has 0
 benchmark                    old ns/op     new ns/op     delta
 BenchmarkEgo-8               805           800           -0.62%
@@ -128,6 +144,7 @@ BenchmarkGorazor-8     613           512           -16.48%
 | ComplexMustache    | 166,411 | 20.409 | 7,558 | 155            |
 
 ```
+comparing: 1.11 to 1.13.5
 benchmark                        old ns/op     new ns/op     delta
 BenchmarkComplexGolang-8         45252         47023         +3.91%
 BenchmarkComplexGolangText-8     19980         20565         +2.93%
@@ -156,6 +173,7 @@ BenchmarkComplexMustache-8     7813          7558          -3.26%
 | ComplexQuicktemplate | 2,219,455 | 1.664 | 0     | 0              |
 
 ```
+comparing: 1.11 to 1.13.5
 ignoring BenchmarkComplexEgon-8: before has 1 instances, after has 0
 benchmark                           old ns/op     new ns/op     delta
 BenchmarkComplexEgo-8               3899          4218          +8.18%
