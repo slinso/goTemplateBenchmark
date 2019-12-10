@@ -2,9 +2,10 @@
 	import (
 	"github.com/SlinSo/goTemplateBenchmark/model"
 	"github.com/sipin/gorazor/gorazor"
-	"github.com/SlinSo/goTemplateBenchmark/gorazor/tpl/layout/base"
+	"github.com/SlinSo/goTemplateBenchmark/gorazor/tpl/layout"
 	"github.com/SlinSo/goTemplateBenchmark/gorazor/tpl/helper"
 	)
+	layout := layout.Base
 	var u *model.User
 	var nav []*model.Navigation
 	var title string
@@ -13,7 +14,7 @@
 <div class="content">
 	<div class="welcome">
 		<h4>Hello @u.FirstName</h4>
-		
+
 		<div class="raw">@raw(u.RawContent)</div>
 		<div class="enc">@u.EscapedContent</div>
 	</div>
