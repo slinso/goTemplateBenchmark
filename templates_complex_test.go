@@ -13,7 +13,6 @@ import (
 	"github.com/valyala/bytebufferpool"
 
 	"github.com/SlinSo/goTemplateBenchmark/ego"
-	"github.com/SlinSo/goTemplateBenchmark/egon"
 	"github.com/SlinSo/goTemplateBenchmark/egonslinso"
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
@@ -277,27 +276,6 @@ func BenchmarkComplexQuicktemplate(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		quicktemplate.WriteIndex(&buf, testComplexUser, testComplexNav, testComplexTitle)
-		buf.Reset()
-	}
-}
-
-/******************************************************************************
-** Egon
-******************************************************************************/
-func TestComplexEgon(t *testing.T) {
-	var buf bytes.Buffer
-	egon.IndexTemplate(&buf, testComplexUser, testComplexNav, testComplexTitle)
-
-	if msg, ok := linesEquals(buf.String(), expectedtComplexResult); !ok {
-		t.Error(msg)
-	}
-}
-
-func BenchmarkComplexEgon(b *testing.B) {
-	var buf bytes.Buffer
-
-	for i := 0; i < b.N; i++ {
-		egon.IndexTemplate(&buf, testComplexUser, testComplexNav, testComplexTitle)
 		buf.Reset()
 	}
 }

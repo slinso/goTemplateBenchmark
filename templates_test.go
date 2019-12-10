@@ -12,7 +12,6 @@ import (
 	"github.com/valyala/bytebufferpool"
 
 	"github.com/SlinSo/goTemplateBenchmark/ego"
-	"github.com/SlinSo/goTemplateBenchmark/egon"
 	"github.com/SlinSo/goTemplateBenchmark/egonslinso"
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
@@ -26,7 +25,6 @@ import (
 	"github.com/robfig/soy"
 	"github.com/robfig/soy/data"
 	"github.com/yosssi/ace"
-	"github.com/ziutek/kasia.go"
 
 	"github.com/CloudyKit/jet"
 	"github.com/dchest/htmlmin"
@@ -198,33 +196,6 @@ func BenchmarkEgo(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		err := ego.EgoSimple(&buf, testData)
-		if err != nil {
-			b.Fatal(err)
-		}
-		buf.Reset()
-	}
-}
-
-/******************************************************************************
-** Egon
-******************************************************************************/
-func TestEgon(t *testing.T) {
-	var buf bytes.Buffer
-	err := egon.SimpleTemplate(&buf, testData)
-	if err != nil {
-		t.Error(err)
-	}
-
-	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
-		t.Error(msg)
-	}
-}
-
-func BenchmarkEgon(b *testing.B) {
-	var buf bytes.Buffer
-
-	for i := 0; i < b.N; i++ {
-		err := egon.SimpleTemplate(&buf, testData)
 		if err != nil {
 			b.Fatal(err)
 		}
@@ -483,42 +454,6 @@ func TestGorazor(t *testing.T) {
 func BenchmarkGorazor(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gorazor.Simple(testData)
-	}
-}
-
-/******************************************************************************
-** Kasia
-******************************************************************************/
-func TestKasia(t *testing.T) {
-	var buf bytes.Buffer
-
-	tpl, err := kasia.ParseFile("kasia/simple.kt")
-	if err != nil {
-		t.Error(err)
-	}
-
-	err = tpl.Execute(&buf, testData)
-	if err != nil {
-		t.Error(err)
-	}
-
-	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
-		t.Error(msg)
-	}
-}
-
-func BenchmarkKasia(b *testing.B) {
-	var buf bytes.Buffer
-
-	tpl, _ := kasia.ParseFile("kasia/simple.kt")
-	b.ResetTimer()
-
-	for i := 0; i < b.N; i++ {
-		err := tpl.Execute(&buf, testData)
-		if err != nil {
-			b.Fatal(err)
-		}
-		buf.Reset()
 	}
 }
 
