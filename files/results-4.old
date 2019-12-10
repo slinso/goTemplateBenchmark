@@ -1,0 +1,13 @@
+goos: linux
+goarch: amd64
+pkg: github.com/SlinSo/goTemplateBenchmark
+BenchmarkComplexEgo-8            1000000  3899  ns/op 656 B/op   36             allocs/op
+BenchmarkComplexEgoSlinso-8      2000000  1813  ns/op 160 B/op   2              allocs/op
+BenchmarkComplexEgon-8           1000000  7345  ns/op 960 B/op   55             allocs/op
+BenchmarkComplexFtmpl-8          1000000  5970  ns/op 5042 B/op 43             allocs/op
+BenchmarkComplexGorazor-8        500000    9010 ns/op  8444 B/op 64             allocs/op
+BenchmarkComplexHero-8           3000000  1225  ns/op 0 B/op     0              allocs/op
+BenchmarkComplexJade-8            5000000  0938 ns/op  0 B/op     0              allocs/op
+BenchmarkComplexQuicktemplate-8  3000000  1629  ns/op 0 B/op     0              allocs/op
+PASS
+ok  	github.com/SlinSo/goTemplateBenchmark	0.133s

@@ -1,0 +1,10 @@
+benchmark                 old ns/op     new ns/op     delta
+BenchmarkAce-8            8970          8873          -1.08%
+BenchmarkAmber-8          5386          5674          +5.35%
+BenchmarkGolang-8         5264          5401          +2.60%
+BenchmarkGolangText-8     1664          1783          +7.15%
+BenchmarkHandlebars-8     9567          9666          +1.03%
+BenchmarkJetHTML-8        1093          1075          -1.65%
+BenchmarkMustache-8       3357          3282          -2.23%
+BenchmarkPongo2-8         3996          4159          +4.08%
+BenchmarkSoy-8            2795          2766          -1.04%
