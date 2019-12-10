@@ -3,6 +3,7 @@ package jade
 
 import (
 	"bytes"
+	"io"
 	"strconv"
 	pool "github.com/valyala/bytebufferpool"
 )
@@ -20,6 +21,24 @@ func WriteEscString(st string, buffer *pool.ByteBuffer) {
 			buffer.WriteByte(st[i])
 		}
 	}
+}
+
+type WriterAsBuffer struct {
+	io.Writer
+}
+
+func (w *WriterAsBuffer) WriteString(s string) (n int, err error) {
+	n, err = w.Write([]byte(s))
+	return
+}
+
+func (w *WriterAsBuffer) WriteByte(b byte) (err error) {
+	_, err = w.Write([]byte{b})
+	return
+}
+
+type stringer interface {
+	String() string
 }
 
 func WriteAll(a interface{}, escape bool, buffer *pool.ByteBuffer) {
@@ -56,8 +75,14 @@ func WriteAll(a interface{}, escape bool, buffer *pool.ByteBuffer) {
 		buffer.WriteString(strconv.FormatFloat(v, 'f', -1, 64))
 	case bool:
 		WriteBool(v, buffer)
+	case stringer:
+		if escape {
+			WriteEscString(v.String(), buffer)
+		} else {
+			buffer.WriteString(v.String())
+		}
 	default:
-		buffer.WriteString("\n<<< unprinted type >>>\n")
+		buffer.WriteString("\n<<< unprinted type, fmt.Stringer implementation needed >>>\n")
 	}
 }
 
