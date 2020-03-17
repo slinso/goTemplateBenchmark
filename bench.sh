@@ -20,7 +20,7 @@
 # as you leave these references intact in the header comments of your source files.
 
 # shellcheck disable=SC2034
-read -r -d '' __usage <<-'EOF' || true    # exits non-zero when EOF encountered
+read -r -d '' __usage <<-'EOF' || true # exits non-zero when EOF encountered
   -t --time  [arg]   Benchmark duration. Required. Default="3s"
   -c --compare [arg] Which go versions will be compared? Required.
   -O --no-old        Do NOT move old benchmark files.
@@ -120,11 +120,11 @@ _move_old_results() {
 
 # run benchmarks
 _run_benchmarks() {
-    go test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime=${RUNTIME} | tee ./files/results-1.new
-    go test -bench "k(Ego|EgonSlinso|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime=${RUNTIME} | tee ./files/results-2.new
-    go test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime=${RUNTIME} | tee ./files/results-3.new
-    go test -bench "Complex(Ego|EgoSlinso|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime=${RUNTIME} | tee ./files/results-4.new
-    go test -bench "Complex(GoStaticString|GoDirectBuffer)$" -benchmem -benchtime=${RUNTIME} | tee ./files/results-5.new
+    go test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime=${arg_t} | tee ./files/results-1.new
+    go test -bench "k(Ego|EgonSlinso|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime=${arg_t} | tee ./files/results-2.new
+    go test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime=${arg_t} | tee ./files/results-3.new
+    go test -bench "Complex(Ego|EgoSlinso|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime=${arg_t} | tee ./files/results-4.new
+    go test -bench "Complex(GoStaticString|GoDirectBuffer)$" -benchmem -benchtime=${arg_t} | tee ./files/results-5.new
 }
 [[ "${__no_benchmarks}" == "true" ]] || _run_benchmarks
 

@@ -45,8 +45,11 @@ Sometimes there are templates that cannot be reasonably cached. Then you possibl
 
 ## Results dev machine
 
-Changed the environment to my local dev laptop: i7-6700T 16GB Mem
-Golang: 1.11
+local dev laptop: i7-6700T 16GB Mem
+
+## Changes with 1.14
+
+- quite a few slowdowns, but I did not do any profiling. needs more testing.
 
 ## Changes with 1.11
 
@@ -60,14 +63,15 @@ There are quite some impressive performance improvements. Almost all pre compila
 
 | Name                  | Runs        | ns/op | B/op | allocations/op |
 | --------------------- | ----------- | ----- | ---- | -------------- |
-| ComplexGoDirectBuffer | 5,925,524   | 590   | 0    | 0              |
-| ComplexGoStaticString | 198,012,804 | 19    | 0    | 0              |
+| ComplexGoDirectBuffer | 5,332,621   | 693   | 0    | 0              |
+| ComplexGoStaticString | 175,642,789 | 21    | 0    | 0              |
 
 ```
-comparing: 1.11 to 1.13.5
+comparing: 1.13.5 to 1.14
+benchcmp is deprecated in favor of benchstat: https://pkg.go.dev/golang.org/x/perf/cmd/benchstat
 benchmark                            old ns/op     new ns/op     delta
-BenchmarkComplexGoDirectBuffer-8     621           590           -4.99%
-BenchmarkComplexGoStaticString-8     24.0          18.5          -22.92%
+BenchmarkComplexGoDirectBuffer-8     590           693           +17.46%
+BenchmarkComplexGoStaticString-8     18.5          21.0          +13.51%
 ```
 
 ## simple benchmarks
@@ -76,60 +80,52 @@ BenchmarkComplexGoStaticString-8     24.0          18.5          -22.92%
 
 | Name        | Runs      | µs/op | B/op  | allocations/op |
 | ----------- | --------- | ----- | ----- | -------------- |
-| Ace         | 403,213   | 8.873 | 1,392 | 42             |
-| Amber       | 536,733   | 5.674 | 1,120 | 38             |
-| Golang      | 612,609   | 5.401 | 1,040 | 37             |
-| GolangText  | 2,128,748 | 1.783 | 144   | 9              |
-| Handlebars  | 397,616   | 9.666 | 4,018 | 82             |
-| **JetHTML** | 3,283,270 | 1.075 | 0     | 0              |
-| Mustache    | 1,000,000 | 3.282 | 1,568 | 29             |
-| Pongo2      | 828,104   | 4.159 | 2,072 | 32             |
-| Soy         | 1,321,779 | 2.766 | 1,392 | 25             |
+| Ace         | 346,275   | 8.678 | 1,392 | 42             |
+| Amber       | 573,464   | 5.387 | 1,120 | 38             |
+| Golang      | 597,543   | 5.386 | 1,040 | 37             |
+| GolangText  | 2,045,877 | 1.829 | 144   | 9              |
+| Handlebars  | 382,017   | 9.852 | 4,019 | 82             |
+| **JetHTML** | 3,230,307 | 1.116 | 0     | 0              |
+| Mustache    | 1,000,000 | 3.067 | 1,568 | 29             |
+| Pongo2      | 761,532   | 4.678 | 2,072 | 32             |
+| Soy         | 962,260   | 3.157 | 1,392 | 25             |
 
 ```
-comparing: 1.11 to 1.13.5
+comparing: 1.13.5 to 1.14
 benchmark                 old ns/op     new ns/op     delta
-BenchmarkAce-8            8970          8873          -1.08%
-BenchmarkAmber-8          5386          5674          +5.35%
-BenchmarkGolang-8         5264          5401          +2.60%
-BenchmarkGolangText-8     1664          1783          +7.15%
-BenchmarkHandlebars-8     9567          9666          +1.03%
-BenchmarkJetHTML-8        1093          1075          -1.65%
-BenchmarkMustache-8       3357          3282          -2.23%
-BenchmarkPongo2-8         3996          4159          +4.08%
-BenchmarkSoy-8            2795          2766          -1.04%
+BenchmarkAce-8            8873          8678          -2.20%
+BenchmarkAmber-8          5674          5387          -5.06%
+BenchmarkGolang-8         5401          5386          -0.28%
+BenchmarkGolangText-8     1783          1829          +2.58%
+BenchmarkHandlebars-8     9666          9852          +1.92%
+BenchmarkJetHTML-8        1075          1116          +3.81%
+BenchmarkMustache-8       3282          3067          -6.55%
+BenchmarkPongo2-8         4159          4678          +12.48%
+BenchmarkSoy-8            2766          3157          +14.14%
 ```
 
 ### precompilation to Go code
 
 | Name          | Runs       | µs/op | B/op  | allocations/op |
 | ------------- | ---------- | ----- | ----- | -------------- |
-| Ego           | 4,448,131  | 0.800 | 85    | 8              |
-| EgonSlinso    | 10,317,644 | 0.324 | 0     | 0              |
-| Ftmpl         | 2,765,876  | 1.314 | 1,094 | 12             |
-| Gorazor       | 6,207,387  | 0.556 | 512   | 5              |
-| Hero          | 20,645,748 | 0.173 | 0     | 0              |
-| **Jade**      | 34,540,056 | 0.102 | 0     | 0              |
-| Quicktemplate | 12,412,521 | 0.285 | 0     | 0              |
+| Ego           | 3,587,478  | 0.921 | 85    | 8              |
+| EgonSlinso    | 8,769,262  | 0.371 | 0     | 0              |
+| Ftmpl         | 2,722,228  | 1.270 | 1,094 | 12             |
+| Gorazor       | 5,341,615  | 0.606 | 512   | 5              |
+| Hero          | 17,180,913 | 0.201 | 0     | 0              |
+| **Jade**      | 28,891,586 | 0.139 | 0     | 0              |
+| Quicktemplate | 10,127,134 | 0.338 | 0     | 0              |
 
 ```
-comparing: 1.11 to 1.13.5
-ignoring BenchmarkEgon-8: before has 1 instances, after has 0
+comparing: 1.13.5 to 1.14
 benchmark                    old ns/op     new ns/op     delta
-BenchmarkEgo-8               805           800           -0.62%
-BenchmarkEgonSlinso-8        340           324           -4.71%
-BenchmarkFtmpl-8             1371          1314          -4.16%
-BenchmarkGorazor-8           1094          556           -49.18%
-BenchmarkHero-8              168           173           +2.98%
-BenchmarkJade-8              103           102           -0.97%
-BenchmarkQuicktemplate-8     289           285           -1.38%
-
-benchmark              old allocs     new allocs     delta
-BenchmarkGorazor-8     11             5              -54.55%
-
-benchmark              old bytes     new bytes     delta
-BenchmarkFtmpl-8       1141          1094          -4.12%
-BenchmarkGorazor-8     613           512           -16.48%
+BenchmarkEgo-8               800           921           +15.13%
+BenchmarkEgonSlinso-8        324           371           +14.51%
+BenchmarkFtmpl-8             1314          1270          -3.35%
+BenchmarkGorazor-8           556           606           +8.99%
+BenchmarkHero-8              173           201           +16.18%
+BenchmarkJade-8              102           139           +36.27%
+BenchmarkQuicktemplate-8     285           338           +18.60%
 ```
 
 ## more complex test with template inheritance (if possible)
@@ -138,58 +134,42 @@ BenchmarkGorazor-8     613           512           -16.48%
 
 | Name               | Runs    | µs/op  | B/op  | allocations/op |
 | ------------------ | ------- | ------ | ----- | -------------- |
-| ComplexGolang      | 76,704  | 47.023 | 8,862 | 296            |
-| ComplexGolangText  | 163,388 | 20.565 | 2,793 | 113            |
-| **ComplexJetHTML** | 364,692 | 9.689  | 546   | 5              |
-| ComplexMustache    | 166,411 | 20.409 | 7,558 | 155            |
+| ComplexGolang      | 78,091  | 47.037 | 8,862 | 296            |
+| ComplexGolangText  | 160,622 | 27.318 | 2,793 | 113            |
+| **ComplexJetHTML** | 266,722 | 11.525 | 546   | 5              |
+| ComplexMustache    | 181,446 | 20.331 | 7,559 | 155            |
 
 ```
-comparing: 1.11 to 1.13.5
+comparing: 1.13.5 to 1.14
 benchmark                        old ns/op     new ns/op     delta
-BenchmarkComplexGolang-8         45252         47023         +3.91%
-BenchmarkComplexGolangText-8     19980         20565         +2.93%
-BenchmarkComplexJetHTML-8        10155         9689          -4.59%
-BenchmarkComplexMustache-8       20542         20409         -0.65%
-
-benchmark                      old allocs     new allocs     delta
-BenchmarkComplexGolang-8       293            296            +1.02%
-BenchmarkComplexMustache-8     161            155            -3.73%
-
-benchmark                      old bytes     new bytes     delta
-BenchmarkComplexGolang-8       10478         8862          -15.42%
-BenchmarkComplexMustache-8     7813          7558          -3.26%
+BenchmarkComplexGolang-8         47023         47037         +0.03%
+BenchmarkComplexGolangText-8     20565         27318         +32.84%
+BenchmarkComplexJetHTML-8        9689          11525         +18.95%
+BenchmarkComplexMustache-8       20409         20331         -0.38%
 ```
 
 ### precompilation to Go code
 
 | Name                 | Runs      | µs/op | B/op  | allocations/op |
 | -------------------- | --------- | ----- | ----- | -------------- |
-| ComplexEgo           | 754,148   | 4.218 | 656   | 36             |
-| ComplexEgoSlinso     | 1,946,601 | 1.984 | 160   | 2              |
-| ComplexFtmpl         | 732,259   | 5.750 | 4,995 | 43             |
-| ComplexGorazor       | 946,285   | 4.020 | 3,056 | 34             |
-| ComplexHero          | 2,798,424 | 1.332 | 0     | 0              |
-| **ComplexJade**      | 3,491,661 | 0.919 | 0     | 0              |
-| ComplexQuicktemplate | 2,219,455 | 1.664 | 0     | 0              |
+| ComplexEgo           | 791,263   | 4.786 | 656   | 36             |
+| ComplexEgoSlinso     | 1,727,679 | 2.084 | 160   | 2              |
+| ComplexFtmpl         | 526,308   | 5.727 | 4,995 | 43             |
+| ComplexGorazor       | 923,703   | 4.108 | 3,056 | 34             |
+| ComplexHero          | 2,355,554 | 1.498 | 0     | 0              |
+| **ComplexJade**      | 3,000,294 | 1.195 | 0     | 0              |
+| ComplexQuicktemplate | 1,881,404 | 1.819 | 0     | 0              |
 
 ```
-comparing: 1.11 to 1.13.5
-ignoring BenchmarkComplexEgon-8: before has 1 instances, after has 0
+comparing: 1.13.5 to 1.14
 benchmark                           old ns/op     new ns/op     delta
-BenchmarkComplexEgo-8               3899          4218          +8.18%
-BenchmarkComplexEgoSlinso-8         1813          1984          +9.43%
-BenchmarkComplexFtmpl-8             5970          5750          -3.69%
-BenchmarkComplexGorazor-8           9010          4020          -55.38%
-BenchmarkComplexHero-8              1225          1332          +8.73%
-BenchmarkComplexJade-8              938           919           -2.03%
-BenchmarkComplexQuicktemplate-8     1629          1664          +2.15%
-
-benchmark                     old allocs     new allocs     delta
-BenchmarkComplexGorazor-8     64             34             -46.88%
-
-benchmark                     old bytes     new bytes     delta
-BenchmarkComplexFtmpl-8       5042          4995          -0.93%
-BenchmarkComplexGorazor-8     8444          3056          -63.81%
+BenchmarkComplexEgo-8               4218          4786          +13.47%
+BenchmarkComplexEgoSlinso-8         1984          2084          +5.04%
+BenchmarkComplexFtmpl-8             5750          5727          -0.40%
+BenchmarkComplexGorazor-8           4020          4108          +2.19%
+BenchmarkComplexHero-8              1332          1498          +12.46%
+BenchmarkComplexJade-8              919           1195          +30.03%
+BenchmarkComplexQuicktemplate-8     1664          1819          +9.31%
 ```
 
 ## Security

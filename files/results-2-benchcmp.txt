@@ -1,15 +1,8 @@
 benchmark                    old ns/op     new ns/op     delta
-BenchmarkEgo-8               805           800           -0.62%
-BenchmarkEgonSlinso-8        340           324           -4.71%
-BenchmarkFtmpl-8             1371          1314          -4.16%
-BenchmarkGorazor-8           1094          556           -49.18%
-BenchmarkHero-8              168           173           +2.98%
-BenchmarkJade-8              103           102           -0.97%
-BenchmarkQuicktemplate-8     289           285           -1.38%
-
-benchmark              old allocs     new allocs     delta
-BenchmarkGorazor-8     11             5              -54.55%
-
-benchmark              old bytes     new bytes     delta
-BenchmarkFtmpl-8       1141          1094          -4.12%
-BenchmarkGorazor-8     613           512           -16.48%
+BenchmarkEgo-8               800           921           +15.13%
+BenchmarkEgonSlinso-8        324           371           +14.51%
+BenchmarkQuicktemplate-8     285           338           +18.60%
+BenchmarkFtmpl-8             1314          1270          -3.35%
+BenchmarkGorazor-8           556           606           +8.99%
+BenchmarkHero-8              173           201           +16.18%
+BenchmarkJade-8              102           139           +36.27%
