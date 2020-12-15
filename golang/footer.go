@@ -5,5 +5,5 @@ import (
 )
 
 func WriteFooter(bb *bytebufferpool.ByteBuffer) {
-	bb.WriteString(`<div class="footer">copyright 2016</div>`)
+	_, _ = bb.WriteString(`<div class="footer">copyright 2016</div>`)
 }

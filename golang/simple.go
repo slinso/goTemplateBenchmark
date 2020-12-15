@@ -28,76 +28,74 @@ func NewGoFunc(buf *bytebufferpool.ByteBuffer) *GoFunc {
 	return &GoFunc{bb: buf}
 }
 
-type hyperfunc func(string, hyperfunc)
-
 func (g *GoFunc) H(elem string, fn func(*string)) func(*string) {
 	return func(s *string) {
 
-		g.bb.WriteString("<")
-		g.bb.WriteString(elem)
-		g.bb.WriteString(">")
+		_, _ = g.bb.WriteString("<")
+		_, _ = g.bb.WriteString(elem)
+		_, _ = g.bb.WriteString(">")
 
 		if fn != nil {
 			fn(s)
 		}
 
-		g.bb.WriteString("</")
-		g.bb.WriteString(elem)
-		g.bb.WriteString(">")
+		_, _ = g.bb.WriteString("</")
+		_, _ = g.bb.WriteString(elem)
+		_, _ = g.bb.WriteString(">")
 	}
 }
 
 type Attr map[string]string
 
 func (g *GoFunc) html() {
-	g.bb.WriteString("<html>")
+	_, _ = g.bb.WriteString("<html>")
 }
 func (g *GoFunc) htmlEnd() {
-	g.bb.WriteString("</html>")
+	_, _ = g.bb.WriteString("</html>")
 }
 
 func (g *GoFunc) body() {
-	g.bb.WriteString("<body>")
+	_, _ = g.bb.WriteString("<body>")
 }
 func (g *GoFunc) bodyEnd() {
-	g.bb.WriteString("</body>")
+	_, _ = g.bb.WriteString("</body>")
 }
 
 func (g *GoFunc) h1() {
-	g.bb.WriteString("<h1>")
+	_, _ = g.bb.WriteString("<h1>")
 }
 func (g *GoFunc) h1End() {
-	g.bb.WriteString("</h1>")
+	_, _ = g.bb.WriteString("</h1>")
 }
 func (g *GoFunc) p() {
-	g.bb.WriteString("<p>")
+	_, _ = g.bb.WriteString("<p>")
 }
 func (g *GoFunc) pEnd() {
-	g.bb.WriteString("</p>")
+	_, _ = g.bb.WriteString("</p>")
 }
 func (g *GoFunc) li() {
-	g.bb.WriteString("<li>")
+	_, _ = g.bb.WriteString("<li>")
 }
 func (g *GoFunc) liEnd() {
-	g.bb.WriteString("</li>")
+	_, _ = g.bb.WriteString("</li>")
 }
 func (g *GoFunc) ul() {
-	g.bb.WriteString("<ul>")
+	_, _ = g.bb.WriteString("<ul>")
 }
 func (g *GoFunc) ulEnd() {
-	g.bb.WriteString("</ul>")
+	_, _ = g.bb.WriteString("</ul>")
 }
 func (g *GoFunc) escape(s string) {
-	g.bb.WriteString(html.EscapeString(s))
+	_, _ = g.bb.WriteString(html.EscapeString(s))
 }
 func (g *GoFunc) s(s string) {
-	g.bb.WriteString(s)
+	_, _ = g.bb.WriteString(s)
 }
 func (g *GoFunc) elem(s []string) {
 	for _, e := range s {
-		g.bb.WriteString("<")
-		g.bb.WriteString(e)
-		g.bb.WriteString(">")
+		_, _ = g.bb.WriteString("<")
+		_, _ = g.bb.WriteString(e)
+		_, _ = g.bb.WriteString(">")
 	}
 }
 
@@ -141,21 +139,21 @@ func GoFuncFunc(g *GoFunc, u *model.User) {
 
 // WriteSimpleGolang golang funcion based template
 func WriteSimpleGolang(bb *bytebufferpool.ByteBuffer, u *model.User) {
-	bb.WriteString(`
+	_, _ = bb.WriteString(`
 <html>
     <body>
         <h1>`)
-	bb.WriteString(html.EscapeString(u.FirstName))
-	bb.WriteString(`</h1>
+	_, _ = bb.WriteString(html.EscapeString(u.FirstName))
+	_, _ = bb.WriteString(`</h1>
         <p>Here's a list of your favorite colors:</p>
         <ul>
         `)
 	for _, colorName := range u.FavoriteColors {
-		bb.WriteString(`<li>`)
-		bb.WriteString(html.EscapeString(colorName))
-		bb.WriteString(`</li>`)
+		_, _ = bb.WriteString(`<li>`)
+		_, _ = bb.WriteString(html.EscapeString(colorName))
+		_, _ = bb.WriteString(`</li>`)
 	}
-	bb.WriteString(`
+	_, _ = bb.WriteString(`
         </ul>
     </body>
 </html>

@@ -7,9 +7,9 @@ import (
 )
 
 func Header(bb *bytebufferpool.ByteBuffer, title *string) {
-	bb.WriteString(`<title>`)
-	bb.WriteString(html.EscapeString(*title))
-	bb.WriteString(`'s Home Page</title>
+	_, _ = bb.WriteString(`<title>`)
+	_, _ = bb.WriteString(html.EscapeString(*title))
+	_, _ = bb.WriteString(`'s Home Page</title>
 <div class="header">Page Header</div>
 `)
 }

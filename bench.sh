@@ -22,8 +22,7 @@
 # shellcheck disable=SC2034
 read -r -d '' __usage <<-'EOF' || true # exits non-zero when EOF encountered
   -t --time  [arg]   Benchmark duration. Required. Default="3s"
-  -c --compare [arg] Which go versions will be compared? Required.
-  -O --no-old        Do NOT move old benchmark files.
+  -c --compare [arg] Old go version binary? Required.
   -B --no-benchmarks Do NOT run the benchmarks.
   -F --no-format     Do NOT format the results.
   -v                 Enable verbose mode, print script as it is executed
@@ -82,11 +81,6 @@ if [[ "${arg_B:?}" == "1" ]]; then
     __no_benchmarks="true"
 fi
 
-__no_old="false"
-if [[ "${arg_O:?}" == "1" ]]; then
-    __no_old="true"
-fi
-
 __no_format="false"
 if [[ "${arg_F:?}" == "1" ]]; then
     __no_format="true"
@@ -105,26 +99,27 @@ fi
 info "OSTYPE: ${OSTYPE}"
 
 info "benchmark duration: ${arg_t}"
-info "compare: ${arg_c}"
-info "move old files: $([[ "${__no_old}" == "true" ]] && echo "false" || echo "true")"
+info "compare: ${arg_c} to $(go version)"
 info "run benchmarks: $([[ "${__no_benchmarks}" == "true" ]] && echo "false" || echo "true")"
 info "format output: $([[ "${__no_format}" == "true" ]] && echo "false" || echo "true")"
 
-# move old results from .new to .old files
-_move_old_results() {
-    for i in {1..5}; do
-        mv files/results-"${i}".new files/results-"${i}".old
-    done
+# run old benchmarks
+_run_old_benchmarks() {
+    ${arg_c} test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-1.old
+    ${arg_c} test -bench "k(Ego|EgonSlinso|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-2.old
+    ${arg_c} test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-3.old
+    ${arg_c} test -bench "Complex(Ego|EgoSlinso|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-4.old
+    ${arg_c} test -bench "Complex(GoStaticString|GoDirectBuffer)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-5.old
 }
-[[ "${__no_old}" == "true" ]] || _move_old_results
+[[ "${__no_benchmarks}" == "true" ]] || _run_old_benchmarks
 
 # run benchmarks
 _run_benchmarks() {
-    go test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime=${arg_t} | tee ./files/results-1.new
-    go test -bench "k(Ego|EgonSlinso|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime=${arg_t} | tee ./files/results-2.new
-    go test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime=${arg_t} | tee ./files/results-3.new
-    go test -bench "Complex(Ego|EgoSlinso|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime=${arg_t} | tee ./files/results-4.new
-    go test -bench "Complex(GoStaticString|GoDirectBuffer)$" -benchmem -benchtime=${arg_t} | tee ./files/results-5.new
+    go test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-1.new
+    go test -bench "k(Ego|EgonSlinso|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-2.new
+    go test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-3.new
+    go test -bench "Complex(Ego|EgoSlinso|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-4.new
+    go test -bench "Complex(GoStaticString|GoDirectBuffer)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-5.new
 }
 [[ "${__no_benchmarks}" == "true" ]] || _run_benchmarks
 
@@ -135,8 +130,8 @@ __format_single_benchmark() {
     pb <./files/results-"${i}".new | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'
     echo ""
     echo "\`\`\`"
-    echo "comparing: ${arg_c}"
-    benchcmp -changed files/results-"${i}".old files/results-"${i}".new | tee files/results-"${i}"-benchcmp.txt
+    echo "comparing: ${arg_c} to $(go version)"
+    benchstat -delta-test none files/results-"${i}".old files/results-"${i}".new | tee files/results-"${i}"-benchstat.txt
     echo "\`\`\`"
 }
 

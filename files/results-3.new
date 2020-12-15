@@ -1,9 +1,9 @@
 goos: linux
 goarch: amd64
 pkg: github.com/SlinSo/goTemplateBenchmark
-BenchmarkComplexGolang-8       	   78091	     47037 ns/op	    8862 B/op	     296 allocs/op
-BenchmarkComplexGolangText-8   	  160622	     27318 ns/op	    2793 B/op	     113 allocs/op
-BenchmarkComplexMustache-8     	  181446	     20331 ns/op	    7559 B/op	     155 allocs/op
-BenchmarkComplexJetHTML-8      	  266722	     11525 ns/op	     546 B/op	       5 allocs/op
+BenchmarkComplexGolang-24        	   51696	     69767 ns/op	    8783 B/op	     285 allocs/op
+BenchmarkComplexGolangText-24    	  115188	     30380 ns/op	    2708 B/op	     102 allocs/op
+BenchmarkComplexMustache-24      	  129087	     27772 ns/op	    7568 B/op	     155 allocs/op
+BenchmarkComplexJetHTML-24       	  292257	     15095 ns/op	     550 B/op	       5 allocs/op
 PASS
-ok  	github.com/SlinSo/goTemplateBenchmark	18.438s
+ok  	github.com/SlinSo/goTemplateBenchmark	16.562s

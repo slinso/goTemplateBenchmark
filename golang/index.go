@@ -29,28 +29,28 @@ func Escape(bb *bytebufferpool.ByteBuffer, b []byte) {
 	for i, c := range b {
 		switch c {
 		case '<':
-			write(b[j:i])
-			write(strLT)
+			_, _ = write(b[j:i])
+			_, _ = write(strLT)
 			j = i + 1
 		case '>':
-			write(b[j:i])
-			write(strGT)
+			_, _ = write(b[j:i])
+			_, _ = write(strGT)
 			j = i + 1
 		case '"':
-			write(b[j:i])
-			write(strQuot)
+			_, _ = write(b[j:i])
+			_, _ = write(strQuot)
 			j = i + 1
 		case '\'':
-			write(b[j:i])
-			write(strApos)
+			_, _ = write(b[j:i])
+			_, _ = write(strApos)
 			j = i + 1
 		case '&':
-			write(b[j:i])
-			write(strAmp)
+			_, _ = write(b[j:i])
+			_, _ = write(strAmp)
 			j = i + 1
 		}
 	}
-	write(b[j:])
+	_, _ = write(b[j:])
 }
 
 var (
@@ -64,37 +64,37 @@ var (
 func hyper(bb *bytebufferpool.ByteBuffer, s string) {
 	classFound := false
 	idFound := false
-	bb.WriteByte('<')
+	_ = bb.WriteByte('<')
 
 	b := UnsafeStrToBytes(s)
 
 	for _, c := range b {
 		switch c {
 		case '#':
-			bb.WriteString(" id=\"")
+			_, _ = bb.WriteString(" id=\"")
 			idFound = true
 		case '.':
 			if idFound {
-				bb.WriteByte('"')
+				_ = bb.WriteByte('"')
 			}
 			if !classFound {
-				bb.WriteString(" class=\"")
+				_, _ = bb.WriteString(" class=\"")
 				classFound = true
 			} else {
-				bb.WriteByte(' ')
+				_ = bb.WriteByte(' ')
 			}
 		default:
-			bb.WriteByte(c)
+			_ = bb.WriteByte(c)
 		}
 	}
 	if idFound || classFound {
-		bb.WriteByte('"')
+		_ = bb.WriteByte('"')
 	}
-	bb.WriteByte('>')
+	_ = bb.WriteByte('>')
 }
 
 func Index3(bb *bytebufferpool.ByteBuffer, u *model.User, nav []*model.Navigation, title string) {
-	bb.WriteString(`<!DOCTYPE html>
+	_, _ = bb.WriteString(`<!DOCTYPE html>
 <html>
 <body>
 
@@ -129,7 +129,7 @@ func Index3(bb *bytebufferpool.ByteBuffer, u *model.User, nav []*model.Navigatio
 }
 
 func Index2(bb *bytebufferpool.ByteBuffer, u *model.User, nav []*model.Navigation, title string) {
-	bb.WriteString(`<!DOCTYPE html>`)
+	_, _ = bb.WriteString(`<!DOCTYPE html>`)
 	hyper(bb, "html")
 	hyper(bb, "body")
 	hyper(bb, "header")
@@ -142,11 +142,11 @@ func Index2(bb *bytebufferpool.ByteBuffer, u *model.User, nav []*model.Navigatio
 	hyper(bb, "div.content")
 	hyper(bb, "div.welcome")
 	hyper(bb, "h4")
-	bb.WriteString(`Hello `)
-	bb.WriteString(html.EscapeString(u.FirstName))
+	_, _ = bb.WriteString(`Hello `)
+	_, _ = bb.WriteString(html.EscapeString(u.FirstName))
 	hyper(bb, "/h4")
 	hyper(bb, "div.raw")
-	bb.WriteString(u.RawContent)
+	_, _ = bb.WriteString(u.RawContent)
 	hyper(bb, "/div")
 	hyper(bb, "div.enc")
 	Escape(bb, UnsafeStrToBytes(u.EscapedContent))
@@ -154,13 +154,13 @@ func Index2(bb *bytebufferpool.ByteBuffer, u *model.User, nav []*model.Navigatio
 
 	for i := 1; i <= 5; i++ {
 		hyper(bb, "p")
-		bb.WriteString(html.EscapeString(u.FirstName))
-		bb.WriteString(` has `)
+		_, _ = bb.WriteString(html.EscapeString(u.FirstName))
+		_, _ = bb.WriteString(` has `)
 		bb.B = strconv.AppendInt(bb.B, int64(i), 10)
 		if i == 1 {
-			bb.WriteString(` message</p>`)
+			_, _ = bb.WriteString(` message</p>`)
 		} else {
-			bb.WriteString(` messages</p>`)
+			_, _ = bb.WriteString(` messages</p>`)
 		}
 
 	}
@@ -187,16 +187,16 @@ func EscapeHTML(html string, buffer *bytebufferpool.ByteBuffer) {
 			}
 		}
 
-		buffer.WriteString(html[i:j])
+		_, _ = buffer.WriteString(html[i:j])
 		if k != -1 {
-			buffer.WriteString(escapedValues[k])
+			_, _ = buffer.WriteString(escapedValues[k])
 		}
 		i = j + 1
 	}
 }
 
 func Index(bb *bytebufferpool.ByteBuffer, u *model.User, nav []*model.Navigation, title string) {
-	bb.WriteString(`
+	_, _ = bb.WriteString(`
 <!DOCTYPE html>
 <html>
 <body>
@@ -204,13 +204,13 @@ func Index(bb *bytebufferpool.ByteBuffer, u *model.User, nav []*model.Navigation
 <header>
 `)
 	Header(bb, &title)
-	bb.WriteString(`
+	_, _ = bb.WriteString(`
 </header>
 
 <nav>
 `)
 	Navigation(bb, nav)
-	bb.WriteString(`
+	_, _ = bb.WriteString(`
 </nav>
 
 <section>
@@ -218,38 +218,38 @@ func Index(bb *bytebufferpool.ByteBuffer, u *model.User, nav []*model.Navigation
 	<div class="welcome">
 		<h4>Hello `)
 	Escape(bb, UnsafeStrToBytes(u.FirstName))
-	bb.WriteString(`</h4>
+	_, _ = bb.WriteString(`</h4>
 		
 		<div class="raw">`)
-	bb.WriteString(u.RawContent)
-	bb.WriteString(`</div>
+	_, _ = bb.WriteString(u.RawContent)
+	_, _ = bb.WriteString(`</div>
 		<div class="enc">`)
 	Escape(bb, UnsafeStrToBytes(u.EscapedContent))
-	bb.WriteString(`</div>
+	_, _ = bb.WriteString(`</div>
 	</div>
 
 `)
 	for i := 1; i <= 5; i++ {
-		bb.WriteString(`
+		_, _ = bb.WriteString(`
 			<p>`)
-		bb.WriteString(html.EscapeString(u.FirstName))
-		bb.WriteString(` has `)
+		_, _ = bb.WriteString(html.EscapeString(u.FirstName))
+		_, _ = bb.WriteString(` has `)
 		if i == 1 {
-			bb.WriteString(`1 message</p>`)
+			_, _ = bb.WriteString(`1 message</p>`)
 		} else {
 			bb.B = strconv.AppendInt(bb.B, int64(i), 10)
-			bb.WriteString(` messages</p>`)
+			_, _ = bb.WriteString(` messages</p>`)
 		}
 
 	}
-	bb.WriteString(`
+	_, _ = bb.WriteString(`
 </div>
 </section>
 
 <footer>
 `)
 	WriteFooter(bb)
-	bb.WriteString(`
+	_, _ = bb.WriteString(`
 </footer>
 
 </body>

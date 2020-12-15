@@ -28,24 +28,33 @@ comparing the performance of different template engines
 ## special benchmarks for comparison
 
 - Go text/template (do not use this for HTML)
-- StaticString - Use one static string for the whole Template to have a base time
+- StaticString - Use one static string for the whole Template to have a base
+  time
 - DirectBuffer - Use go to write the HTML by hand to the buffer
 
 ## transpiling to Go Template
 
-- [Damsel](https://github.com/dskinner/damsel)
-  I won't benchmark transpiling engines, because transpilation should just happen once at startup. If you cache the transpilation result, which is recommended, you would have the same performance numbers as html/template for rendering.
+- [Damsel](https://github.com/dskinner/damsel) I won't benchmark transpiling
+  engines, because transpilation should just happen once at startup. If you
+  cache the transpilation result, which is recommended, you would have the same
+  performance numbers as html/template for rendering.
 
 ## Why?
 
-Just for fun. Go Templates work nice out of the box and should be used for rendering from a security point of view.
-If you care about performance you should cache the rendered output.
+Just for fun. Go Templates work nice out of the box and should be used for
+rendering from a security point of view. If you care about performance you
+should cache the rendered output.
 
-Sometimes there are templates that cannot be reasonably cached. Then you possibly need a really fast template engine with code generation.
+Sometimes there are templates that cannot be reasonably cached. Then you
+possibly need a really fast template engine with code generation.
 
 ## Results dev machine
 
-local dev laptop: i7-6700T 16GB Mem
+local desktop: ryzen 3900x
+
+## Changes with 1.15
+
+- benchmarks run on a new system. I ran 1.14.13 and 1.15.5 on the same machine.
 
 ## Changes with 1.14
 
@@ -57,75 +66,123 @@ local dev laptop: i7-6700T 16GB Mem
 
 ## Changes with 1.9
 
-There are quite some impressive performance improvements. Almost all pre compilation engines gained 10%-20%.
+There are quite some impressive performance improvements. Almost all pre
+compilation engines gained 10%-20%.
 
 ## special benchmarks
 
 | Name                  | Runs        | ns/op | B/op | allocations/op |
 | --------------------- | ----------- | ----- | ---- | -------------- |
-| ComplexGoDirectBuffer | 5,332,621   | 693   | 0    | 0              |
-| ComplexGoStaticString | 175,642,789 | 21    | 0    | 0              |
+| ComplexGoDirectBuffer | 7,914,384   | 450   | 0    | 0              |
+| ComplexGoStaticString | 287,497,974 | 12    | 0    | 0              |
 
 ```
-comparing: 1.13.5 to 1.14
-benchcmp is deprecated in favor of benchstat: https://pkg.go.dev/golang.org/x/perf/cmd/benchstat
-benchmark                            old ns/op     new ns/op     delta
-BenchmarkComplexGoDirectBuffer-8     590           693           +17.46%
-BenchmarkComplexGoStaticString-8     18.5          21.0          +13.51%
+comparing: go1.14.13 to go version go1.15.5 linux/amd64
+name                      old time/op    new time/op    delta
+ComplexGoDirectBuffer-24     465ns ± 0%     450ns ± 0%  -3.23%
+ComplexGoStaticString-24    11.9ns ± 0%    12.4ns ± 0%  +4.20%
+
+name                      old alloc/op   new alloc/op   delta
+ComplexGoDirectBuffer-24     0.00B          0.00B        0.00%
+ComplexGoStaticString-24     0.00B          0.00B        0.00%
+
+name                      old allocs/op  new allocs/op  delta
+ComplexGoDirectBuffer-24      0.00           0.00        0.00%
+ComplexGoStaticString-24      0.00           0.00        0.00%
 ```
 
 ## simple benchmarks
 
 ### full featured template engines
 
-| Name        | Runs      | µs/op | B/op  | allocations/op |
-| ----------- | --------- | ----- | ----- | -------------- |
-| Ace         | 346,275   | 8.678 | 1,392 | 42             |
-| Amber       | 573,464   | 5.387 | 1,120 | 38             |
-| Golang      | 597,543   | 5.386 | 1,040 | 37             |
-| GolangText  | 2,045,877 | 1.829 | 144   | 9              |
-| Handlebars  | 382,017   | 9.852 | 4,019 | 82             |
-| **JetHTML** | 3,230,307 | 1.116 | 0     | 0              |
-| Mustache    | 1,000,000 | 3.067 | 1,568 | 29             |
-| Pongo2      | 761,532   | 4.678 | 2,072 | 32             |
-| Soy         | 962,260   | 3.157 | 1,392 | 25             |
+| Name        | Runs      | µs/op  | B/op  | allocations/op |
+| ----------- | --------- | ------ | ----- | -------------- |
+| Ace         | 271,477   | 12.135 | 1,378 | 40             |
+| Amber       | 427,455   | 8.165  | 1,105 | 36             |
+| Golang      | 422,346   | 7.959  | 1,025 | 35             |
+| GolangText  | 1,445,512 | 2.489  | 128   | 7              |
+| Handlebars  | 257,184   | 13.704 | 3,983 | 78             |
+| **JetHTML** | 3,632,552 | 0.971  | 0     | 0              |
+| Mustache    | 878,670   | 4.198  | 1,570 | 29             |
+| Pongo2      | 616,092   | 5.774  | 2,074 | 32             |
+| Soy         | 941,029   | 3.968  | 1,352 | 20             |
 
 ```
-comparing: 1.13.5 to 1.14
-benchmark                 old ns/op     new ns/op     delta
-BenchmarkAce-8            8873          8678          -2.20%
-BenchmarkAmber-8          5674          5387          -5.06%
-BenchmarkGolang-8         5401          5386          -0.28%
-BenchmarkGolangText-8     1783          1829          +2.58%
-BenchmarkHandlebars-8     9666          9852          +1.92%
-BenchmarkJetHTML-8        1075          1116          +3.81%
-BenchmarkMustache-8       3282          3067          -6.55%
-BenchmarkPongo2-8         4159          4678          +12.48%
-BenchmarkSoy-8            2766          3157          +14.14%
+comparing: go1.14.13 to go version go1.15.5 linux/amd64
+name           old time/op    new time/op    delta
+Golang-24        8.24µs ± 0%    7.96µs ± 0%   -3.40%
+GolangText-24    2.69µs ± 0%    2.49µs ± 0%   -7.64%
+Ace-24           12.5µs ± 0%    12.1µs ± 0%   -3.01%
+Amber-24         8.40µs ± 0%    8.17µs ± 0%   -2.79%
+Mustache-24      4.08µs ± 0%    4.20µs ± 0%   +2.82%
+Pongo2-24        5.78µs ± 0%    5.77µs ± 0%   -0.03%
+Handlebars-24    14.0µs ± 0%    13.7µs ± 0%   -2.27%
+Soy-24           4.06µs ± 0%    3.97µs ± 0%   -2.36%
+JetHTML-24        974ns ± 0%     971ns ± 0%   -0.31%
+
+name           old alloc/op   new alloc/op   delta
+Golang-24        1.04kB ± 0%    1.02kB ± 0%   -1.54%
+GolangText-24      144B ± 0%      128B ± 0%  -11.11%
+Ace-24           1.39kB ± 0%    1.38kB ± 0%   -1.15%
+Amber-24         1.12kB ± 0%    1.10kB ± 0%   -1.43%
+Mustache-24      1.57kB ± 0%    1.57kB ± 0%    0.00%
+Pongo2-24        2.07kB ± 0%    2.07kB ± 0%    0.00%
+Handlebars-24    4.02kB ± 0%    3.98kB ± 0%   -0.99%
+Soy-24           1.39kB ± 0%    1.35kB ± 0%   -2.87%
+JetHTML-24        0.00B          0.00B         0.00%
+
+name           old allocs/op  new allocs/op  delta
+Golang-24          37.0 ± 0%      35.0 ± 0%   -5.41%
+GolangText-24      9.00 ± 0%      7.00 ± 0%  -22.22%
+Ace-24             42.0 ± 0%      40.0 ± 0%   -4.76%
+Amber-24           38.0 ± 0%      36.0 ± 0%   -5.26%
+Mustache-24        29.0 ± 0%      29.0 ± 0%    0.00%
+Pongo2-24          32.0 ± 0%      32.0 ± 0%    0.00%
+Handlebars-24      82.0 ± 0%      78.0 ± 0%   -4.88%
+Soy-24             25.0 ± 0%      20.0 ± 0%  -20.00%
+JetHTML-24         0.00           0.00         0.00%
 ```
 
 ### precompilation to Go code
 
 | Name          | Runs       | µs/op | B/op  | allocations/op |
 | ------------- | ---------- | ----- | ----- | -------------- |
-| Ego           | 3,587,478  | 0.921 | 85    | 8              |
-| EgonSlinso    | 8,769,262  | 0.371 | 0     | 0              |
-| Ftmpl         | 2,722,228  | 1.270 | 1,094 | 12             |
-| Gorazor       | 5,341,615  | 0.606 | 512   | 5              |
-| Hero          | 17,180,913 | 0.201 | 0     | 0              |
-| **Jade**      | 28,891,586 | 0.139 | 0     | 0              |
-| Quicktemplate | 10,127,134 | 0.338 | 0     | 0              |
+| Ego           | 2,723,541  | 1.307 | 85    | 8              |
+| EgonSlinso    | 13,241,811 | 0.269 | 0     | 0              |
+| Ftmpl         | 2,104,824  | 1.714 | 1,095 | 12             |
+| Gorazor       | 4,454,704  | 0.802 | 512   | 5              |
+| Hero          | 25,230,196 | 0.139 | 0     | 0              |
+| **Jade**      | 43,579,422 | 0.090 | 0     | 0              |
+| Quicktemplate | 13,199,523 | 0.229 | 0     | 0              |
 
 ```
-comparing: 1.13.5 to 1.14
-benchmark                    old ns/op     new ns/op     delta
-BenchmarkEgo-8               800           921           +15.13%
-BenchmarkEgonSlinso-8        324           371           +14.51%
-BenchmarkFtmpl-8             1314          1270          -3.35%
-BenchmarkGorazor-8           556           606           +8.99%
-BenchmarkHero-8              173           201           +16.18%
-BenchmarkJade-8              102           139           +36.27%
-BenchmarkQuicktemplate-8     285           338           +18.60%
+comparing: go1.14.13 to go version go1.15.5 linux/amd64
+name              old time/op    new time/op    delta
+Ego-24              1.26µs ± 0%    1.31µs ± 0%  +3.73%
+EgonSlinso-24        264ns ± 0%     269ns ± 0%  +1.89%
+Quicktemplate-24     236ns ± 0%     229ns ± 0%  -2.97%
+Ftmpl-24            1.73µs ± 0%    1.71µs ± 0%  -0.92%
+Gorazor-24           747ns ± 0%     802ns ± 0%  +7.36%
+Hero-24              144ns ± 0%     139ns ± 0%  -3.47%
+Jade-24             90.7ns ± 0%    90.4ns ± 0%  -0.33%
+
+name              old alloc/op   new alloc/op   delta
+Ego-24               85.0B ± 0%     85.0B ± 0%   0.00%
+EgonSlinso-24        0.00B          0.00B        0.00%
+Quicktemplate-24     0.00B          0.00B        0.00%
+Ftmpl-24            1.09kB ± 0%    1.09kB ± 0%   0.00%
+Gorazor-24            512B ± 0%      512B ± 0%   0.00%
+Hero-24              0.00B          0.00B        0.00%
+Jade-24              0.00B          0.00B        0.00%
+
+name              old allocs/op  new allocs/op  delta
+Ego-24                8.00 ± 0%      8.00 ± 0%   0.00%
+EgonSlinso-24         0.00           0.00        0.00%
+Quicktemplate-24      0.00           0.00        0.00%
+Ftmpl-24              12.0 ± 0%      12.0 ± 0%   0.00%
+Gorazor-24            5.00 ± 0%      5.00 ± 0%   0.00%
+Hero-24               0.00           0.00        0.00%
+Jade-24               0.00           0.00        0.00%
 ```
 
 ## more complex test with template inheritance (if possible)
@@ -134,47 +191,80 @@ BenchmarkQuicktemplate-8     285           338           +18.60%
 
 | Name               | Runs    | µs/op  | B/op  | allocations/op |
 | ------------------ | ------- | ------ | ----- | -------------- |
-| ComplexGolang      | 78,091  | 47.037 | 8,862 | 296            |
-| ComplexGolangText  | 160,622 | 27.318 | 2,793 | 113            |
-| **ComplexJetHTML** | 266,722 | 11.525 | 546   | 5              |
-| ComplexMustache    | 181,446 | 20.331 | 7,559 | 155            |
+| ComplexGolang      | 51,696  | 69.767 | 8,783 | 285            |
+| ComplexGolangText  | 115,188 | 30.380 | 2,708 | 102            |
+| **ComplexJetHTML** | 292,257 | 15.095 | 550   | 5              |
+| ComplexMustache    | 129,087 | 27.772 | 7,568 | 155            |
 
 ```
-comparing: 1.13.5 to 1.14
-benchmark                        old ns/op     new ns/op     delta
-BenchmarkComplexGolang-8         47023         47037         +0.03%
-BenchmarkComplexGolangText-8     20565         27318         +32.84%
-BenchmarkComplexJetHTML-8        9689          11525         +18.95%
-BenchmarkComplexMustache-8       20409         20331         -0.38%
+comparing: go1.14.13 to go version go1.15.5 linux/amd64
+name                  old time/op    new time/op    delta
+ComplexGolang-24        68.7µs ± 0%    69.8µs ± 0%  +1.56%
+ComplexGolangText-24    31.5µs ± 0%    30.4µs ± 0%  -3.50%
+ComplexMustache-24      26.4µs ± 0%    27.8µs ± 0%  +5.40%
+ComplexJetHTML-24       15.2µs ± 0%    15.1µs ± 0%  -0.87%
+
+name                  old alloc/op   new alloc/op   delta
+ComplexGolang-24        8.87kB ± 0%    8.78kB ± 0%  -0.99%
+ComplexGolangText-24    2.80kB ± 0%    2.71kB ± 0%  -3.18%
+ComplexMustache-24      7.57kB ± 0%    7.57kB ± 0%   0.00%
+ComplexJetHTML-24         551B ± 0%      550B ± 0%  -0.18%
+
+name                  old allocs/op  new allocs/op  delta
+ComplexGolang-24           296 ± 0%       285 ± 0%  -3.72%
+ComplexGolangText-24       113 ± 0%       102 ± 0%  -9.73%
+ComplexMustache-24         155 ± 0%       155 ± 0%   0.00%
+ComplexJetHTML-24         5.00 ± 0%      5.00 ± 0%   0.00%
 ```
 
 ### precompilation to Go code
 
 | Name                 | Runs      | µs/op | B/op  | allocations/op |
 | -------------------- | --------- | ----- | ----- | -------------- |
-| ComplexEgo           | 791,263   | 4.786 | 656   | 36             |
-| ComplexEgoSlinso     | 1,727,679 | 2.084 | 160   | 2              |
-| ComplexFtmpl         | 526,308   | 5.727 | 4,995 | 43             |
-| ComplexGorazor       | 923,703   | 4.108 | 3,056 | 34             |
-| ComplexHero          | 2,355,554 | 1.498 | 0     | 0              |
-| **ComplexJade**      | 3,000,294 | 1.195 | 0     | 0              |
-| ComplexQuicktemplate | 1,881,404 | 1.819 | 0     | 0              |
+| ComplexEgo           | 503,415   | 6.523 | 592   | 31             |
+| ComplexEgoSlinso     | 1,348,783 | 2.670 | 160   | 2              |
+| ComplexFtmpl         | 459,254   | 7.681 | 4,936 | 38             |
+| ComplexGorazor       | 846,919   | 4.573 | 2,872 | 22             |
+| ComplexHero          | 3,478,174 | 1.049 | 0     | 0              |
+| **ComplexJade**      | 4,716,076 | 0.725 | 0     | 0              |
+| ComplexQuicktemplate | 2,778,873 | 1.260 | 0     | 0              |
 
 ```
-comparing: 1.13.5 to 1.14
-benchmark                           old ns/op     new ns/op     delta
-BenchmarkComplexEgo-8               4218          4786          +13.47%
-BenchmarkComplexEgoSlinso-8         1984          2084          +5.04%
-BenchmarkComplexFtmpl-8             5750          5727          -0.40%
-BenchmarkComplexGorazor-8           4020          4108          +2.19%
-BenchmarkComplexHero-8              1332          1498          +12.46%
-BenchmarkComplexJade-8              919           1195          +30.03%
-BenchmarkComplexQuicktemplate-8     1664          1819          +9.31%
+comparing: go1.14.13 to go version go1.15.5 linux/amd64
+name                     old time/op    new time/op    delta
+ComplexEgo-24              6.54µs ± 0%    6.52µs ± 0%   -0.24%
+ComplexQuicktemplate-24    1.28µs ± 0%    1.26µs ± 0%   -1.95%
+ComplexEgoSlinso-24        2.63µs ± 0%    2.67µs ± 0%   +1.52%
+ComplexFtmpl-24            7.70µs ± 0%    7.68µs ± 0%   -0.27%
+ComplexGorazor-24          4.37µs ± 0%    4.57µs ± 0%   +4.57%
+ComplexHero-24             1.15µs ± 0%    1.05µs ± 0%   -8.86%
+ComplexJade-24              737ns ± 0%     725ns ± 0%   -1.63%
+
+name                     old alloc/op   new alloc/op   delta
+ComplexEgo-24                657B ± 0%      592B ± 0%   -9.89%
+ComplexQuicktemplate-24     0.00B          0.00B         0.00%
+ComplexEgoSlinso-24          160B ± 0%      160B ± 0%    0.00%
+ComplexFtmpl-24            5.00kB ± 0%    4.94kB ± 0%   -1.30%
+ComplexGorazor-24          2.87kB ± 0%    2.87kB ± 0%    0.00%
+ComplexHero-24              0.00B          0.00B         0.00%
+ComplexJade-24              0.00B          0.00B         0.00%
+
+name                     old allocs/op  new allocs/op  delta
+ComplexEgo-24                36.0 ± 0%      31.0 ± 0%  -13.89%
+ComplexQuicktemplate-24      0.00           0.00         0.00%
+ComplexEgoSlinso-24          2.00 ± 0%      2.00 ± 0%    0.00%
+ComplexFtmpl-24              43.0 ± 0%      38.0 ± 0%  -11.63%
+ComplexGorazor-24            22.0 ± 0%      22.0 ± 0%    0.00%
+ComplexHero-24               0.00           0.00         0.00%
+ComplexJade-24               0.00           0.00         0.00%
 ```
 
 ## Security
 
-All packages assume that template authors are trusted. If you allow custom templates you have to sanitize your user input e.g. [bluemonday](https://github.com/microcosm-cc/bluemonday). Generally speaking I would suggest to sanitize every input not just HTML-input.
+All packages assume that template authors are trusted. If you allow custom
+templates you have to sanitize your user input e.g.
+[bluemonday](https://github.com/microcosm-cc/bluemonday). Generally speaking I
+would suggest to sanitize every input not just HTML-input.
 
 ### Attention: This part is not updated since 2016.
 

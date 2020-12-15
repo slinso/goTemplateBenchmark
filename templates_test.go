@@ -606,7 +606,7 @@ func linesEquals(str1, str2 string) (explanation string, equals bool) {
 	b2 = bytes.Replace(b2, []byte("\t"), []byte("[tab]"), -1)
 	b2 = bytes.Replace(b2, []byte("\n"), []byte(""), -1)
 
-	if bytes.Compare(b1, b2) != 0 {
+	if !bytes.Equal(b1, b2) {
 		return fmt.Sprintf("Lines don't match \n1:\"%s\"\n2:\"%s\"", b1, b2), false
 	}
 

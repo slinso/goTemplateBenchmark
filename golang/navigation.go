@@ -8,14 +8,14 @@ import (
 )
 
 func Navigation(bb *bytebufferpool.ByteBuffer, nav []*model.Navigation) {
-	bb.WriteString(`<ul class="navigation">`)
+	_, _ = bb.WriteString(`<ul class="navigation">`)
 	for _, item := range nav {
-		bb.WriteString(`<li><a href="`)
-		bb.WriteString(html.EscapeString(item.Link))
-		bb.WriteString(`">`)
-		bb.WriteString(html.EscapeString(item.Item))
-		bb.WriteString(`</a></li>`)
+		_, _ = bb.WriteString(`<li><a href="`)
+		_, _ = bb.WriteString(html.EscapeString(item.Link))
+		_, _ = bb.WriteString(`">`)
+		_, _ = bb.WriteString(html.EscapeString(item.Item))
+		_, _ = bb.WriteString(`</a></li>`)
 
 	}
-	bb.WriteString(`</ul>`)
+	_, _ = bb.WriteString(`</ul>`)
 }

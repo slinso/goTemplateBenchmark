@@ -27,7 +27,7 @@ func RenderIndex(_buffer io.StringWriter, u *model.User, nav []*model.Navigation
 		// Line: 12
 		_buffer.WriteString("\n\n<div class=\"content\">\n\t<div class=\"welcome\">\n\t\t<h4>Hello ")
 		// Line: 16
-		_buffer.WriteString(gorazor.HTMLEscape(u.FirstName))
+		_buffer.WriteString(gorazor.HTMLEscStr(u.FirstName))
 		// Line: 16
 		_buffer.WriteString("</h4>\n\n\t\t<div class=\"raw\">")
 		// Line: 18
@@ -35,7 +35,7 @@ func RenderIndex(_buffer io.StringWriter, u *model.User, nav []*model.Navigation
 		// Line: 18
 		_buffer.WriteString("</div>\n\t\t<div class=\"enc\">")
 		// Line: 19
-		_buffer.WriteString(gorazor.HTMLEscape(u.EscapedContent))
+		_buffer.WriteString(gorazor.HTMLEscStr(u.EscapedContent))
 		// Line: 19
 		_buffer.WriteString("</div>\n\t</div>")
 
@@ -45,11 +45,11 @@ func RenderIndex(_buffer io.StringWriter, u *model.User, nav []*model.Navigation
 				// Line: 25
 				_buffer.WriteString("<p>")
 				// Line: 25
-				_buffer.WriteString(gorazor.HTMLEscape(u.FirstName))
+				_buffer.WriteString(gorazor.HTMLEscStr(u.FirstName))
 				// Line: 25
 				_buffer.WriteString(" has ")
 				// Line: 25
-				_buffer.WriteString(gorazor.HTMLEscape(i))
+				_buffer.WriteString(gorazor.HTMLEscInt(i))
 				// Line: 25
 				_buffer.WriteString(" message</p>")
 
@@ -58,11 +58,11 @@ func RenderIndex(_buffer io.StringWriter, u *model.User, nav []*model.Navigation
 				// Line: 27
 				_buffer.WriteString("<p>")
 				// Line: 27
-				_buffer.WriteString(gorazor.HTMLEscape(u.FirstName))
+				_buffer.WriteString(gorazor.HTMLEscStr(u.FirstName))
 				// Line: 27
 				_buffer.WriteString(" has ")
 				// Line: 27
-				_buffer.WriteString(gorazor.HTMLEscape(gorazor.Itoa(i)))
+				_buffer.WriteString(gorazor.HTMLEscStr(gorazor.Itoa(i)))
 				// Line: 27
 				_buffer.WriteString(" messages</p>")
 

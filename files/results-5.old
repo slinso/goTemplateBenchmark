@@ -1,7 +1,7 @@
 goos: linux
 goarch: amd64
 pkg: github.com/SlinSo/goTemplateBenchmark
-BenchmarkComplexGoDirectBuffer-8   	 5925524	       590 ns/op	       0 B/op	       0 allocs/op
-BenchmarkComplexGoStaticString-8   	198012804	        18.5 ns/op	       0 B/op	       0 allocs/op
+BenchmarkComplexGoDirectBuffer-24    	 7138662	       465 ns/op	       0 B/op	       0 allocs/op
+BenchmarkComplexGoStaticString-24    	290304441	        11.9 ns/op	       0 B/op	       0 allocs/op
 PASS
-ok  	github.com/SlinSo/goTemplateBenchmark	13.293s
+ok  	github.com/SlinSo/goTemplateBenchmark	8.582s

@@ -1,0 +1,11 @@
+name                      old time/op    new time/op    delta
+ComplexGoDirectBuffer-24     465ns ± 0%     450ns ± 0%  -3.23%
+ComplexGoStaticString-24    11.9ns ± 0%    12.4ns ± 0%  +4.20%
+
+name                      old alloc/op   new alloc/op   delta
+ComplexGoDirectBuffer-24     0.00B          0.00B        0.00%
+ComplexGoStaticString-24     0.00B          0.00B        0.00%
+
+name                      old allocs/op  new allocs/op  delta
+ComplexGoDirectBuffer-24      0.00           0.00        0.00%
+ComplexGoStaticString-24      0.00           0.00        0.00%
