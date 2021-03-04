@@ -15,16 +15,16 @@ require (
 	github.com/kr/text v0.2.0 // indirect
 	github.com/robertkrimen/otto v0.0.0-20200922221731-ef014fd054ac // indirect
 	github.com/robfig/gettext v0.0.0-20201110163533-02cf70f90b33 // indirect
-	github.com/robfig/soy v0.0.0-20201204215242-50d37073b326
+	github.com/robfig/soy v0.0.0-20210204185029-c6ac571a9e00
 	github.com/shiyanhui/hero v0.0.2
 	github.com/sipin/gorazor v1.2.2
-	github.com/stretchr/testify v1.6.1 // indirect
+	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.1-0.20180905182247-cdfbe9377474
 	github.com/valyala/quicktemplate v1.6.3
 	github.com/yosssi/ace v0.0.5
-	golang.org/x/net v0.0.0-20201209123823-ac852fbbde11 // indirect
-	golang.org/x/sys v0.0.0-20201214210602-f9fddec55a1e // indirect
+	golang.org/x/net v0.0.0-20210226172049-e18ecbb05110 // indirect
+	golang.org/x/sys v0.0.0-20210303074136-134d130e1a04 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776 // indirect
+	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )

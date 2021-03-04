@@ -1,26 +1,26 @@
 name              old time/op    new time/op    delta
-Ego-24              1.26µs ± 0%    1.31µs ± 0%  +3.73%
-EgonSlinso-24        264ns ± 0%     269ns ± 0%  +1.89%
-Quicktemplate-24     236ns ± 0%     229ns ± 0%  -2.97%
-Ftmpl-24            1.73µs ± 0%    1.71µs ± 0%  -0.92%
-Gorazor-24           747ns ± 0%     802ns ± 0%  +7.36%
-Hero-24              144ns ± 0%     139ns ± 0%  -3.47%
-Jade-24             90.7ns ± 0%    90.4ns ± 0%  -0.33%
+Ego-24              1.39µs ± 0%    1.41µs ± 0%   +1.58%
+EgonSlinso-24        286ns ± 0%     310ns ± 0%   +8.53%
+Quicktemplate-24     249ns ± 0%     232ns ± 0%   -6.75%
+Ftmpl-24            1.77µs ± 0%    1.74µs ± 0%   -1.30%
+Gorazor-24           778ns ± 0%     831ns ± 0%   +6.77%
+Hero-24              155ns ± 0%     133ns ± 0%  -14.06%
+Jade-24             86.1ns ± 0%    84.4ns ± 0%   -1.93%
 
 name              old alloc/op   new alloc/op   delta
-Ego-24               85.0B ± 0%     85.0B ± 0%   0.00%
-EgonSlinso-24        0.00B          0.00B        0.00%
-Quicktemplate-24     0.00B          0.00B        0.00%
-Ftmpl-24            1.09kB ± 0%    1.09kB ± 0%   0.00%
-Gorazor-24            512B ± 0%      512B ± 0%   0.00%
-Hero-24              0.00B          0.00B        0.00%
-Jade-24              0.00B          0.00B        0.00%
+Ego-24               85.0B ± 0%     85.0B ± 0%    0.00%
+EgonSlinso-24        0.00B          0.00B         0.00%
+Quicktemplate-24     0.00B          0.00B         0.00%
+Ftmpl-24            1.09kB ± 0%    1.09kB ± 0%    0.00%
+Gorazor-24            512B ± 0%      512B ± 0%    0.00%
+Hero-24              0.00B          0.00B         0.00%
+Jade-24              0.00B          0.00B         0.00%
 
 name              old allocs/op  new allocs/op  delta
-Ego-24                8.00 ± 0%      8.00 ± 0%   0.00%
-EgonSlinso-24         0.00           0.00        0.00%
-Quicktemplate-24      0.00           0.00        0.00%
-Ftmpl-24              12.0 ± 0%      12.0 ± 0%   0.00%
-Gorazor-24            5.00 ± 0%      5.00 ± 0%   0.00%
-Hero-24               0.00           0.00        0.00%
-Jade-24               0.00           0.00        0.00%
+Ego-24                8.00 ± 0%      8.00 ± 0%    0.00%
+EgonSlinso-24         0.00           0.00         0.00%
+Quicktemplate-24      0.00           0.00         0.00%
+Ftmpl-24              12.0 ± 0%      12.0 ± 0%    0.00%
+Gorazor-24            5.00 ± 0%      5.00 ± 0%    0.00%
+Hero-24               0.00           0.00         0.00%
+Jade-24               0.00           0.00         0.00%

@@ -1,14 +1,14 @@
 goos: linux
 goarch: amd64
 pkg: github.com/SlinSo/goTemplateBenchmark
-BenchmarkGolang-24        	  478496	      8239 ns/op	    1041 B/op	      37 allocs/op
-BenchmarkGolangText-24    	 1345178	      2695 ns/op	     144 B/op	       9 allocs/op
-BenchmarkAce-24           	  275970	     12512 ns/op	    1394 B/op	      42 allocs/op
-BenchmarkAmber-24         	  466138	      8399 ns/op	    1121 B/op	      38 allocs/op
-BenchmarkMustache-24      	  921456	      4083 ns/op	    1570 B/op	      29 allocs/op
-BenchmarkPongo2-24        	  586114	      5776 ns/op	    2074 B/op	      32 allocs/op
-BenchmarkHandlebars-24    	  254666	     14023 ns/op	    4023 B/op	      82 allocs/op
-BenchmarkSoy-24           	  859377	      4064 ns/op	    1392 B/op	      25 allocs/op
-BenchmarkJetHTML-24       	 3673084	       974 ns/op	       0 B/op	       0 allocs/op
+BenchmarkGolang-24        	  404853	      8100 ns/op	    1025 B/op	      35 allocs/op
+BenchmarkGolangText-24    	 1411759	      2647 ns/op	     128 B/op	       7 allocs/op
+BenchmarkAce-24           	  285241	     12731 ns/op	    1378 B/op	      40 allocs/op
+BenchmarkAmber-24         	  413607	      8450 ns/op	    1105 B/op	      36 allocs/op
+BenchmarkMustache-24      	  864164	      4114 ns/op	    1570 B/op	      29 allocs/op
+BenchmarkPongo2-24        	  656702	      5797 ns/op	    2074 B/op	      32 allocs/op
+BenchmarkHandlebars-24    	  253188	     13818 ns/op	    3983 B/op	      78 allocs/op
+BenchmarkSoy-24           	  884814	      3961 ns/op	    1352 B/op	      20 allocs/op
+BenchmarkJetHTML-24       	 3649552	       941 ns/op	       0 B/op	       0 allocs/op
 PASS
-ok  	github.com/SlinSo/goTemplateBenchmark	37.064s
+ok  	github.com/SlinSo/goTemplateBenchmark	36.175s

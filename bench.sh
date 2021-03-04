@@ -25,6 +25,7 @@ read -r -d '' __usage <<-'EOF' || true # exits non-zero when EOF encountered
   -c --compare [arg] Old go version binary? Required.
   -B --no-benchmarks Do NOT run the benchmarks.
   -F --no-format     Do NOT format the results.
+  -u --update        update dependencies.
   -v                 Enable verbose mode, print script as it is executed
   -d --debug         Enables debug mode
   -h --help          This page
@@ -102,6 +103,26 @@ info "benchmark duration: ${arg_t}"
 info "compare: ${arg_c} to $(go version)"
 info "run benchmarks: $([[ "${__no_benchmarks}" == "true" ]] && echo "false" || echo "true")"
 info "format output: $([[ "${__no_format}" == "true" ]] && echo "false" || echo "true")"
+
+_updateDeps() {
+    info "Update dependencies"
+    go get -u -v ./...
+
+    go get -u -v github.com/tkrajina/ftmpl
+    go get -u -v github.com/sipin/gorazor
+    go get -u -v github.com/valyala/quicktemplate/qtc
+    go get -u -v github.com/benbjohnson/ego/...
+    go get -u -v github.com/shiyanhui/hero
+    go get -u -v github.com/Joker/jade/cmd/jade
+
+    qtc -dir quicktemplate
+    ftmpl ftmpl/
+    gorazor -prefix github.com/SlinSo/goTemplateBenchmark gorazor gorazor
+    hero -source hero/
+    jade -d jade/ jade/simple.jade
+    jade -d jade/ jade/index.jade
+}
+[[ "${arg_u:?}" == "1" ]] && _updateDeps
 
 # run old benchmarks
 _run_old_benchmarks() {

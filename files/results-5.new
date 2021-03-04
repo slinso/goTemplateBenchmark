@@ -1,7 +1,8 @@
 goos: linux
 goarch: amd64
 pkg: github.com/SlinSo/goTemplateBenchmark
-BenchmarkComplexGoDirectBuffer-24    	 7914384	       450 ns/op	       0 B/op	       0 allocs/op
-BenchmarkComplexGoStaticString-24    	287497974	        12.4 ns/op	       0 B/op	       0 allocs/op
+cpu: AMD Ryzen 9 3900X 12-Core Processor            
+BenchmarkComplexGoDirectBuffer-24    	 7326960	       450.8 ns/op	       0 B/op	       0 allocs/op
+BenchmarkComplexGoStaticString-24    	304678492	        11.80 ns/op	       0 B/op	       0 allocs/op
 PASS
-ok  	github.com/SlinSo/goTemplateBenchmark	8.880s
+ok  	github.com/SlinSo/goTemplateBenchmark	8.631s
