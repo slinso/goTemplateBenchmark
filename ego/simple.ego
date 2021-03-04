@@ -1,5 +1,7 @@
-<%% import "github.com/SlinSo/goTemplateBenchmark/model" %%>
-<%! func EgoSimple(w io.Writer, u *model.User) error %>
+<% package ego 
+import "github.com/SlinSo/goTemplateBenchmark/model"
+
+func EgoSimple(w io.Writer, u *model.User) { %>
 <html>
     <body>
         <h1><%= u.FirstName %></h1>
@@ -11,3 +13,4 @@
         </ul>
     </body>
 </html>
+<% } %>

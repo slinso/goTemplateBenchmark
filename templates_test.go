@@ -181,10 +181,7 @@ func BenchmarkGoFunc3(b *testing.B) {
 ******************************************************************************/
 func TestEgo(t *testing.T) {
 	var buf bytes.Buffer
-	err := ego.EgoSimple(&buf, testData)
-	if err != nil {
-		t.Error(err)
-	}
+	ego.EgoSimple(&buf, testData)
 
 	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
 		t.Error(msg)
@@ -195,10 +192,7 @@ func BenchmarkEgo(b *testing.B) {
 	var buf bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		err := ego.EgoSimple(&buf, testData)
-		if err != nil {
-			b.Fatal(err)
-		}
+		ego.EgoSimple(&buf, testData)
 		buf.Reset()
 	}
 }

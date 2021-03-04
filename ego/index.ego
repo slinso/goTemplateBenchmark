@@ -1,5 +1,7 @@
-<%% import "github.com/SlinSo/goTemplateBenchmark/model" %%>
-<%! func EgoComplex(w io.Writer, u *model.User, nav []*model.Navigation, title string) error %>
+<% package ego 
+ import "github.com/SlinSo/goTemplateBenchmark/model" 
+ 
+ func EgoComplex(w io.Writer, u *model.User, nav []*model.Navigation, title string) { %>
 <!DOCTYPE html>
 <html>
 <body>
@@ -39,3 +41,4 @@
 
 </body>
 </html>
+<% } %>

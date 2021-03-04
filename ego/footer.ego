@@ -1,2 +1,5 @@
-<%! func EgoFooter(w io.Writer) error %>
+<% package ego 
+
+func EgoFooter(w io.Writer) { %>
 <div class="footer">copyright 2016</div>
+<% } %>

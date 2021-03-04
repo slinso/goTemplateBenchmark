@@ -1,3 +1,6 @@
-<%! func EgoHeader(w io.Writer, title string) error %>
+<% package ego 
+
+func EgoHeader(w io.Writer, title string) { %>
 <title><%= title %>'s Home Page</title>
 <div class="header">Page Header</div>
+<% } %>

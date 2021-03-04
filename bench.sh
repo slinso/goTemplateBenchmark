@@ -109,18 +109,27 @@ _updateDeps() {
     go get -u -v ./...
 
     go get -u -v github.com/tkrajina/ftmpl
-    go get -u -v github.com/sipin/gorazor
-    go get -u -v github.com/valyala/quicktemplate/qtc
-    go get -u -v github.com/benbjohnson/ego/...
-    go get -u -v github.com/shiyanhui/hero
-    go get -u -v github.com/Joker/jade/cmd/jade
-
-    qtc -dir quicktemplate
     ftmpl ftmpl/
+
+    go get -u -v github.com/sipin/gorazor
     gorazor -prefix github.com/SlinSo/goTemplateBenchmark gorazor gorazor
+
+    go get -u -v github.com/valyala/quicktemplate/qtc
+    qtc -dir quicktemplate
+
+    go get -u -v github.com/benbjohnson/ego/...
+    ego ego
+
+    go get -u -v github.com/shiyanhui/hero/hero
     hero -source hero/
+
+    # update jade manually
+    # go get -u -v github.com/Joker/jade/cmd/jade
+
     jade -d jade/ jade/simple.jade
     jade -d jade/ jade/index.jade
+
+    go mod tidy
 }
 [[ "${arg_u:?}" == "1" ]] && _updateDeps
 
