@@ -11,19 +11,20 @@ require (
 	github.com/dchest/jsmin v0.0.0-20160823214000-faeced883947 // indirect
 	github.com/eknkc/amber v0.0.0-20171010120322-cdade1c07385
 	github.com/flosch/pongo2 v0.0.0-20200913210552-0d938eb266f3
+	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/hoisie/mustache v0.0.0-20160804235033-6375acf62c69
 	github.com/kr/text v0.2.0 // indirect
-	github.com/robertkrimen/otto v0.0.0-20200922221731-ef014fd054ac // indirect
-	github.com/robfig/gettext v0.0.0-20201110163533-02cf70f90b33 // indirect
-	github.com/robfig/soy v0.0.0-20210204185029-c6ac571a9e00
+	github.com/robertkrimen/otto v0.0.0-20210614181706-373ff5438452 // indirect
+	github.com/robfig/gettext v0.0.0-20210319194541-81dadf19848b // indirect
+	github.com/robfig/soy v0.0.0-20210708182426-5db4016fcbab
 	github.com/shiyanhui/hero v0.0.2
 	github.com/sipin/gorazor v1.2.2
 	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.1-0.20180905182247-cdfbe9377474
 	github.com/valyala/quicktemplate v1.6.3
 	github.com/yosssi/ace v0.0.5
-	golang.org/x/net v0.0.0-20210226172049-e18ecbb05110 // indirect
-	golang.org/x/sys v0.0.0-20210303074136-134d130e1a04 // indirect
+	golang.org/x/net v0.0.0-20210825183410-e898025ed96a // indirect
+	golang.org/x/sys v0.0.0-20210831042530-f4d43177bf5e // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect

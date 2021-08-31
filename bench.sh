@@ -108,23 +108,23 @@ _updateDeps() {
     info "Update dependencies"
     go get -u -v ./...
 
-    go get -u -v github.com/tkrajina/ftmpl
+    go install -v github.com/tkrajina/ftmpl@master
     ftmpl ftmpl/
 
-    go get -u -v github.com/sipin/gorazor
+    go install -v github.com/sipin/gorazor@master
     gorazor -prefix github.com/SlinSo/goTemplateBenchmark gorazor gorazor
 
-    go get -u -v github.com/valyala/quicktemplate/qtc
+    go install -v github.com/valyala/quicktemplate/qtc@master
     qtc -dir quicktemplate
 
-    go get -u -v github.com/benbjohnson/ego/...
+    go install -v github.com/benbjohnson/ego/cmd/ego@master
     ego ego
 
-    go get -u -v github.com/shiyanhui/hero/hero
+    go install -v github.com/shiyanhui/hero/hero@master
     hero -source hero/
 
     # update jade manually
-    # go get -u -v github.com/Joker/jade/cmd/jade
+    go install -v github.com/Joker/jade/cmd/jade@master
 
     jade -d jade/ jade/simple.jade
     jade -d jade/ jade/index.jade
