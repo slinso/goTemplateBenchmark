@@ -162,7 +162,7 @@ __format_single_benchmark() {
     pb <./files/results-"${i}".new | grep \| | sed '/Name/a \| --- \| --- \| --- \| --- \| --- \|'
     echo ""
     echo "\`\`\`"
-    echo "comparing: ${arg_c} to $(go version)"
+    echo "comparing: ${arg_c} to ${arg_g}"
     benchstat -delta-test none files/results-"${i}".old files/results-"${i}".new | tee files/results-"${i}"-benchstat.txt
     echo "\`\`\`"
 }
