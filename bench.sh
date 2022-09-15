@@ -23,6 +23,7 @@
 read -r -d '' __usage <<-'EOF' || true # exits non-zero when EOF encountered
   -t --time  [arg]   Benchmark duration. Required. Default="3s"
   -c --compare [arg] Old go version binary? Required.
+  -g --go [arg]      Curenct go version binary? Required. Default="go"
   -B --no-benchmarks Do NOT run the benchmarks.
   -F --no-format     Do NOT format the results.
   -u --update        update dependencies.
@@ -92,6 +93,7 @@ fi
 
 [[ "${arg_t:-}" ]] || help "Setting benchmark druation with -t or --time is required"
 [[ "${arg_c:-}" ]] || help "Setting go versions which will be compared with -c or --compare is required"
+[[ "${arg_g:-}" ]] || help "Setting go versions which will be compared with -g or --go is required"
 [[ "${LOG_LEVEL:-}" ]] || emergency "Cannot continue without LOG_LEVEL. "
 
 ### Runtime
@@ -100,7 +102,7 @@ fi
 info "OSTYPE: ${OSTYPE}"
 
 info "benchmark duration: ${arg_t}"
-info "compare: ${arg_c} to $(go version)"
+info "compare: ${arg_c} to ${arg_g}"
 info "run benchmarks: $([[ "${__no_benchmarks}" == "true" ]] && echo "false" || echo "true")"
 info "format output: $([[ "${__no_format}" == "true" ]] && echo "false" || echo "true")"
 
@@ -136,20 +138,20 @@ _updateDeps() {
 # run old benchmarks
 _run_old_benchmarks() {
     ${arg_c} test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-1.old
-    ${arg_c} test -bench "k(Ego|EgonSlinso|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-2.old
+    ${arg_c} test -bench "k(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-2.old
     ${arg_c} test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-3.old
-    ${arg_c} test -bench "Complex(Ego|EgoSlinso|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-4.old
+    ${arg_c} test -bench "Complex(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-4.old
     ${arg_c} test -bench "Complex(GoStaticString|GoDirectBuffer)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-5.old
 }
 [[ "${__no_benchmarks}" == "true" ]] || _run_old_benchmarks
 
 # run benchmarks
 _run_benchmarks() {
-    go test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-1.new
-    go test -bench "k(Ego|EgonSlinso|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-2.new
-    go test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-3.new
-    go test -bench "Complex(Ego|EgoSlinso|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-4.new
-    go test -bench "Complex(GoStaticString|GoDirectBuffer)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-5.new
+    ${arg_g} test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-1.new
+    ${arg_g} test -bench "k(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-2.new
+    ${arg_g} test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-3.new
+    ${arg_g} test -bench "Complex(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-4.new
+    ${arg_g} test -bench "Complex(GoStaticString|GoDirectBuffer)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-5.new
 }
 [[ "${__no_benchmarks}" == "true" ]] || _run_benchmarks
 

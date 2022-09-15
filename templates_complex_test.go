@@ -13,7 +13,6 @@ import (
 	"github.com/valyala/bytebufferpool"
 
 	"github.com/SlinSo/goTemplateBenchmark/ego"
-	"github.com/SlinSo/goTemplateBenchmark/egonslinso"
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
 	herotmpl "github.com/SlinSo/goTemplateBenchmark/hero"
@@ -40,18 +39,21 @@ var (
 		EscapedContent: "<div><div><div>Escaped</div></div></div>",
 	}
 
-	testComplexNav = []*model.Navigation{{
-		Item: "Link 1",
-		Link: "http://www.mytest.com/"}, {
-		Item: "Link 2",
-		Link: "http://www.mytest.com/"}, {
-		Item: "Link 3",
-		Link: "http://www.mytest.com/"},
+	testComplexNav = []*model.Navigation{
+		{
+			Item: "Link 1",
+			Link: "http://www.mytest.com/",
+		}, {
+			Item: "Link 2",
+			Link: "http://www.mytest.com/",
+		}, {
+			Item: "Link 3",
+			Link: "http://www.mytest.com/",
+		},
 	}
 	testComplexTitle = testComplexUser.FirstName
 
 	testComplexData = tmplData{
-
 		User:  testComplexUser,
 		Nav:   testComplexNav,
 		Title: testComplexTitle,
@@ -101,7 +103,6 @@ var (
 ** Go
 ******************************************************************************/
 func TestComplexGolang(t *testing.T) {
-
 	var buf bytes.Buffer
 
 	funcMap := template.FuncMap{
@@ -132,8 +133,8 @@ func TestComplexGolang(t *testing.T) {
 		t.Error(msg)
 	}
 }
-func TestComplexGolangText(t *testing.T) {
 
+func TestComplexGolangText(t *testing.T) {
 	var buf bytes.Buffer
 
 	funcMap := text.FuncMap{
@@ -168,6 +169,7 @@ func TestComplexGolangText(t *testing.T) {
 	}
 	testComplexData.User.EscapedContent = tempData
 }
+
 func BenchmarkComplexGolang(b *testing.B) {
 	var buf bytes.Buffer
 
@@ -276,27 +278,6 @@ func BenchmarkComplexQuicktemplate(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		quicktemplate.WriteIndex(&buf, testComplexUser, testComplexNav, testComplexTitle)
-		buf.Reset()
-	}
-}
-
-/******************************************************************************
-** EgoSlinso
-******************************************************************************/
-func TestComplexEgoSlinso(t *testing.T) {
-	var buf bytes.Buffer
-	egonslinso.IndexTemplate(&buf, testComplexUser, testComplexNav, testComplexTitle)
-
-	if msg, ok := linesEquals(buf.String(), expectedtComplexResult); !ok {
-		t.Error(msg)
-	}
-}
-
-func BenchmarkComplexEgoSlinso(b *testing.B) {
-	var buf bytes.Buffer
-
-	for i := 0; i < b.N; i++ {
-		egonslinso.IndexTemplate(&buf, testComplexUser, testComplexNav, testComplexTitle)
 		buf.Reset()
 	}
 }
@@ -442,7 +423,7 @@ func BenchmarkComplexHero(b *testing.B) {
 ** Jade
 ******************************************************************************/
 func TestComplexJade(t *testing.T) {
-	var buf = bytebufferpool.Get()
+	buf := bytebufferpool.Get()
 
 	jade.Index(testComplexUser, testComplexNav, testComplexTitle, buf)
 
@@ -452,7 +433,7 @@ func TestComplexJade(t *testing.T) {
 }
 
 func BenchmarkComplexJade(b *testing.B) {
-	var buf = bytebufferpool.Get()
+	buf := bytebufferpool.Get()
 
 	for i := 0; i < b.N; i++ {
 		jade.Index(testComplexUser, testComplexNav, testComplexTitle, buf)

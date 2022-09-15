@@ -1,26 +1,23 @@
 name                     old time/op    new time/op    delta
-ComplexEgo-24              6.33µs ± 0%    6.03µs ± 0%   -4.85%
-ComplexQuicktemplate-24    1.37µs ± 0%    0.95µs ± 0%  -30.51%
-ComplexEgoSlinso-24        2.88µs ± 0%    2.41µs ± 0%  -16.24%
-ComplexFtmpl-24            7.66µs ± 0%    7.44µs ± 0%   -2.81%
-ComplexGorazor-24          4.52µs ± 0%    4.25µs ± 0%   -6.12%
-ComplexHero-24             1.01µs ± 0%    1.00µs ± 0%   -1.19%
-ComplexJade-24              674ns ± 0%     744ns ± 0%  +10.32%
+ComplexEgo-24              5.82µs ± 0%    5.76µs ± 0%   -0.86%
+ComplexQuicktemplate-24    1.39µs ± 0%    1.00µs ± 0%  -28.10%
+ComplexFtmpl-24            7.52µs ± 0%    7.10µs ± 0%   -5.56%
+ComplexGorazor-24          4.99µs ± 0%    5.34µs ± 0%   +6.97%
+ComplexHero-24             1.06µs ± 0%    0.96µs ± 0%   -8.88%
+ComplexJade-24              779ns ± 0%     771ns ± 0%   -1.05%
 
 name                     old alloc/op   new alloc/op   delta
 ComplexEgo-24                568B ± 0%      568B ± 0%    0.00%
 ComplexQuicktemplate-24     0.00B          0.00B         0.00%
-ComplexEgoSlinso-24          160B ± 0%      160B ± 0%    0.00%
-ComplexFtmpl-24            4.91kB ± 0%    4.91kB ± 0%    0.00%
-ComplexGorazor-24          2.72kB ± 0%    2.72kB ± 0%    0.00%
+ComplexFtmpl-24            4.91kB ± 0%    3.54kB ± 0%  -28.03%
+ComplexGorazor-24          3.74kB ± 0%    3.73kB ± 0%   -0.43%
 ComplexHero-24              0.00B          0.00B         0.00%
 ComplexJade-24              0.00B          0.00B         0.00%
 
 name                     old allocs/op  new allocs/op  delta
 ComplexEgo-24                31.0 ± 0%      31.0 ± 0%    0.00%
 ComplexQuicktemplate-24      0.00           0.00         0.00%
-ComplexEgoSlinso-24          2.00 ± 0%      2.00 ± 0%    0.00%
 ComplexFtmpl-24              38.0 ± 0%      38.0 ± 0%    0.00%
-ComplexGorazor-24            21.0 ± 0%      21.0 ± 0%    0.00%
+ComplexGorazor-24            22.0 ± 0%      22.0 ± 0%    0.00%
 ComplexHero-24               0.00           0.00         0.00%
 ComplexJade-24               0.00           0.00         0.00%

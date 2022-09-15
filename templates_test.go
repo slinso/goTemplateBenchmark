@@ -12,7 +12,6 @@ import (
 	"github.com/valyala/bytebufferpool"
 
 	"github.com/SlinSo/goTemplateBenchmark/ego"
-	"github.com/SlinSo/goTemplateBenchmark/egonslinso"
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
 	herotmpl "github.com/SlinSo/goTemplateBenchmark/hero"
@@ -72,6 +71,7 @@ func TestGolang(t *testing.T) {
 		t.Error(msg)
 	}
 }
+
 func TestGolangText(t *testing.T) {
 	var buf bytes.Buffer
 
@@ -193,33 +193,6 @@ func BenchmarkEgo(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		ego.EgoSimple(&buf, testData)
-		buf.Reset()
-	}
-}
-
-/******************************************************************************
-** EgonSlinSo
-******************************************************************************/
-func TestEgonSlinso(t *testing.T) {
-	var buf bytes.Buffer
-	err := egonslinso.SimpleTemplate(&buf, testData)
-	if err != nil {
-		t.Error(err)
-	}
-
-	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
-		t.Error(msg)
-	}
-}
-
-func BenchmarkEgonSlinso(b *testing.B) {
-	var buf bytes.Buffer
-
-	for i := 0; i < b.N; i++ {
-		err := egonslinso.SimpleTemplate(&buf, testData)
-		if err != nil {
-			b.Fatal(err)
-		}
 		buf.Reset()
 	}
 }
@@ -555,7 +528,7 @@ func BenchmarkHero(b *testing.B) {
 ** Jade
 ******************************************************************************/
 func TestJade(t *testing.T) {
-	var buf = bytebufferpool.Get()
+	buf := bytebufferpool.Get()
 
 	jade.Simple(testData, buf)
 
@@ -565,7 +538,7 @@ func TestJade(t *testing.T) {
 }
 
 func BenchmarkJade(b *testing.B) {
-	var buf = bytebufferpool.Get()
+	buf := bytebufferpool.Get()
 
 	for i := 0; i < b.N; i++ {
 		jade.Simple(testData, buf)
