@@ -47,6 +47,29 @@ should cache the rendered output.
 Sometimes there are templates that cannot be reasonably cached. Then you might
 need a really fast template engine with code generation.
 
+## How to run the benchmarks
+
+minimal configuration, but does not make sense, as it would compare the same 2
+go versions.
+
+```
+./bench.sh -c go
+```
+
+testing your setup - reduce test runtime and assuming you have those two go
+binaries on your system.
+
+```
+./bench.sh -t 10ms -c go1.18 -g go1.19
+```
+
+example for a normal benchmark run on my system with the default 3s runtime per
+template engine
+
+```
+./bench.sh -c go1.18.6 -g go1.19.1
+```
+
 ## Results dev machine
 
 local desktop: ryzen 3900x
