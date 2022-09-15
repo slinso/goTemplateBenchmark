@@ -137,21 +137,21 @@ _updateDeps() {
 
 # run old benchmarks
 _run_old_benchmarks() {
-    ${arg_c} test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-1.old
-    ${arg_c} test -bench "k(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-2.old
-    ${arg_c} test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-3.old
-    ${arg_c} test -bench "Complex(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-4.old
-    ${arg_c} test -bench "Complex(GoStaticString|GoDirectBuffer)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-5.old
+    ${arg_c} test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML|HB)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-1.old
+    ${arg_c} test -bench "k(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|HB)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-2.old
+    ${arg_c} test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML|HB)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-3.old
+    ${arg_c} test -bench "Complex(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|HB)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-4.old
+    ${arg_c} test -bench "Complex(GoStaticString|GoDirectBuffer|HB)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-5.old
 }
 [[ "${__no_benchmarks}" == "true" ]] || _run_old_benchmarks
 
 # run benchmarks
 _run_benchmarks() {
-    ${arg_g} test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-1.new
-    ${arg_g} test -bench "k(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-2.new
-    ${arg_g} test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-3.new
-    ${arg_g} test -bench "Complex(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-4.new
-    ${arg_g} test -bench "Complex(GoStaticString|GoDirectBuffer)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-5.new
+    ${arg_g} test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML|HB)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-1.new
+    ${arg_g} test -bench "k(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|HB)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-2.new
+    ${arg_g} test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML|HB)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-3.new
+    ${arg_g} test -bench "Complex(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|HB)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-4.new
+    ${arg_g} test -bench "Complex(GoStaticString|GoDirectBuffer|HB)$" -benchmem -benchtime="${arg_t}" | tee ./files/results-5.new
 }
 [[ "${__no_benchmarks}" == "true" ]] || _run_benchmarks
 

@@ -11,7 +11,7 @@ require (
 	github.com/dchest/jsmin v0.0.0-20160823214000-faeced883947 // indirect
 	github.com/eknkc/amber v0.0.0-20171010120322-cdade1c07385
 	github.com/flosch/pongo2 v0.0.0-20200913210552-0d938eb266f3
-	github.com/fsnotify/fsnotify v1.5.1 // indirect
+	github.com/gouniverse/hb v1.43.0 // indirect
 	github.com/hoisie/mustache v0.0.0-20160804235033-6375acf62c69
 	github.com/kr/text v0.2.0 // indirect
 	github.com/robertkrimen/otto v0.0.0-20210614181706-373ff5438452 // indirect
@@ -24,8 +24,6 @@ require (
 	github.com/valyala/quicktemplate v1.7.0
 	github.com/yosssi/ace v0.0.5
 	golang.org/dl v0.0.0-20220907140016-191c3420d549 // indirect
-	golang.org/x/net v0.0.0-20210825183410-e898025ed96a // indirect
-	golang.org/x/sys v0.0.0-20210831042530-f4d43177bf5e // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
