@@ -78,22 +78,22 @@ local desktop: ryzen 3900x
 
 | Name                  | Runs        | ns/op | B/op | allocations/op |
 | --------------------- | ----------- | ----- | ---- | -------------- |
-| ComplexGoDirectBuffer | 7,195,976   | 488   | 0    | 0              |
-| ComplexGoStaticString | 312,416,414 | 12    | 0    | 0              |
+| ComplexGoDirectBuffer | 8,153,427   | 428   | 0    | 0              |
+| ComplexGoStaticString | 310,142,265 | 12    | 0    | 0              |
 
 ```
-comparing: go1.18.6 to go version go1.19 linux/amd64
+comparing: go1.19.5 to go1.20
 name                      old time/op    new time/op    delta
-ComplexGoDirectBuffer-24     491ns ± 0%     488ns ± 0%  -0.67%
-ComplexGoStaticString-24    11.7ns ± 0%    11.7ns ± 0%  -0.09%
+ComplexGoDirectBuffer-24     519ns ± 0%     428ns ± 0%  -17.63%
+ComplexGoStaticString-24    11.7ns ± 0%    11.9ns ± 0%   +1.96%
 
 name                      old alloc/op   new alloc/op   delta
-ComplexGoDirectBuffer-24     0.00B          0.00B        0.00%
-ComplexGoStaticString-24     0.00B          0.00B        0.00%
+ComplexGoDirectBuffer-24     0.00B          0.00B         0.00%
+ComplexGoStaticString-24     0.00B          0.00B         0.00%
 
 name                      old allocs/op  new allocs/op  delta
-ComplexGoDirectBuffer-24      0.00           0.00        0.00%
-ComplexGoStaticString-24      0.00           0.00        0.00%
+ComplexGoDirectBuffer-24      0.00           0.00         0.00%
+ComplexGoStaticString-24      0.00           0.00         0.00%
 ```
 
 ## simple benchmarks
@@ -102,77 +102,77 @@ ComplexGoStaticString-24      0.00           0.00        0.00%
 
 | Name       | Runs      | µs/op  | B/op  | allocations/op |
 | ---------- | --------- | ------ | ----- | -------------- |
-| Ace        | 277,736   | 12.943 | 1,121 | 40             |
-| Amber      | 384,963   | 8.808  | 849   | 36             |
-| Golang     | 659,941   | 8.628  | 769   | 35             |
-| GolangText | 1,435,208 | 2.516  | 128   | 7              |
-| Handlebars | 253,663   | 14.007 | 3,648 | 78             |
-| JetHTML    | 4,248,274 | 0.828  | 0     | 0              |
-| Mustache   | 753,109   | 4.546  | 1,723 | 30             |
-| Pongo2     | 520,420   | 5.975  | 2,075 | 32             |
-| Soy        | 913,322   | 3.786  | 1,224 | 19             |
+| Ace        | 289,507   | 12.165 | 1,121 | 40             |
+| Amber      | 381,030   | 8.535  | 849   | 36             |
+| Golang     | 694,083   | 8.197  | 769   | 35             |
+| GolangText | 1,500,374 | 2.355  | 128   | 7              |
+| Handlebars | 266,238   | 13.062 | 3,648 | 78             |
+| JetHTML    | 4,429,336 | 0.771  | 0     | 0              |
+| Mustache   | 859,552   | 4.177  | 1,723 | 30             |
+| Pongo2     | 840,604   | 5.441  | 2,075 | 32             |
+| Soy        | 1,000,000 | 3.610  | 1,224 | 19             |
 
 ```
-comparing: go1.18.6 to go version go1.19 linux/amd64
+comparing: go1.19.5 to go1.20
 name           old time/op    new time/op    delta
-Golang-24        8.71µs ± 0%    8.63µs ± 0%   -0.88%
-GolangText-24    2.51µs ± 0%    2.52µs ± 0%   +0.20%
-Ace-24           13.6µs ± 0%    12.9µs ± 0%   -4.56%
-Amber-24         9.04µs ± 0%    8.81µs ± 0%   -2.58%
-Mustache-24      4.21µs ± 0%    4.55µs ± 0%   +7.96%
-Pongo2-24        5.88µs ± 0%    5.98µs ± 0%   +1.63%
-Handlebars-24    14.1µs ± 0%    14.0µs ± 0%   -0.58%
-Soy-24           3.63µs ± 0%    3.79µs ± 0%   +4.38%
-JetHTML-24        900ns ± 0%     828ns ± 0%   -8.11%
+Golang-24        8.42µs ± 0%    8.20µs ± 0%  -2.61%
+GolangText-24    2.47µs ± 0%    2.35µs ± 0%  -4.81%
+Ace-24           12.8µs ± 0%    12.2µs ± 0%  -4.75%
+Amber-24         8.57µs ± 0%    8.54µs ± 0%  -0.42%
+Mustache-24      4.46µs ± 0%    4.18µs ± 0%  -6.41%
+Pongo2-24        5.91µs ± 0%    5.44µs ± 0%  -7.98%
+Handlebars-24    13.9µs ± 0%    13.1µs ± 0%  -6.26%
+Soy-24           3.67µs ± 0%    3.61µs ± 0%  -1.77%
+JetHTML-24        832ns ± 0%     771ns ± 0%  -7.39%
 
 name           old alloc/op   new alloc/op   delta
-Golang-24          769B ± 0%      769B ± 0%    0.00%
-GolangText-24      128B ± 0%      128B ± 0%    0.00%
-Ace-24           1.12kB ± 0%    1.12kB ± 0%    0.00%
-Amber-24           849B ± 0%      849B ± 0%    0.00%
-Mustache-24      1.53kB ± 0%    1.72kB ± 0%  +12.61%
-Pongo2-24        2.07kB ± 0%    2.08kB ± 0%   +0.05%
-Handlebars-24    3.97kB ± 0%    3.65kB ± 0%   -8.02%
-Soy-24           1.22kB ± 0%    1.22kB ± 0%    0.00%
-JetHTML-24        0.00B          0.00B         0.00%
+Golang-24          769B ± 0%      769B ± 0%   0.00%
+GolangText-24      128B ± 0%      128B ± 0%   0.00%
+Ace-24           1.12kB ± 0%    1.12kB ± 0%   0.00%
+Amber-24           849B ± 0%      849B ± 0%   0.00%
+Mustache-24      1.72kB ± 0%    1.72kB ± 0%   0.00%
+Pongo2-24        2.08kB ± 0%    2.08kB ± 0%   0.00%
+Handlebars-24    3.65kB ± 0%    3.65kB ± 0%   0.00%
+Soy-24           1.22kB ± 0%    1.22kB ± 0%   0.00%
+JetHTML-24        0.00B          0.00B        0.00%
 
 name           old allocs/op  new allocs/op  delta
-Golang-24          35.0 ± 0%      35.0 ± 0%    0.00%
-GolangText-24      7.00 ± 0%      7.00 ± 0%    0.00%
-Ace-24             40.0 ± 0%      40.0 ± 0%    0.00%
-Amber-24           36.0 ± 0%      36.0 ± 0%    0.00%
-Mustache-24        29.0 ± 0%      30.0 ± 0%   +3.45%
-Pongo2-24          32.0 ± 0%      32.0 ± 0%    0.00%
-Handlebars-24      78.0 ± 0%      78.0 ± 0%    0.00%
-Soy-24             19.0 ± 0%      19.0 ± 0%    0.00%
-JetHTML-24         0.00           0.00         0.00%
+Golang-24          35.0 ± 0%      35.0 ± 0%   0.00%
+GolangText-24      7.00 ± 0%      7.00 ± 0%   0.00%
+Ace-24             40.0 ± 0%      40.0 ± 0%   0.00%
+Amber-24           36.0 ± 0%      36.0 ± 0%   0.00%
+Mustache-24        30.0 ± 0%      30.0 ± 0%   0.00%
+Pongo2-24          32.0 ± 0%      32.0 ± 0%   0.00%
+Handlebars-24      78.0 ± 0%      78.0 ± 0%   0.00%
+Soy-24             19.0 ± 0%      19.0 ± 0%   0.00%
+JetHTML-24         0.00           0.00        0.00%
 ```
 
 ### precompilation to Go code
 
 | Name          | Runs       | µs/op | B/op | allocations/op |
 | ------------- | ---------- | ----- | ---- | -------------- |
-| Ego           | 3,330,222  | 1.138 | 85   | 8              |
-| Ftmpl         | 2,247,235  | 1.603 | 774  | 12             |
-| Gorazor       | 4,196,112  | 0.844 | 512  | 5              |
-| Hero          | 25,661,955 | 0.122 | 0    | 0              |
-| Jade          | 38,546,743 | 0.093 | 0    | 0              |
-| Quicktemplate | 20,088,501 | 0.181 | 0    | 0              |
+| Ego           | 3,272,616  | 1.151 | 85   | 8              |
+| Ftmpl         | 2,179,855  | 1.610 | 774  | 12             |
+| Gorazor       | 4,294,610  | 0.803 | 512  | 5              |
+| Hero          | 24,494,606 | 0.123 | 0    | 0              |
+| Jade          | 40,706,695 | 0.089 | 0    | 0              |
+| Quicktemplate | 19,722,939 | 0.181 | 0    | 0              |
 
 ```
-comparing: go1.18.6 to go version go1.19 linux/amd64
+comparing: go1.19.5 to go1.20
 name              old time/op    new time/op    delta
-Ego-24              1.24µs ± 0%    1.14µs ± 0%   -8.15%
-Quicktemplate-24     190ns ± 0%     181ns ± 0%   -4.53%
-Ftmpl-24            1.67µs ± 0%    1.60µs ± 0%   -4.01%
-Gorazor-24           823ns ± 0%     844ns ± 0%   +2.56%
-Hero-24              126ns ± 0%     122ns ± 0%   -3.56%
-Jade-24             92.7ns ± 0%    92.5ns ± 0%   -0.15%
+Ego-24              1.13µs ± 0%    1.15µs ± 0%   +2.22%
+Quicktemplate-24     185ns ± 0%     181ns ± 0%   -1.95%
+Ftmpl-24            1.46µs ± 0%    1.61µs ± 0%  +10.05%
+Gorazor-24           804ns ± 0%     803ns ± 0%   -0.06%
+Hero-24              119ns ± 0%     123ns ± 0%   +3.20%
+Jade-24             91.5ns ± 0%    88.8ns ± 0%   -2.86%
 
 name              old alloc/op   new alloc/op   delta
 Ego-24               85.0B ± 0%     85.0B ± 0%    0.00%
 Quicktemplate-24     0.00B          0.00B         0.00%
-Ftmpl-24            1.09kB ± 0%    0.77kB ± 0%  -29.25%
+Ftmpl-24              774B ± 0%      774B ± 0%    0.00%
 Gorazor-24            512B ± 0%      512B ± 0%    0.00%
 Hero-24              0.00B          0.00B         0.00%
 Jade-24              0.00B          0.00B         0.00%
@@ -192,29 +192,29 @@ Jade-24               0.00           0.00         0.00%
 
 | Name              | Runs    | µs/op  | B/op  | allocations/op |
 | ----------------- | ------- | ------ | ----- | -------------- |
-| ComplexGolang     | 49,461  | 76.020 | 6,645 | 290            |
-| ComplexGolangText | 100,723 | 33.766 | 2,236 | 107            |
-| ComplexJetHTML    | 304,092 | 13.188 | 534   | 5              |
-| ComplexMustache   | 125,402 | 28.236 | 7,274 | 156            |
+| ComplexGolang     | 55,249  | 72.293 | 6,548 | 290            |
+| ComplexGolangText | 115,640 | 31.731 | 2,236 | 107            |
+| ComplexJetHTML    | 313,855 | 11.832 | 534   | 5              |
+| ComplexMustache   | 134,226 | 26.156 | 7,274 | 156            |
 
 ```
-comparing: go1.18.6 to go version go1.19 linux/amd64
+comparing: go1.19.5 to go1.20
 name                  old time/op    new time/op    delta
-ComplexGolang-24        75.7µs ± 0%    76.0µs ± 0%  +0.44%
-ComplexGolangText-24    33.4µs ± 0%    33.8µs ± 0%  +1.00%
-ComplexMustache-24      28.1µs ± 0%    28.2µs ± 0%  +0.39%
-ComplexJetHTML-24       13.0µs ± 0%    13.2µs ± 0%  +1.34%
+ComplexGolang-24        72.8µs ± 0%    72.3µs ± 0%  -0.73%
+ComplexGolangText-24    31.8µs ± 0%    31.7µs ± 0%  -0.20%
+ComplexMustache-24      26.7µs ± 0%    26.2µs ± 0%  -2.07%
+ComplexJetHTML-24       11.7µs ± 0%    11.8µs ± 0%  +1.13%
 
 name                  old alloc/op   new alloc/op   delta
-ComplexGolang-24        6.64kB ± 0%    6.64kB ± 0%  +0.03%
-ComplexGolangText-24    2.23kB ± 0%    2.24kB ± 0%  +0.04%
-ComplexMustache-24      7.40kB ± 0%    7.27kB ± 0%  -1.66%
-ComplexJetHTML-24         533B ± 0%      534B ± 0%  +0.19%
+ComplexGolang-24        6.64kB ± 0%    6.55kB ± 0%  -1.46%
+ComplexGolangText-24    2.24kB ± 0%    2.24kB ± 0%   0.00%
+ComplexMustache-24      7.27kB ± 0%    7.27kB ± 0%  +0.01%
+ComplexJetHTML-24         534B ± 0%      534B ± 0%   0.00%
 
 name                  old allocs/op  new allocs/op  delta
 ComplexGolang-24           290 ± 0%       290 ± 0%   0.00%
 ComplexGolangText-24       107 ± 0%       107 ± 0%   0.00%
-ComplexMustache-24         155 ± 0%       156 ± 0%  +0.65%
+ComplexMustache-24         156 ± 0%       156 ± 0%   0.00%
 ComplexJetHTML-24         5.00 ± 0%      5.00 ± 0%   0.00%
 ```
 
@@ -222,38 +222,38 @@ ComplexJetHTML-24         5.00 ± 0%      5.00 ± 0%   0.00%
 
 | Name                 | Runs      | µs/op | B/op  | allocations/op |
 | -------------------- | --------- | ----- | ----- | -------------- |
-| ComplexEgo           | 1,000,000 | 5.765 | 568   | 31             |
-| ComplexFtmpl         | 507,601   | 7.100 | 3,535 | 38             |
-| ComplexGorazor       | 669,070   | 5.338 | 3,728 | 22             |
-| ComplexHero          | 3,630,922 | 0.961 | 0     | 0              |
-| ComplexJade          | 4,504,540 | 0.771 | 0     | 0              |
-| ComplexQuicktemplate | 3,619,738 | 0.997 | 0     | 0              |
+| ComplexEgo           | 837,608   | 5.777 | 568   | 31             |
+| ComplexFtmpl         | 486,427   | 7.126 | 3,535 | 38             |
+| ComplexGorazor       | 720,013   | 5.193 | 3,688 | 24             |
+| ComplexHero          | 3,623,186 | 0.955 | 0     | 0              |
+| ComplexJade          | 5,046,976 | 0.745 | 0     | 0              |
+| ComplexQuicktemplate | 3,481,230 | 1.011 | 0     | 0              |
 
 ```
-comparing: go1.18.6 to go version go1.19 linux/amd64
+comparing: go1.19.5 to go1.20
 name                     old time/op    new time/op    delta
-ComplexEgo-24              5.82µs ± 0%    5.76µs ± 0%   -0.86%
-ComplexQuicktemplate-24    1.39µs ± 0%    1.00µs ± 0%  -28.10%
-ComplexFtmpl-24            7.52µs ± 0%    7.10µs ± 0%   -5.56%
-ComplexGorazor-24          4.99µs ± 0%    5.34µs ± 0%   +6.97%
-ComplexHero-24             1.06µs ± 0%    0.96µs ± 0%   -8.88%
-ComplexJade-24              779ns ± 0%     771ns ± 0%   -1.05%
+ComplexEgo-24              5.67µs ± 0%    5.78µs ± 0%  +1.91%
+ComplexQuicktemplate-24    1.03µs ± 0%    1.01µs ± 0%  -2.22%
+ComplexFtmpl-24            7.08µs ± 0%    7.13µs ± 0%  +0.65%
+ComplexGorazor-24          5.09µs ± 0%    5.19µs ± 0%  +2.10%
+ComplexHero-24              964ns ± 0%     955ns ± 0%  -0.92%
+ComplexJade-24              764ns ± 0%     745ns ± 0%  -2.47%
 
 name                     old alloc/op   new alloc/op   delta
-ComplexEgo-24                568B ± 0%      568B ± 0%    0.00%
-ComplexQuicktemplate-24     0.00B          0.00B         0.00%
-ComplexFtmpl-24            4.91kB ± 0%    3.54kB ± 0%  -28.03%
-ComplexGorazor-24          3.74kB ± 0%    3.73kB ± 0%   -0.43%
-ComplexHero-24              0.00B          0.00B         0.00%
-ComplexJade-24              0.00B          0.00B         0.00%
+ComplexEgo-24                568B ± 0%      568B ± 0%   0.00%
+ComplexQuicktemplate-24     0.00B          0.00B        0.00%
+ComplexFtmpl-24            3.54kB ± 0%    3.54kB ± 0%   0.00%
+ComplexGorazor-24          3.73kB ± 0%    3.69kB ± 0%  -1.07%
+ComplexHero-24              0.00B          0.00B        0.00%
+ComplexJade-24              0.00B          0.00B        0.00%
 
 name                     old allocs/op  new allocs/op  delta
-ComplexEgo-24                31.0 ± 0%      31.0 ± 0%    0.00%
-ComplexQuicktemplate-24      0.00           0.00         0.00%
-ComplexFtmpl-24              38.0 ± 0%      38.0 ± 0%    0.00%
-ComplexGorazor-24            22.0 ± 0%      22.0 ± 0%    0.00%
-ComplexHero-24               0.00           0.00         0.00%
-ComplexJade-24               0.00           0.00         0.00%
+ComplexEgo-24                31.0 ± 0%      31.0 ± 0%   0.00%
+ComplexQuicktemplate-24      0.00           0.00        0.00%
+ComplexFtmpl-24              38.0 ± 0%      38.0 ± 0%   0.00%
+ComplexGorazor-24            22.0 ± 0%      24.0 ± 0%  +9.09%
+ComplexHero-24               0.00           0.00        0.00%
+ComplexJade-24               0.00           0.00        0.00%
 ```
 
 ## Security

@@ -23,7 +23,6 @@ require (
 	github.com/valyala/bytebufferpool v1.0.1-0.20180905182247-cdfbe9377474
 	github.com/valyala/quicktemplate v1.7.0
 	github.com/yosssi/ace v0.0.5
-	golang.org/dl v0.0.0-20220907140016-191c3420d549 // indirect
 	golang.org/x/net v0.0.0-20210825183410-e898025ed96a // indirect
 	golang.org/x/sys v0.0.0-20210831042530-f4d43177bf5e // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect

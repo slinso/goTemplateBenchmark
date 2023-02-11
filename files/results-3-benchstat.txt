@@ -1,17 +1,17 @@
 name                  old time/op    new time/op    delta
-ComplexGolang-24        42.1µs ± 0%    39.9µs ± 0%    -5.26%
-ComplexGolangText-24    17.7µs ± 0%    41.3µs ± 0%  +133.53%
-ComplexMustache-24      35.1µs ± 0%    15.8µs ± 0%   -55.07%
-ComplexJetHTML-24       17.4µs ± 0%    13.6µs ± 0%   -22.13%
+ComplexGolang-24        72.8µs ± 0%    72.3µs ± 0%  -0.73%
+ComplexGolangText-24    31.8µs ± 0%    31.7µs ± 0%  -0.20%
+ComplexMustache-24      26.7µs ± 0%    26.2µs ± 0%  -2.07%
+ComplexJetHTML-24       11.7µs ± 0%    11.8µs ± 0%  +1.13%
 
 name                  old alloc/op   new alloc/op   delta
-ComplexGolang-24        6.71kB ± 0%    6.70kB ± 0%    -0.12%
-ComplexGolangText-24    2.24kB ± 0%    2.25kB ± 0%    +0.31%
-ComplexMustache-24      7.28kB ± 0%    7.27kB ± 0%    -0.14%
-ComplexJetHTML-24         539B ± 0%      540B ± 0%    +0.19%
+ComplexGolang-24        6.64kB ± 0%    6.55kB ± 0%  -1.46%
+ComplexGolangText-24    2.24kB ± 0%    2.24kB ± 0%   0.00%
+ComplexMustache-24      7.27kB ± 0%    7.27kB ± 0%  +0.01%
+ComplexJetHTML-24         534B ± 0%      534B ± 0%   0.00%
 
 name                  old allocs/op  new allocs/op  delta
-ComplexGolang-24           290 ± 0%       290 ± 0%     0.00%
-ComplexGolangText-24       107 ± 0%       107 ± 0%     0.00%
-ComplexMustache-24         156 ± 0%       156 ± 0%     0.00%
-ComplexJetHTML-24         5.00 ± 0%      5.00 ± 0%     0.00%
+ComplexGolang-24           290 ± 0%       290 ± 0%   0.00%
+ComplexGolangText-24       107 ± 0%       107 ± 0%   0.00%
+ComplexMustache-24         156 ± 0%       156 ± 0%   0.00%
+ComplexJetHTML-24         5.00 ± 0%      5.00 ± 0%   0.00%

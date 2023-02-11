@@ -1,15 +1,15 @@
 name              old time/op    new time/op    delta
-Ego-24               626ns ± 0%     654ns ± 0%   +4.62%
-Quicktemplate-24     378ns ± 0%     349ns ± 0%   -7.67%
-Ftmpl-24            1.33µs ± 0%    1.45µs ± 0%   +9.26%
-Gorazor-24           834ns ± 0%     846ns ± 0%   +1.44%
-Hero-24              285ns ± 0%     253ns ± 0%  -11.34%
-Jade-24              205ns ± 0%     173ns ± 0%  -15.83%
+Ego-24              1.13µs ± 0%    1.15µs ± 0%   +2.22%
+Quicktemplate-24     185ns ± 0%     181ns ± 0%   -1.95%
+Ftmpl-24            1.46µs ± 0%    1.61µs ± 0%  +10.05%
+Gorazor-24           804ns ± 0%     803ns ± 0%   -0.06%
+Hero-24              119ns ± 0%     123ns ± 0%   +3.20%
+Jade-24             91.5ns ± 0%    88.8ns ± 0%   -2.86%
 
 name              old alloc/op   new alloc/op   delta
 Ego-24               85.0B ± 0%     85.0B ± 0%    0.00%
 Quicktemplate-24     0.00B          0.00B         0.00%
-Ftmpl-24              774B ± 0%      775B ± 0%   +0.13%
+Ftmpl-24              774B ± 0%      774B ± 0%    0.00%
 Gorazor-24            512B ± 0%      512B ± 0%    0.00%
 Hero-24              0.00B          0.00B         0.00%
 Jade-24              0.00B          0.00B         0.00%
