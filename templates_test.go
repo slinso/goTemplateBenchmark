@@ -2,6 +2,7 @@ package main_test
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"html/template"
 	"testing"
@@ -10,6 +11,7 @@ import (
 	"github.com/SlinSo/goTemplateBenchmark/golang"
 	"github.com/SlinSo/goTemplateBenchmark/gomponents"
 	"github.com/SlinSo/goTemplateBenchmark/model"
+	"github.com/SlinSo/goTemplateBenchmark/templbench"
 	"github.com/valyala/bytebufferpool"
 
 	"github.com/SlinSo/goTemplateBenchmark/ego"
@@ -543,6 +545,28 @@ func BenchmarkJade(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		jade.Simple(testData, buf)
+		buf.Reset()
+	}
+}
+
+/******************************************************************************
+** templ
+******************************************************************************/
+func TestTempl(t *testing.T) {
+	var buf bytes.Buffer
+	templbench.SimpleTempl(testData).Render(context.Background(), &buf)
+
+	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkTempl(b *testing.B) {
+	var buf bytes.Buffer
+
+	ctx := context.Background()
+	for i := 0; i < b.N; i++ {
+		templbench.SimpleTempl(testData).Render(ctx, &buf)
 		buf.Reset()
 	}
 }

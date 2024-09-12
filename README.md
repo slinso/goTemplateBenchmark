@@ -21,6 +21,7 @@ comparing the performance of different template engines
 - [Quicktemplate](https://github.com/valyala/quicktemplate)
 - [Hero](https://github.com/shiyanhui/hero)
 - [Jade](https://github.com/Joker/jade)
+- [templ](https://github.com/a-h/templ)
 
 ## baseline benchmarks for comparison
 

@@ -2,6 +2,7 @@ package main_test
 
 import (
 	"bytes"
+	"context"
 	"html"
 	"html/template"
 	"path/filepath"
@@ -10,6 +11,7 @@ import (
 
 	"github.com/SlinSo/goTemplateBenchmark/golang"
 	"github.com/SlinSo/goTemplateBenchmark/model"
+	"github.com/SlinSo/goTemplateBenchmark/templbench"
 	"github.com/valyala/bytebufferpool"
 
 	"github.com/SlinSo/goTemplateBenchmark/ego"
@@ -278,6 +280,27 @@ func BenchmarkComplexQuicktemplate(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		quicktemplate.WriteIndex(&buf, testComplexUser, testComplexNav, testComplexTitle)
+		buf.Reset()
+	}
+}
+
+/******************************************************************************
+** templ
+******************************************************************************/
+func TestComplexTempl(t *testing.T) {
+	var buf bytes.Buffer
+	templbench.Index(testComplexUser, testComplexNav, testComplexTitle).Render(context.Background(), &buf)
+
+	if msg, ok := linesEquals(buf.String(), expectedtComplexResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkComplexTempl(b *testing.B) {
+	var buf bytes.Buffer
+
+	for i := 0; i < b.N; i++ {
+		templbench.Index(testComplexUser, testComplexNav, testComplexTitle).Render(context.Background(), &buf)
 		buf.Reset()
 	}
 }

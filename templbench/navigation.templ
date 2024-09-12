@@ -1,0 +1,11 @@
+package templbench
+
+import "github.com/SlinSo/goTemplateBenchmark/model"
+
+templ Navigation(nav []*model.Navigation) {
+	<ul class="navigation">
+		for _, item := range nav {
+			<li><a href={ templ.SafeURL(item.Link) }>{ item.Item }</a></li>
+		}
+	</ul>
+}

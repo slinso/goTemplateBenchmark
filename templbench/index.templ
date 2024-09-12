@@ -1,0 +1,50 @@
+package templbench
+
+import (
+	"context"
+	"github.com/SlinSo/goTemplateBenchmark/model"
+	"io"
+	"strconv"
+)
+
+func Raw(s string) templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) (err error) {
+		_, err = io.WriteString(w, s)
+		return
+	})
+}
+
+templ Index(u *model.User, nav []*model.Navigation, title string) {
+	@Raw("<!DOCTYPE html>")
+	<html>
+		<body>
+			<header>
+				@Header(title)
+			</header>
+			<nav>
+				@Navigation(nav)
+			</nav>
+			<section>
+				<div class="content">
+					<div class="welcome">
+						<h4>Hello { u.FirstName }</h4>
+						<div class="raw">
+							@Raw(u.RawContent)
+						</div>
+						<div class="enc">{ u.EscapedContent }</div>
+					</div>
+					for i := 1; i <= 5; i++ {
+						if i == 1 {
+							<p>{ u.FirstName } has { strconv.FormatInt(int64(i), 10) } message</p>
+						} else {
+							<p>{ u.FirstName } has { strconv.FormatInt(int64(i), 10) } messages</p>
+						}
+					}
+				</div>
+			</section>
+			<footer>
+				@Footer()
+			</footer>
+		</body>
+	</html>
+}
