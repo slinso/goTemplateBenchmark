@@ -9,6 +9,7 @@ import (
 	text "text/template"
 
 	"github.com/SlinSo/goTemplateBenchmark/golang"
+	"github.com/SlinSo/goTemplateBenchmark/gomponents"
 	"github.com/SlinSo/goTemplateBenchmark/model"
 	"github.com/SlinSo/goTemplateBenchmark/templbench"
 	"github.com/valyala/bytebufferpool"
@@ -566,6 +567,31 @@ func BenchmarkTempl(b *testing.B) {
 	ctx := context.Background()
 	for i := 0; i < b.N; i++ {
 		templbench.SimpleTempl(testData).Render(ctx, &buf)
+		buf.Reset()
+	}
+}
+
+/******************************************************************************
+** Gomponents
+******************************************************************************/
+func TestGomponents(t *testing.T) {
+	buf := bytebufferpool.Get()
+
+	err := gomponents.Page(testData).Render(buf)
+	if err != nil {
+		t.Error(err)
+	}
+
+	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkGomponents(b *testing.B) {
+	buf := bytebufferpool.Get()
+
+	for i := 0; i < b.N; i++ {
+		gomponents.Page(testData).Render(buf)
 		buf.Reset()
 	}
 }

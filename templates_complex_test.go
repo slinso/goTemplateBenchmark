@@ -306,27 +306,6 @@ func BenchmarkComplexTempl(b *testing.B) {
 }
 
 /******************************************************************************
-** EgoSlinso
-******************************************************************************/
-func TestComplexEgoSlinso(t *testing.T) {
-	var buf bytes.Buffer
-	egonslinso.IndexTemplate(&buf, testComplexUser, testComplexNav, testComplexTitle)
-
-	if msg, ok := linesEquals(buf.String(), expectedtComplexResult); !ok {
-		t.Error(msg)
-	}
-}
-
-func BenchmarkComplexEgoSlinso(b *testing.B) {
-	var buf bytes.Buffer
-
-	for i := 0; i < b.N; i++ {
-		egonslinso.IndexTemplate(&buf, testComplexUser, testComplexNav, testComplexTitle)
-		buf.Reset()
-	}
-}
-
-/******************************************************************************
 ** ftmpl
 ******************************************************************************/
 func TestComplexFtmpl(t *testing.T) {

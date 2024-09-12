@@ -2,14 +2,14 @@ goos: linux
 goarch: amd64
 pkg: github.com/SlinSo/goTemplateBenchmark
 cpu: AMD Ryzen 9 3900X 12-Core Processor            
-BenchmarkGolang-24        	  694083	      8197 ns/op	     769 B/op	      35 allocs/op
-BenchmarkGolangText-24    	 1500374	      2355 ns/op	     128 B/op	       7 allocs/op
-BenchmarkAce-24           	  289507	     12165 ns/op	    1121 B/op	      40 allocs/op
-BenchmarkAmber-24         	  381030	      8535 ns/op	     849 B/op	      36 allocs/op
-BenchmarkMustache-24      	  859552	      4177 ns/op	    1723 B/op	      30 allocs/op
-BenchmarkPongo2-24        	  840604	      5441 ns/op	    2075 B/op	      32 allocs/op
-BenchmarkHandlebars-24    	  266238	     13062 ns/op	    3648 B/op	      78 allocs/op
-BenchmarkSoy-24           	 1000000	      3610 ns/op	    1224 B/op	      19 allocs/op
-BenchmarkJetHTML-24       	 4429336	       771.0 ns/op	       0 B/op	       0 allocs/op
+BenchmarkGolang-24        	  495836	      8168 ns/op	     769 B/op	      35 allocs/op
+BenchmarkGolangText-24    	 1588129	      2430 ns/op	     128 B/op	       7 allocs/op
+BenchmarkAce-24           	  255001	     12738 ns/op	    1121 B/op	      40 allocs/op
+BenchmarkAmber-24         	  385418	      8304 ns/op	     849 B/op	      36 allocs/op
+BenchmarkMustache-24      	  869660	      4276 ns/op	    1723 B/op	      30 allocs/op
+BenchmarkPongo2-24        	  919458	      5437 ns/op	    2075 B/op	      32 allocs/op
+BenchmarkHandlebars-24    	  260066	     12838 ns/op	    3424 B/op	      75 allocs/op
+BenchmarkSoy-24           	 1000000	      3399 ns/op	    1224 B/op	      19 allocs/op
+BenchmarkJetHTML-24       	 4728830	       771.4 ns/op	       0 B/op	       0 allocs/op
 PASS
-ok  	github.com/SlinSo/goTemplateBenchmark	38.487s
+ok  	github.com/SlinSo/goTemplateBenchmark	37.140s

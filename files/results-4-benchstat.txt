@@ -1,16 +1,16 @@
 name                     old time/op    new time/op    delta
-ComplexEgo-24              5.67µs ± 0%    5.78µs ± 0%  +1.91%
-ComplexQuicktemplate-24    1.03µs ± 0%    1.01µs ± 0%  -2.22%
-ComplexFtmpl-24            7.08µs ± 0%    7.13µs ± 0%  +0.65%
-ComplexGorazor-24          5.09µs ± 0%    5.19µs ± 0%  +2.10%
-ComplexHero-24              964ns ± 0%     955ns ± 0%  -0.92%
-ComplexJade-24              764ns ± 0%     745ns ± 0%  -2.47%
+ComplexEgo-24              5.03µs ± 0%    4.82µs ± 0%  -4.16%
+ComplexQuicktemplate-24    1.06µs ± 0%    1.03µs ± 0%  -2.55%
+ComplexFtmpl-24            7.25µs ± 0%    7.05µs ± 0%  -2.76%
+ComplexGorazor-24          5.40µs ± 0%    5.45µs ± 0%  +0.91%
+ComplexHero-24              954ns ± 0%     947ns ± 0%  -0.72%
+ComplexJade-24              736ns ± 0%     742ns ± 0%  +0.90%
 
 name                     old alloc/op   new alloc/op   delta
-ComplexEgo-24                568B ± 0%      568B ± 0%   0.00%
+ComplexEgo-24                569B ± 0%      569B ± 0%   0.00%
 ComplexQuicktemplate-24     0.00B          0.00B        0.00%
 ComplexFtmpl-24            3.54kB ± 0%    3.54kB ± 0%   0.00%
-ComplexGorazor-24          3.73kB ± 0%    3.69kB ± 0%  -1.07%
+ComplexGorazor-24          3.69kB ± 0%    3.69kB ± 0%   0.00%
 ComplexHero-24              0.00B          0.00B        0.00%
 ComplexJade-24              0.00B          0.00B        0.00%
 
@@ -18,6 +18,6 @@ name                     old allocs/op  new allocs/op  delta
 ComplexEgo-24                31.0 ± 0%      31.0 ± 0%   0.00%
 ComplexQuicktemplate-24      0.00           0.00        0.00%
 ComplexFtmpl-24              38.0 ± 0%      38.0 ± 0%   0.00%
-ComplexGorazor-24            22.0 ± 0%      24.0 ± 0%  +9.09%
+ComplexGorazor-24            24.0 ± 0%      24.0 ± 0%   0.00%
 ComplexHero-24               0.00           0.00        0.00%
 ComplexJade-24               0.00           0.00        0.00%

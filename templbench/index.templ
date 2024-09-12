@@ -1,7 +1,11 @@
 package templbench
 
-import "github.com/SlinSo/goTemplateBenchmark/model"
-import "strconv"
+import (
+	"context"
+	"github.com/SlinSo/goTemplateBenchmark/model"
+	"io"
+	"strconv"
+)
 
 func Raw(s string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) (err error) {
@@ -11,21 +15,21 @@ func Raw(s string) templ.Component {
 }
 
 templ Index(u *model.User, nav []*model.Navigation, title string) {
-	{! Raw("<!DOCTYPE html>") }
+	@Raw("<!DOCTYPE html>")
 	<html>
 		<body>
 			<header>
-				{! Header(title) }
+				@Header(title)
 			</header>
 			<nav>
-				{! Navigation(nav) }
+				@Navigation(nav)
 			</nav>
 			<section>
 				<div class="content">
 					<div class="welcome">
 						<h4>Hello { u.FirstName }</h4>
 						<div class="raw">
-							{! Raw(u.RawContent) }
+							@Raw(u.RawContent)
 						</div>
 						<div class="enc">{ u.EscapedContent }</div>
 					</div>
@@ -39,9 +43,8 @@ templ Index(u *model.User, nav []*model.Navigation, title string) {
 				</div>
 			</section>
 			<footer>
-				{! Footer() }
+				@Footer()
 			</footer>
 		</body>
 	</html>
 }
-

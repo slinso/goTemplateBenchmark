@@ -8,7 +8,6 @@ comparing the performance of different template engines
 - [Amber](https://github.com/eknkc/amber)
 - [Go](https://golang.org/pkg/html/template)
 - [Handlebars](https://github.com/aymerick/raymond)
-- removed - [Kasia](https://github.com/ziutek/kasia.go)
 - [Mustache](https://github.com/hoisie/mustache)
 - [Pongo2](https://github.com/flosch/pongo2)
 - [Soy](https://github.com/robfig/soy)
@@ -17,7 +16,6 @@ comparing the performance of different template engines
 ## precompilation to Go code
 
 - [ego](https://github.com/benbjohnson/ego)
-- removed - [egon](https://github.com/commondream/egon)
 - [ftmpl](https://github.com/tkrajina/ftmpl)
 - [Gorazor](https://github.com/sipin/gorazor)
 - [Quicktemplate](https://github.com/valyala/quicktemplate)
@@ -25,12 +23,9 @@ comparing the performance of different template engines
 - [Jade](https://github.com/Joker/jade)
 - [templ](https://github.com/a-h/templ)
 
-## special benchmarks for comparison
+## baseline benchmarks for comparison
 
-- Go text/template (do not use this for HTML)
-- StaticString - Use one static string for the whole Template to have a base
-  time
-- DirectBuffer - Use go to write the HTML by hand to the buffer
+- DirectBuffer - Use go to write the HTML by hand to the buffer with basic escaping
 
 ## transpiling to Go Template
 
@@ -75,56 +70,32 @@ template engine
 
 local desktop: ryzen 3900x
 
-## special benchmarks
-
-| Name                  | Runs        | ns/op | B/op | allocations/op |
-| --------------------- | ----------- | ----- | ---- | -------------- |
-| ComplexGoDirectBuffer | 8,153,427   | 428   | 0    | 0              |
-| ComplexGoStaticString | 310,142,265 | 12    | 0    | 0              |
-
-```
-comparing: go1.19.5 to go1.20
-name                      old time/op    new time/op    delta
-ComplexGoDirectBuffer-24     519ns ± 0%     428ns ± 0%  -17.63%
-ComplexGoStaticString-24    11.7ns ± 0%    11.9ns ± 0%   +1.96%
-
-name                      old alloc/op   new alloc/op   delta
-ComplexGoDirectBuffer-24     0.00B          0.00B         0.00%
-ComplexGoStaticString-24     0.00B          0.00B         0.00%
-
-name                      old allocs/op  new allocs/op  delta
-ComplexGoDirectBuffer-24      0.00           0.00         0.00%
-ComplexGoStaticString-24      0.00           0.00         0.00%
-```
-
 ## simple benchmarks
-
 ### full featured template engines
-
 | Name       | Runs      | µs/op  | B/op  | allocations/op |
 | ---------- | --------- | ------ | ----- | -------------- |
-| Ace        | 289,507   | 12.165 | 1,121 | 40             |
-| Amber      | 381,030   | 8.535  | 849   | 36             |
-| Golang     | 694,083   | 8.197  | 769   | 35             |
-| GolangText | 1,500,374 | 2.355  | 128   | 7              |
-| Handlebars | 266,238   | 13.062 | 3,648 | 78             |
-| JetHTML    | 4,429,336 | 0.771  | 0     | 0              |
-| Mustache   | 859,552   | 4.177  | 1,723 | 30             |
-| Pongo2     | 840,604   | 5.441  | 2,075 | 32             |
-| Soy        | 1,000,000 | 3.610  | 1,224 | 19             |
+| Ace        | 255,001   | 12.738 | 1,121 | 40             |
+| Amber      | 385,418   | 8.304  | 849   | 36             |
+| Golang     | 495,836   | 8.168  | 769   | 35             |
+| GolangText | 1,588,129 | 2.430  | 128   | 7              |
+| Handlebars | 260,066   | 12.838 | 3,424 | 75             |
+| JetHTML    | 4,728,830 | 0.771  | 0     | 0              |
+| Mustache   | 869,660   | 4.276  | 1,723 | 30             |
+| Pongo2     | 919,458   | 5.437  | 2,075 | 32             |
+| Soy        | 1,000,000 | 3.399  | 1,224 | 19             |
 
 ```
-comparing: go1.19.5 to go1.20
+comparing: go1.22.7 to go1.23.1
 name           old time/op    new time/op    delta
-Golang-24        8.42µs ± 0%    8.20µs ± 0%  -2.61%
-GolangText-24    2.47µs ± 0%    2.35µs ± 0%  -4.81%
-Ace-24           12.8µs ± 0%    12.2µs ± 0%  -4.75%
-Amber-24         8.57µs ± 0%    8.54µs ± 0%  -0.42%
-Mustache-24      4.46µs ± 0%    4.18µs ± 0%  -6.41%
-Pongo2-24        5.91µs ± 0%    5.44µs ± 0%  -7.98%
-Handlebars-24    13.9µs ± 0%    13.1µs ± 0%  -6.26%
-Soy-24           3.67µs ± 0%    3.61µs ± 0%  -1.77%
-JetHTML-24        832ns ± 0%     771ns ± 0%  -7.39%
+Golang-24        8.04µs ± 0%    8.17µs ± 0%  +1.62%
+GolangText-24    2.39µs ± 0%    2.43µs ± 0%  +1.63%
+Ace-24           12.7µs ± 0%    12.7µs ± 0%  +0.69%
+Amber-24         8.20µs ± 0%    8.30µs ± 0%  +1.27%
+Mustache-24      4.31µs ± 0%    4.28µs ± 0%  -0.72%
+Pongo2-24        5.64µs ± 0%    5.44µs ± 0%  -3.51%
+Handlebars-24    13.4µs ± 0%    12.8µs ± 0%  -4.13%
+Soy-24           3.45µs ± 0%    3.40µs ± 0%  -1.56%
+JetHTML-24        769ns ± 0%     771ns ± 0%  +0.27%
 
 name           old alloc/op   new alloc/op   delta
 Golang-24          769B ± 0%      769B ± 0%   0.00%
@@ -133,7 +104,7 @@ Ace-24           1.12kB ± 0%    1.12kB ± 0%   0.00%
 Amber-24           849B ± 0%      849B ± 0%   0.00%
 Mustache-24      1.72kB ± 0%    1.72kB ± 0%   0.00%
 Pongo2-24        2.08kB ± 0%    2.08kB ± 0%   0.00%
-Handlebars-24    3.65kB ± 0%    3.65kB ± 0%   0.00%
+Handlebars-24    3.42kB ± 0%    3.42kB ± 0%   0.00%
 Soy-24           1.22kB ± 0%    1.22kB ± 0%   0.00%
 JetHTML-24        0.00B          0.00B        0.00%
 
@@ -144,73 +115,74 @@ Ace-24             40.0 ± 0%      40.0 ± 0%   0.00%
 Amber-24           36.0 ± 0%      36.0 ± 0%   0.00%
 Mustache-24        30.0 ± 0%      30.0 ± 0%   0.00%
 Pongo2-24          32.0 ± 0%      32.0 ± 0%   0.00%
-Handlebars-24      78.0 ± 0%      78.0 ± 0%   0.00%
+Handlebars-24      75.0 ± 0%      75.0 ± 0%   0.00%
 Soy-24             19.0 ± 0%      19.0 ± 0%   0.00%
 JetHTML-24         0.00           0.00        0.00%
 ```
 
 ### precompilation to Go code
-
-| Name          | Runs       | µs/op | B/op | allocations/op |
-| ------------- | ---------- | ----- | ---- | -------------- |
-| Ego           | 3,272,616  | 1.151 | 85   | 8              |
-| Ftmpl         | 2,179,855  | 1.610 | 774  | 12             |
-| Gorazor       | 4,294,610  | 0.803 | 512  | 5              |
-| Hero          | 24,494,606 | 0.123 | 0    | 0              |
-| Jade          | 40,706,695 | 0.089 | 0    | 0              |
-| Quicktemplate | 19,722,939 | 0.181 | 0    | 0              |
+| Name          | Runs       | µs/op | B/op  | allocations/op |
+| ------------- | ---------- | ----- | ----- | -------------- |
+| Ego           | 4,065,416  | 0.942 | 85    | 8              |
+| Ftmpl         | 2,238,477  | 1.602 | 774   | 12             |
+| Gomponents    | 1,000,000  | 4.785 | 1,112 | 56             |
+| Gorazor       | 4,340,546  | 0.831 | 512   | 5              |
+| Hero          | 30,667,665 | 0.116 | 0     | 0              |
+| Jade          | 38,743,312 | 0.090 | 0     | 0              |
+| Quicktemplate | 16,765,074 | 0.188 | 0     | 0              |
 
 ```
-comparing: go1.19.5 to go1.20
+comparing: go1.22.7 to go1.23.1
 name              old time/op    new time/op    delta
-Ego-24              1.13µs ± 0%    1.15µs ± 0%   +2.22%
-Quicktemplate-24     185ns ± 0%     181ns ± 0%   -1.95%
-Ftmpl-24            1.46µs ± 0%    1.61µs ± 0%  +10.05%
-Gorazor-24           804ns ± 0%     803ns ± 0%   -0.06%
-Hero-24              119ns ± 0%     123ns ± 0%   +3.20%
-Jade-24             91.5ns ± 0%    88.8ns ± 0%   -2.86%
+Ego-24              1.02µs ± 0%    0.94µs ± 0%  -7.67%
+Quicktemplate-24     194ns ± 0%     188ns ± 0%  -2.99%
+Ftmpl-24            1.66µs ± 0%    1.60µs ± 0%  -3.55%
+Gorazor-24           847ns ± 0%     831ns ± 0%  -1.84%
+Hero-24              125ns ± 0%     116ns ± 0%  -6.96%
+Jade-24             88.8ns ± 0%    89.7ns ± 0%  +0.96%
+Gomponents-24       4.72µs ± 0%    4.79µs ± 0%  +1.44%
 
 name              old alloc/op   new alloc/op   delta
-Ego-24               85.0B ± 0%     85.0B ± 0%    0.00%
-Quicktemplate-24     0.00B          0.00B         0.00%
-Ftmpl-24              774B ± 0%      774B ± 0%    0.00%
-Gorazor-24            512B ± 0%      512B ± 0%    0.00%
-Hero-24              0.00B          0.00B         0.00%
-Jade-24              0.00B          0.00B         0.00%
+Ego-24               85.0B ± 0%     85.0B ± 0%   0.00%
+Quicktemplate-24     0.00B          0.00B        0.00%
+Ftmpl-24              774B ± 0%      774B ± 0%   0.00%
+Gorazor-24            512B ± 0%      512B ± 0%   0.00%
+Hero-24              0.00B          0.00B        0.00%
+Jade-24              0.00B          0.00B        0.00%
+Gomponents-24       1.11kB ± 0%    1.11kB ± 0%   0.00%
 
 name              old allocs/op  new allocs/op  delta
-Ego-24                8.00 ± 0%      8.00 ± 0%    0.00%
-Quicktemplate-24      0.00           0.00         0.00%
-Ftmpl-24              12.0 ± 0%      12.0 ± 0%    0.00%
-Gorazor-24            5.00 ± 0%      5.00 ± 0%    0.00%
-Hero-24               0.00           0.00         0.00%
-Jade-24               0.00           0.00         0.00%
+Ego-24                8.00 ± 0%      8.00 ± 0%   0.00%
+Quicktemplate-24      0.00           0.00        0.00%
+Ftmpl-24              12.0 ± 0%      12.0 ± 0%   0.00%
+Gorazor-24            5.00 ± 0%      5.00 ± 0%   0.00%
+Hero-24               0.00           0.00        0.00%
+Jade-24               0.00           0.00        0.00%
+Gomponents-24         56.0 ± 0%      56.0 ± 0%   0.00%
 ```
 
 ## more complex test with template inheritance (if possible)
-
 ### full featured template engines
-
 | Name              | Runs    | µs/op  | B/op  | allocations/op |
 | ----------------- | ------- | ------ | ----- | -------------- |
-| ComplexGolang     | 55,249  | 72.293 | 6,548 | 290            |
-| ComplexGolangText | 115,640 | 31.731 | 2,236 | 107            |
-| ComplexJetHTML    | 313,855 | 11.832 | 534   | 5              |
-| ComplexMustache   | 134,226 | 26.156 | 7,274 | 156            |
+| ComplexGolang     | 56,319  | 67.173 | 6,565 | 290            |
+| ComplexGolangText | 129,277 | 29.535 | 2,236 | 107            |
+| ComplexJetHTML    | 354,434 | 11.799 | 535   | 5              |
+| ComplexMustache   | 140,676 | 25.785 | 7,275 | 156            |
 
 ```
-comparing: go1.19.5 to go1.20
+comparing: go1.22.7 to go1.23.1
 name                  old time/op    new time/op    delta
-ComplexGolang-24        72.8µs ± 0%    72.3µs ± 0%  -0.73%
-ComplexGolangText-24    31.8µs ± 0%    31.7µs ± 0%  -0.20%
-ComplexMustache-24      26.7µs ± 0%    26.2µs ± 0%  -2.07%
-ComplexJetHTML-24       11.7µs ± 0%    11.8µs ± 0%  +1.13%
+ComplexGolang-24        67.1µs ± 0%    67.2µs ± 0%  +0.06%
+ComplexGolangText-24    29.4µs ± 0%    29.5µs ± 0%  +0.30%
+ComplexMustache-24      25.4µs ± 0%    25.8µs ± 0%  +1.49%
+ComplexJetHTML-24       12.4µs ± 0%    11.8µs ± 0%  -4.89%
 
 name                  old alloc/op   new alloc/op   delta
-ComplexGolang-24        6.64kB ± 0%    6.55kB ± 0%  -1.46%
+ComplexGolang-24        6.55kB ± 0%    6.57kB ± 0%  +0.24%
 ComplexGolangText-24    2.24kB ± 0%    2.24kB ± 0%   0.00%
-ComplexMustache-24      7.27kB ± 0%    7.27kB ± 0%  +0.01%
-ComplexJetHTML-24         534B ± 0%      534B ± 0%   0.00%
+ComplexMustache-24      7.28kB ± 0%    7.28kB ± 0%  -0.01%
+ComplexJetHTML-24         535B ± 0%      535B ± 0%   0.00%
 
 name                  old allocs/op  new allocs/op  delta
 ComplexGolang-24           290 ± 0%       290 ± 0%   0.00%
@@ -220,41 +192,44 @@ ComplexJetHTML-24         5.00 ± 0%      5.00 ± 0%   0.00%
 ```
 
 ### precompilation to Go code
-
-| Name                 | Runs      | µs/op | B/op  | allocations/op |
-| -------------------- | --------- | ----- | ----- | -------------- |
-| ComplexEgo           | 837,608   | 5.777 | 568   | 31             |
-| ComplexFtmpl         | 486,427   | 7.126 | 3,535 | 38             |
-| ComplexGorazor       | 720,013   | 5.193 | 3,688 | 24             |
-| ComplexHero          | 3,623,186 | 0.955 | 0     | 0              |
-| ComplexJade          | 5,046,976 | 0.745 | 0     | 0              |
-| ComplexQuicktemplate | 3,481,230 | 1.011 | 0     | 0              |
+| Name                  | Runs      | µs/op | B/op  | allocations/op |
+| --------------------- | --------- | ----- | ----- | -------------- |
+| ComplexEgo            | 1,000,000 | 4.817 | 569   | 31             |
+| ComplexFtmpl          | 567,518   | 7.049 | 3,536 | 38             |
+| ComplexGorazor        | 606,054   | 5.445 | 3,688 | 24             |
+| ComplexHero           | 3,695,972 | 0.947 | 0     | 0              |
+| ComplexJade           | 4,579,771 | 0.743 | 0     | 0              |
+| ComplexQuicktemplate  | 3,465,189 | 1.033 | 0     | 0              |
+| ComplexGoDirectBuffer | 6,758,412 | 0.531 | 0     | 0              |
 
 ```
-comparing: go1.19.5 to go1.20
+comparing: go1.22.7 to go1.23.1
 name                     old time/op    new time/op    delta
-ComplexEgo-24              5.67µs ± 0%    5.78µs ± 0%  +1.91%
-ComplexQuicktemplate-24    1.03µs ± 0%    1.01µs ± 0%  -2.22%
-ComplexFtmpl-24            7.08µs ± 0%    7.13µs ± 0%  +0.65%
-ComplexGorazor-24          5.09µs ± 0%    5.19µs ± 0%  +2.10%
-ComplexHero-24              964ns ± 0%     955ns ± 0%  -0.92%
-ComplexJade-24              764ns ± 0%     745ns ± 0%  -2.47%
+ComplexEgo-24              5.03µs ± 0%    4.82µs ± 0%  -4.16%
+ComplexQuicktemplate-24    1.06µs ± 0%    1.03µs ± 0%  -2.55%
+ComplexFtmpl-24            7.25µs ± 0%    7.05µs ± 0%  -2.76%
+ComplexGorazor-24          5.40µs ± 0%    5.45µs ± 0%  +0.91%
+ComplexHero-24              954ns ± 0%     947ns ± 0%  -0.72%
+ComplexJade-24              736ns ± 0%     742ns ± 0%  +0.90%
+ComplexGoDirectBuffer-24    533ns ± 0%     530ns ± 0%  -0.41%
 
 name                     old alloc/op   new alloc/op   delta
-ComplexEgo-24                568B ± 0%      568B ± 0%   0.00%
+ComplexEgo-24                569B ± 0%      569B ± 0%   0.00%
 ComplexQuicktemplate-24     0.00B          0.00B        0.00%
 ComplexFtmpl-24            3.54kB ± 0%    3.54kB ± 0%   0.00%
-ComplexGorazor-24          3.73kB ± 0%    3.69kB ± 0%  -1.07%
+ComplexGorazor-24          3.69kB ± 0%    3.69kB ± 0%   0.00%
 ComplexHero-24              0.00B          0.00B        0.00%
 ComplexJade-24              0.00B          0.00B        0.00%
+ComplexGoDirectBuffer-24    0.00B          0.00B        0.00%
 
 name                     old allocs/op  new allocs/op  delta
 ComplexEgo-24                31.0 ± 0%      31.0 ± 0%   0.00%
 ComplexQuicktemplate-24      0.00           0.00        0.00%
 ComplexFtmpl-24              38.0 ± 0%      38.0 ± 0%   0.00%
-ComplexGorazor-24            22.0 ± 0%      24.0 ± 0%  +9.09%
+ComplexGorazor-24            24.0 ± 0%      24.0 ± 0%   0.00%
 ComplexHero-24               0.00           0.00        0.00%
 ComplexJade-24               0.00           0.00        0.00%
+ComplexGoDirectBuffer-24     0.00           0.00        0.00%
 ```
 
 ## Security
