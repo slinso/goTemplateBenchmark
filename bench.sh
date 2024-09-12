@@ -108,6 +108,10 @@ info "count: ${arg_n}"
 info "run benchmarks: $([[ "${__no_benchmarks}" == "true" ]] && echo "false" || echo "true")"
 info "format output: $([[ "${__no_format}" == "true" ]] && echo "false" || echo "true")"
 
+# TODO: check if specific go versions are installed, otherise install
+# go install golang.org/dl/go1.10.7@latest
+# go1.10.7 download
+
 _updateDeps() {
     info "Update dependencies"
     go get -u -v ./...
@@ -140,20 +144,18 @@ _updateDeps() {
 # run old benchmarks
 _run_old_benchmarks() {
     ${arg_c} test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-1.old
-    ${arg_c} test -bench "k(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-2.old
+    ${arg_c} test -bench "k(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|Gomponents)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-2.old
     ${arg_c} test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-3.old
-    ${arg_c} test -bench "Complex(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-4.old
-    ${arg_c} test -bench "Complex(GoStaticString|GoDirectBuffer)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-5.old
+    ${arg_c} test -bench "Complex(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|GoDirectBuffer)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-4.old
 }
 [[ "${__no_benchmarks}" == "true" ]] || _run_old_benchmarks
 
 # run benchmarks
 _run_benchmarks() {
     ${arg_g} test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-1.new
-    ${arg_g} test -bench "k(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-2.new
+    ${arg_g} test -bench "k(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|Gomponents)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-2.new
     ${arg_g} test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-3.new
-    ${arg_g} test -bench "Complex(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-4.new
-    ${arg_g} test -bench "Complex(GoStaticString|GoDirectBuffer)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-5.new
+    ${arg_g} test -bench "Complex(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|GoDirectBuffer)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-4.new
 }
 [[ "${__no_benchmarks}" == "true" ]] || _run_benchmarks
 
@@ -171,10 +173,6 @@ __format_single_benchmark() {
 
 # pretty print for readme.md
 _format_benchmarks() {
-    echo ""
-    echo "## special benchmarks"
-    __format_single_benchmark 5
-
     echo ""
     echo "## simple benchmarks"
     echo "### full featured template engines"
