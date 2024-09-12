@@ -10,6 +10,7 @@ import (
 
 	"github.com/SlinSo/goTemplateBenchmark/golang"
 	"github.com/SlinSo/goTemplateBenchmark/gomponents"
+	"github.com/SlinSo/goTemplateBenchmark/htmlbuilder"
 	"github.com/SlinSo/goTemplateBenchmark/model"
 	"github.com/SlinSo/goTemplateBenchmark/templbench"
 	"github.com/valyala/bytebufferpool"
@@ -196,6 +197,27 @@ func BenchmarkEgo(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		ego.EgoSimple(&buf, testData)
+		buf.Reset()
+	}
+}
+
+/******************************************************************************
+** HB (HTML Builder)
+******************************************************************************/
+func TestHB(t *testing.T) {
+	var buf bytes.Buffer
+	htmlbuilder.HbSimple(&buf, testData)
+
+	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkHB(b *testing.B) {
+	var buf bytes.Buffer
+
+	for i := 0; i < b.N; i++ {
+		htmlbuilder.HbSimple(&buf, testData)
 		buf.Reset()
 	}
 }

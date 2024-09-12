@@ -1,13 +1,13 @@
 name           old time/op    new time/op    delta
-Golang-24        8.04µs ± 0%    8.17µs ± 0%  +1.62%
-GolangText-24    2.39µs ± 0%    2.43µs ± 0%  +1.63%
-Ace-24           12.7µs ± 0%    12.7µs ± 0%  +0.69%
-Amber-24         8.20µs ± 0%    8.30µs ± 0%  +1.27%
-Mustache-24      4.31µs ± 0%    4.28µs ± 0%  -0.72%
-Pongo2-24        5.64µs ± 0%    5.44µs ± 0%  -3.51%
-Handlebars-24    13.4µs ± 0%    12.8µs ± 0%  -4.13%
-Soy-24           3.45µs ± 0%    3.40µs ± 0%  -1.56%
-JetHTML-24        769ns ± 0%     771ns ± 0%  +0.27%
+Golang-24        8.56µs ± 0%    7.88µs ± 0%  -7.91%
+GolangText-24    2.44µs ± 0%    2.37µs ± 0%  -3.11%
+Ace-24           13.1µs ± 0%    12.6µs ± 0%  -3.65%
+Amber-24         8.90µs ± 0%    8.57µs ± 0%  -3.70%
+Mustache-24      4.27µs ± 0%    4.38µs ± 0%  +2.50%
+Pongo2-24        5.72µs ± 0%    5.79µs ± 0%  +1.24%
+Handlebars-24    13.1µs ± 0%    13.0µs ± 0%  -0.21%
+Soy-24           3.47µs ± 0%    3.51µs ± 0%  +1.18%
+JetHTML-24        769ns ± 0%     773ns ± 0%  +0.52%
 
 name           old alloc/op   new alloc/op   delta
 Golang-24          769B ± 0%      769B ± 0%   0.00%

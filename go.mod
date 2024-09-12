@@ -1,6 +1,6 @@
 module github.com/SlinSo/goTemplateBenchmark
 
-go 1.21
+go 1.22
 
 toolchain go1.23.1
 
@@ -11,6 +11,7 @@ require (
 	github.com/dchest/htmlmin v1.0.0
 	github.com/eknkc/amber v0.0.0-20171010120322-cdade1c07385
 	github.com/flosch/pongo2 v0.0.0-20200913210552-0d938eb266f3
+	github.com/gouniverse/hb v1.75.1
 	github.com/hoisie/mustache v0.0.0-20160804235033-6375acf62c69
 	github.com/maragudk/gomponents v0.20.4
 	github.com/robfig/soy v0.0.0-20210708182426-5db4016fcbab
@@ -29,8 +30,8 @@ require (
 	github.com/kr/text v0.2.0 // indirect
 	github.com/robertkrimen/otto v0.0.0-20210614181706-373ff5438452 // indirect
 	github.com/robfig/gettext v0.0.0-20210319194541-81dadf19848b // indirect
-	golang.org/x/net v0.28.0 // indirect
-	golang.org/x/sys v0.23.0 // indirect
+	golang.org/x/net v0.29.0 // indirect
+	golang.org/x/sys v0.25.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

@@ -144,18 +144,18 @@ _updateDeps() {
 # run old benchmarks
 _run_old_benchmarks() {
     ${arg_c} test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-1.old
-    ${arg_c} test -bench "k(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|Gomponents)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-2.old
+    ${arg_c} test -bench "k(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|HB|Gomponents|Templ)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-2.old
     ${arg_c} test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-3.old
-    ${arg_c} test -bench "Complex(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|GoDirectBuffer)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-4.old
+    ${arg_c} test -bench "Complex(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|Templ|GoDirectBuffer)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-4.old
 }
 [[ "${__no_benchmarks}" == "true" ]] || _run_old_benchmarks
 
 # run benchmarks
 _run_benchmarks() {
     ${arg_g} test -bench "k(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-1.new
-    ${arg_g} test -bench "k(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|Gomponents)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-2.new
+    ${arg_g} test -bench "k(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|HB|Gomponents|Templ)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-2.new
     ${arg_g} test -bench "Complex(Ace|Amber|Golang|GolangText|Handlebars|Mustache|Pongo2|Soy|JetHTML)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-3.new
-    ${arg_g} test -bench "Complex(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|GoDirectBuffer)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-4.new
+    ${arg_g} test -bench "Complex(Ego|Quicktemplate|Ftmpl|Gorazor|Hero|Jade|Templ|GoDirectBuffer)$" -benchmem -benchtime="${arg_t}" -count="${arg_n}" | tee ./files/results-4.new
 }
 [[ "${__no_benchmarks}" == "true" ]] || _run_benchmarks
 

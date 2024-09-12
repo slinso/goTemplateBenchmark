@@ -1,26 +1,32 @@
 name              old time/op    new time/op    delta
-Ego-24              1.02µs ± 0%    0.94µs ± 0%  -7.67%
-Quicktemplate-24     194ns ± 0%     188ns ± 0%  -2.99%
-Ftmpl-24            1.66µs ± 0%    1.60µs ± 0%  -3.55%
-Gorazor-24           847ns ± 0%     831ns ± 0%  -1.84%
-Hero-24              125ns ± 0%     116ns ± 0%  -6.96%
-Jade-24             88.8ns ± 0%    89.7ns ± 0%  +0.96%
-Gomponents-24       4.72µs ± 0%    4.79µs ± 0%  +1.44%
+Ego-24              1.00µs ± 0%    1.01µs ± 0%  +1.60%
+HB-24               7.48µs ± 0%    7.53µs ± 0%  +0.72%
+Quicktemplate-24     176ns ± 0%     180ns ± 0%  +2.45%
+Ftmpl-24            1.66µs ± 0%    1.61µs ± 0%  -3.31%
+Gorazor-24           829ns ± 0%     820ns ± 0%  -1.13%
+Hero-24              118ns ± 0%     120ns ± 0%  +1.52%
+Jade-24             87.0ns ± 0%    85.2ns ± 0%  -1.98%
+Templ-24             543ns ± 0%     557ns ± 0%  +2.73%
+Gomponents-24       4.87µs ± 0%    4.88µs ± 0%  +0.02%
 
 name              old alloc/op   new alloc/op   delta
 Ego-24               85.0B ± 0%     85.0B ± 0%   0.00%
+HB-24               2.45kB ± 0%    2.45kB ± 0%   0.00%
 Quicktemplate-24     0.00B          0.00B        0.00%
 Ftmpl-24              774B ± 0%      774B ± 0%   0.00%
 Gorazor-24            512B ± 0%      512B ± 0%   0.00%
 Hero-24              0.00B          0.00B        0.00%
 Jade-24              0.00B          0.00B        0.00%
+Templ-24             96.0B ± 0%     96.0B ± 0%   0.00%
 Gomponents-24       1.11kB ± 0%    1.11kB ± 0%   0.00%
 
 name              old allocs/op  new allocs/op  delta
 Ego-24                8.00 ± 0%      8.00 ± 0%   0.00%
+HB-24                 51.0 ± 0%      51.0 ± 0%   0.00%
 Quicktemplate-24      0.00           0.00        0.00%
 Ftmpl-24              12.0 ± 0%      12.0 ± 0%   0.00%
 Gorazor-24            5.00 ± 0%      5.00 ± 0%   0.00%
 Hero-24               0.00           0.00        0.00%
 Jade-24               0.00           0.00        0.00%
+Templ-24              2.00 ± 0%      2.00 ± 0%   0.00%
 Gomponents-24         56.0 ± 0%      56.0 ± 0%   0.00%
