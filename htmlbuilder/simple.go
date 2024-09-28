@@ -16,23 +16,14 @@ func HbSimple(w io.Writer, u *model.User) {
 		ul.Child(hb.NewLI().HTML(u.FavoriteColors[i]))
 	}
 
-	htmlTag := &hb.Tag{
-		TagName: "html",
-	}
+	page := hb.NewTag("html").
+		Child(hb.NewTag("body").
+			Child(hb.NewHeading1().HTML(u.FirstName)).
+			Child(hb.NewParagraph().HTML("Here's a list of your favorite colors:")).
+			Child(ul),
+		).ToHTML()
 
-	bodyTag := &hb.Tag{
-		TagName: "body",
-	}
-
-	page := htmlTag.Children([]hb.TagInterface{
-		bodyTag.Children([]hb.TagInterface{
-			hb.NewHeading1().HTML(u.FirstName),
-			hb.NewParagraph().HTML("Here's a list of your favorite colors:"),
-			ul,
-		}),
-	})
-
-	_, _ = io.WriteString(w, page.ToHTML())
+	_, _ = io.WriteString(w, page)
 }
 
 var (
