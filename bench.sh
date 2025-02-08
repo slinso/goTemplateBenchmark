@@ -137,6 +137,8 @@ _updateDeps() {
     jade -d jade/ jade/simple.jade
     jade -d jade/ jade/index.jade
 
+    go install github.com/OblivionOcean/Goh@main
+
     go mod tidy
     go test .
 }
