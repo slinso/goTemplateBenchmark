@@ -2,8 +2,8 @@ package gomponents
 
 import (
 	"github.com/SlinSo/goTemplateBenchmark/model"
-	g "github.com/maragudk/gomponents"
-	. "github.com/maragudk/gomponents/html"
+	g "maragu.dev/gomponents"
+	. "maragu.dev/gomponents/html"
 )
 
 func Page(u *model.User) g.Node {
