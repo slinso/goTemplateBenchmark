@@ -3,3 +3,4 @@ prof.mem
 cpu*.prof
 mem*.prof
 *.test
+files/results*

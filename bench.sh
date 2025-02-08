@@ -119,7 +119,7 @@ _updateDeps() {
     go install -v github.com/tkrajina/ftmpl@master
     ftmpl ftmpl/
 
-    go install -v github.com/sipin/gorazor@master
+    go install -v github.com/sipin/gorazor@main
     gorazor -prefix github.com/SlinSo/goTemplateBenchmark gorazor gorazor
 
     go install -v github.com/valyala/quicktemplate/qtc@master
@@ -138,6 +138,7 @@ _updateDeps() {
     jade -d jade/ jade/index.jade
 
     go mod tidy
+    go test .
 }
 [[ "${arg_u:?}" == "1" ]] && _updateDeps
 
