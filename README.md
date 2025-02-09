@@ -17,6 +17,7 @@ comparing the performance of different template engines
 
 - [ego](https://github.com/benbjohnson/ego)
 - [ftmpl](https://github.com/tkrajina/ftmpl)
+- [Goh](https://github.com/OblivionOcean/Goh)
 - [Gorazor](https://github.com/sipin/gorazor)
 - [Quicktemplate](https://github.com/valyala/quicktemplate)
 - [Hero](https://github.com/shiyanhui/hero)
