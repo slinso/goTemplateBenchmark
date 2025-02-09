@@ -170,7 +170,7 @@ __format_single_benchmark() {
     echo ""
     echo "\`\`\`"
     echo "comparing: ${arg_c} to ${arg_g}"
-    benchstat -delta-test none files/results-"${i}".old files/results-"${i}".new | tee files/results-"${i}"-benchstat.txt
+    benchstat files/results-"${i}".old files/results-"${i}".new | tee files/results-"${i}"-benchstat.txt
     echo "\`\`\`"
 }
 
