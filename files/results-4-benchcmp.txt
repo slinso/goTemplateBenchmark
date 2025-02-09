@@ -1,8 +1,0 @@
-benchmark                           old ns/op     new ns/op     delta
-BenchmarkComplexEgo-8               4218          4786          +13.47%
-BenchmarkComplexQuicktemplate-8     1664          1819          +9.31%
-BenchmarkComplexEgoSlinso-8         1984          2084          +5.04%
-BenchmarkComplexFtmpl-8             5750          5727          -0.40%
-BenchmarkComplexGorazor-8           4020          4108          +2.19%
-BenchmarkComplexHero-8              1332          1498          +12.46%
-BenchmarkComplexJade-8              919           1195          +30.03%

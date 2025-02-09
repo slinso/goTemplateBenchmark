@@ -1,8 +1,0 @@
-benchmark                        old ns/op     new ns/op     delta
-BenchmarkComplexGolang-8         47023         47037         +0.03%
-BenchmarkComplexGolangText-8     20565         27318         +32.84%
-BenchmarkComplexMustache-8       20409         20331         -0.38%
-BenchmarkComplexJetHTML-8        9689          11525         +18.95%
-
-benchmark                      old bytes     new bytes     delta
-BenchmarkComplexMustache-8     7558          7559          +0.01%
