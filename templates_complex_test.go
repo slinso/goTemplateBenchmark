@@ -16,6 +16,7 @@ import (
 
 	"github.com/SlinSo/goTemplateBenchmark/ego"
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
+	goh "github.com/SlinSo/goTemplateBenchmark/goh"
 	"github.com/SlinSo/goTemplateBenchmark/gorazor"
 	herotmpl "github.com/SlinSo/goTemplateBenchmark/hero"
 	"github.com/SlinSo/goTemplateBenchmark/jade"
@@ -416,6 +417,28 @@ func BenchmarkComplexJetHTML(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+		buf.Reset()
+	}
+}
+
+/******************************************************************************
+** Goh
+******************************************************************************/
+func TestComplexGoh(t *testing.T) {
+	var buf bytes.Buffer
+
+	goh.Index(testComplexUser, testComplexNav, testComplexTitle, &buf)
+
+	if msg, ok := linesEquals(buf.String(), expectedtComplexResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkComplexGoh(b *testing.B) {
+	var buf bytes.Buffer
+
+	for i := 0; i < b.N; i++ {
+		goh.Index(testComplexUser, testComplexNav, testComplexTitle, &buf)
 		buf.Reset()
 	}
 }

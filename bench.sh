@@ -137,6 +137,8 @@ _updateDeps() {
     jade -d jade/ jade/simple.jade
     jade -d jade/ jade/index.jade
 
+    go install github.com/OblivionOcean/Goh@main
+
     go mod tidy
     go test .
 }
@@ -168,7 +170,7 @@ __format_single_benchmark() {
     echo ""
     echo "\`\`\`"
     echo "comparing: ${arg_c} to ${arg_g}"
-    benchstat -delta-test none files/results-"${i}".old files/results-"${i}".new | tee files/results-"${i}"-benchstat.txt
+    benchstat files/results-"${i}".old files/results-"${i}".new | tee files/results-"${i}"-benchstat.txt
     echo "\`\`\`"
 }
 

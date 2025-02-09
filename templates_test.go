@@ -8,6 +8,7 @@ import (
 	"testing"
 	text "text/template"
 
+	goh "github.com/SlinSo/goTemplateBenchmark/goh"
 	"github.com/SlinSo/goTemplateBenchmark/golang"
 	"github.com/SlinSo/goTemplateBenchmark/gomponents"
 	"github.com/SlinSo/goTemplateBenchmark/htmlbuilder"
@@ -523,6 +524,27 @@ func BenchmarkJetHTML(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
+		buf.Reset()
+	}
+}
+
+/******************************************************************************
+** Goh
+******************************************************************************/
+func TestGoh(t *testing.T) {
+	var buf bytes.Buffer
+	goh.SimpleQtc(testData, &buf)
+
+	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
+		t.Error(msg)
+	}
+}
+
+func BenchmarkGoh(b *testing.B) {
+	var buf bytes.Buffer
+
+	for i := 0; i < b.N; i++ {
+		goh.SimpleQtc(testData, &buf)
 		buf.Reset()
 	}
 }
