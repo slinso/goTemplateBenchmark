@@ -20,7 +20,7 @@ require (
 	github.com/valyala/bytebufferpool v1.0.1-0.20180905182247-cdfbe9377474
 	github.com/valyala/quicktemplate v1.8.0
 	github.com/yosssi/ace v0.0.5
-	maragu.dev/gomponents v1.0.0
+	maragu.dev/gomponents v1.2.0
 )
 
 require (
