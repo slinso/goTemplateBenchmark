@@ -58,56 +58,56 @@ local desktop: ryzen 3900x
 
 ## simple benchmarks
 ### full featured template engines
-| Name       | Runs      | µs/op  | B/op  | allocations/op |
-| ---------- | --------- | ------ | ----- | -------------- |
-| Ace        | 256,797   | 13.017 | 1,121 | 40             |
-| Amber      | 373,540   | 8.926  | 849   | 36             |
-| Golang     | 604,209   | 8.650  | 769   | 35             |
-| GolangText | 1,426,340 | 2.453  | 128   | 7              |
-| Handlebars | 254,118   | 13.904 | 3,424 | 75             |
-| JetHTML    | 4,334,586 | 0.794  | 0     | 0              |
-| Mustache   | 810,091   | 4.483  | 1,723 | 30             |
-| Pongo2     | 586,269   | 5.805  | 2,075 | 32             |
-| Soy        | 1,000,000 | 3.545  | 1,224 | 19             |
+| Name       | Runs      | µs/op | B/op  | allocations/op |
+| ---------- | --------- | ----- | ----- | -------------- |
+| Ace        | 501,468   | 6.896 | 1,073 | 32             |
+| Amber      | 829,180   | 4.371 | 753   | 28             |
+| Golang     | 829,586   | 4.226 | 673   | 27             |
+| GolangText | 2,524,951 | 1.428 | 224   | 7              |
+| Handlebars | 491,289   | 7.281 | 3,407 | 73             |
+| JetHTML    | 4,463,096 | 0.786 | 0     | 0              |
+| Mustache   | 1,595,821 | 2.244 | 1,611 | 24             |
+| Pongo2     | 1,000,000 | 3.159 | 2,059 | 30             |
+| Soy        | 1,839,766 | 1.968 | 1,224 | 19             |
 
 
 ### precompilation to Go code
 | Name          | Runs       | µs/op | B/op  | allocations/op |
 | ------------- | ---------- | ----- | ----- | -------------- |
-| Ego           | 3,287,790  | 1.024 | 85    | 8              |
-| Ftmpl         | 2,133,676  | 1.704 | 774   | 12             |
-| Goh           | 41,564,152 | 0.085 | 0     | 0              |
-| Gomponents    | 630,400    | 5.394 | 1,240 | 64             |
-| Gorazor       | 4,209,751  | 0.852 | 512   | 5              |
-| HB            | 735,676    | 4.749 | 1,984 | 36             |
-| Hero          | 30,954,032 | 0.120 | 0     | 0              |
-| Jade          | 38,540,751 | 0.083 | 0     | 0              |
-| Quicktemplate | 17,429,122 | 0.183 | 0     | 0              |
-| Templ         | 6,126,406  | 0.575 | 96    | 2              |
+| Ego           | 6,319,710  | 0.565 | 85    | 8              |
+| Ftmpl         | 3,803,455  | 0.929 | 774   | 12             |
+| Goh           | 41,145,136 | 0.084 | 0     | 0              |
+| Gomponents    | 2,234,062  | 1.607 | 776   | 25             |
+| Gorazor       | 7,170,680  | 0.501 | 512   | 5              |
+| HB            | 1,387,557  | 2.599 | 2,064 | 44             |
+| Hero          | 31,017,628 | 0.125 | 0     | 0              |
+| Jade          | 25,551,121 | 0.140 | 0     | 0              |
+| Quicktemplate | 19,508,510 | 0.181 | 0     | 0              |
+| Templ         | 4,734,141  | 0.760 | 182   | 10             |
 
 
 ## more complex test with template inheritance (if possible)
 ### full featured template engines
 | Name              | Runs    | µs/op  | B/op  | allocations/op |
 | ----------------- | ------- | ------ | ----- | -------------- |
-| ComplexGolang     | 49,784  | 72.503 | 6,565 | 290            |
-| ComplexGolangText | 120,789 | 32.198 | 2,236 | 107            |
-| ComplexJetHTML    | 287,542 | 12.108 | 535   | 5              |
-| ComplexMustache   | 128,841 | 27.375 | 7,275 | 156            |
+| ComplexGolang     | 99,990  | 36.024 | 5,474 | 209            |
+| ComplexGolangText | 214,260 | 16.702 | 2,396 | 78             |
+| ComplexJetHTML    | 462,312 | 7.612  | 535   | 5              |
+| ComplexMustache   | 248,392 | 14.313 | 6,730 | 112            |
 
 
 ### precompilation to Go code
 | Name                  | Runs      | µs/op | B/op  | allocations/op |
 | --------------------- | --------- | ----- | ----- | -------------- |
-| ComplexEgo            | 1,000,000 | 5.352 | 569   | 31             |
-| ComplexFtmpl          | 512,026   | 7.545 | 3,536 | 38             |
-| ComplexGoDirectBuffer | 6,203,253 | 0.543 | 0     | 0              |
-| ComplexGoh            | 6,074,386 | 0.569 | 0     | 0              |
-| ComplexGorazor        | 636,561   | 5.653 | 3,688 | 24             |
-| ComplexHero           | 3,706,204 | 0.955 | 0     | 0              |
-| ComplexJade           | 4,795,210 | 0.708 | 0     | 0              |
-| ComplexQuicktemplate  | 3,466,336 | 1.012 | 0     | 0              |
-| ComplexTempl          | 1,265,850 | 2.790 | 408   | 11             |
+| ComplexEgo            | 1,275,114 | 2.815 | 569   | 31             |
+| ComplexFtmpl          | 856,627   | 4.137 | 3,535 | 38             |
+| ComplexGoDirectBuffer | 5,595,393 | 0.656 | 0     | 0              |
+| ComplexGoh            | 6,029,959 | 0.593 | 0     | 0              |
+| ComplexGorazor        | 1,000,000 | 3.283 | 3,688 | 24             |
+| ComplexHero           | 3,601,705 | 1.003 | 0     | 0              |
+| ComplexJade           | 3,236,332 | 1.060 | 0     | 0              |
+| ComplexQuicktemplate  | 3,428,479 | 1.033 | 0     | 0              |
+| ComplexTempl          | 1,000,000 | 3.168 | 762   | 38             |
 
 ## Security
 
