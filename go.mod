@@ -15,7 +15,6 @@ require (
 	github.com/robfig/soy v0.0.0-20210708182426-5db4016fcbab
 	github.com/shiyanhui/hero v0.0.2
 	github.com/sipin/gorazor v1.2.2
-	github.com/valyala/bytebufferpool v1.0.1-0.20180905182247-cdfbe9377474
 	github.com/valyala/quicktemplate v1.8.0
 	github.com/yosssi/ace v0.0.5
 	maragu.dev/gomponents v1.2.0
@@ -29,6 +28,7 @@ require (
 	github.com/kr/text v0.2.0 // indirect
 	github.com/robertkrimen/otto v0.0.0-20210614181706-373ff5438452 // indirect
 	github.com/robfig/gettext v0.0.0-20210319194541-81dadf19848b // indirect
+	github.com/valyala/bytebufferpool v1.0.1-0.20180905182247-cdfbe9377474 // indirect
 	golang.org/x/net v0.50.0 // indirect
 	golang.org/x/sys v0.41.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect

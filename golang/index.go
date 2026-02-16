@@ -8,7 +8,6 @@ import (
 	"unsafe"
 
 	"github.com/SlinSo/goTemplateBenchmark/model"
-	"github.com/valyala/bytebufferpool"
 )
 
 var ()
@@ -23,7 +22,7 @@ func UnsafeStrToBytes(s string) []byte {
 	return *(*[]byte)(unsafe.Pointer(&bh))
 }
 
-func Escape(bb *bytebufferpool.ByteBuffer, b []byte) {
+func Escape(bb *bytes.Buffer, b []byte) {
 	write := bb.Write
 	j := 0
 	for i, c := range b {
@@ -61,7 +60,7 @@ var (
 	strAmp  = []byte("&amp;")
 )
 
-func hyper(bb *bytebufferpool.ByteBuffer, s string) {
+func hyper(bb *bytes.Buffer, s string) {
 	classFound := false
 	idFound := false
 	_ = bb.WriteByte('<')
@@ -93,7 +92,7 @@ func hyper(bb *bytebufferpool.ByteBuffer, s string) {
 	_ = bb.WriteByte('>')
 }
 
-func Index3(bb *bytebufferpool.ByteBuffer, u *model.User, nav []*model.Navigation, title string) {
+func Index3(bb *bytes.Buffer, u *model.User, nav []*model.Navigation, title string) {
 	_, _ = bb.WriteString(`<!DOCTYPE html>
 <html>
 <body>
@@ -128,7 +127,7 @@ func Index3(bb *bytebufferpool.ByteBuffer, u *model.User, nav []*model.Navigatio
 </html>`)
 }
 
-func Index2(bb *bytebufferpool.ByteBuffer, u *model.User, nav []*model.Navigation, title string) {
+func Index2(bb *bytes.Buffer, u *model.User, nav []*model.Navigation, title string) {
 	_, _ = bb.WriteString(`<!DOCTYPE html>`)
 	hyper(bb, "html")
 	hyper(bb, "body")
@@ -156,7 +155,7 @@ func Index2(bb *bytebufferpool.ByteBuffer, u *model.User, nav []*model.Navigatio
 		hyper(bb, "p")
 		_, _ = bb.WriteString(html.EscapeString(u.FirstName))
 		_, _ = bb.WriteString(` has `)
-		bb.B = strconv.AppendInt(bb.B, int64(i), 10)
+		bb.WriteString(strconv.FormatInt(int64(i), 10))
 		if i == 1 {
 			_, _ = bb.WriteString(` message</p>`)
 		} else {
@@ -176,7 +175,7 @@ var (
 )
 
 // EscapeHTML escapes the html and then put it to the buffer.
-func EscapeHTML(html string, buffer *bytebufferpool.ByteBuffer) {
+func EscapeHTML(html string, buffer *bytes.Buffer) {
 	var i, j, k int
 
 	for i < len(html) {
@@ -195,7 +194,7 @@ func EscapeHTML(html string, buffer *bytebufferpool.ByteBuffer) {
 	}
 }
 
-func Index(bb *bytebufferpool.ByteBuffer, u *model.User, nav []*model.Navigation, title string) {
+func Index(bb *bytes.Buffer, u *model.User, nav []*model.Navigation, title string) {
 	_, _ = bb.WriteString(`
 <!DOCTYPE html>
 <html>
@@ -237,7 +236,7 @@ func Index(bb *bytebufferpool.ByteBuffer, u *model.User, nav []*model.Navigation
 		if i == 1 {
 			_, _ = bb.WriteString(`1 message</p>`)
 		} else {
-			bb.B = strconv.AppendInt(bb.B, int64(i), 10)
+			bb.WriteString(strconv.FormatInt(int64(i), 10))
 			_, _ = bb.WriteString(` messages</p>`)
 		}
 

@@ -3,8 +3,9 @@
 package jade
 
 import (
+	"bytes"
+
 	"github.com/SlinSo/goTemplateBenchmark/model"
-	pool "github.com/valyala/bytebufferpool"
 )
 
 const (
@@ -15,7 +16,7 @@ const (
 	simple__4 = `</li>`
 )
 
-func Simple(u *model.User, buffer *pool.ByteBuffer) {
+func Simple(u *model.User, buffer *bytes.Buffer) {
 
 	buffer.WriteString(simple__0)
 	WriteEscString(u.FirstName, buffer)

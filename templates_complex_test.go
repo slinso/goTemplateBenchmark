@@ -12,7 +12,6 @@ import (
 	"github.com/SlinSo/goTemplateBenchmark/golang"
 	"github.com/SlinSo/goTemplateBenchmark/model"
 	"github.com/SlinSo/goTemplateBenchmark/templbench"
-	"github.com/valyala/bytebufferpool"
 
 	"github.com/SlinSo/goTemplateBenchmark/ego"
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
@@ -469,9 +468,9 @@ func BenchmarkComplexHero(b *testing.B) {
 ** Jade
 ******************************************************************************/
 func TestComplexJade(t *testing.T) {
-	buf := bytebufferpool.Get()
+	var buf bytes.Buffer
 
-	jade.Index(testComplexUser, testComplexNav, testComplexTitle, buf)
+	jade.Index(testComplexUser, testComplexNav, testComplexTitle, &buf)
 
 	if msg, ok := linesEquals(buf.String(), expectedtComplexResult); !ok {
 		t.Error(msg)
@@ -479,10 +478,10 @@ func TestComplexJade(t *testing.T) {
 }
 
 func BenchmarkComplexJade(b *testing.B) {
-	buf := bytebufferpool.Get()
+	var buf bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		jade.Index(testComplexUser, testComplexNav, testComplexTitle, buf)
+		jade.Index(testComplexUser, testComplexNav, testComplexTitle, &buf)
 		buf.Reset()
 	}
 }
@@ -491,116 +490,106 @@ func BenchmarkComplexJade(b *testing.B) {
 ** Go func
 ******************************************************************************/
 func TestComplexGoFunc(t *testing.T) {
-	bb := bytebufferpool.Get()
+	var bb bytes.Buffer
 
-	golang.Index(bb, testComplexUser, testComplexNav, testComplexTitle)
-
-	if msg, ok := linesEquals(bb.String(), expectedtComplexResult); !ok {
-		t.Error(msg)
-	}
-	bb.Reset()
-
-	golang.Index2(bb, testComplexUser, testComplexNav, testComplexTitle)
+	golang.Index(&bb, testComplexUser, testComplexNav, testComplexTitle)
 
 	if msg, ok := linesEquals(bb.String(), expectedtComplexResult); !ok {
 		t.Error(msg)
 	}
 	bb.Reset()
 
-	golang.Index3(bb, testComplexUser, testComplexNav, testComplexTitle)
+	golang.Index2(&bb, testComplexUser, testComplexNav, testComplexTitle)
 
 	if msg, ok := linesEquals(bb.String(), expectedtComplexResult); !ok {
 		t.Error(msg)
 	}
-	bytebufferpool.Put(bb)
+	bb.Reset()
+
+	golang.Index3(&bb, testComplexUser, testComplexNav, testComplexTitle)
+
+	if msg, ok := linesEquals(bb.String(), expectedtComplexResult); !ok {
+		t.Error(msg)
+	}
 }
 
 func BenchmarkComplexGoDirectBuffer(b *testing.B) {
-	bb := bytebufferpool.Get()
+	var bb bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		golang.Index(bb, testComplexUser, testComplexNav, testComplexTitle)
+		golang.Index(&bb, testComplexUser, testComplexNav, testComplexTitle)
 		bb.Reset()
 	}
-	bytebufferpool.Put(bb)
 }
 
 func BenchmarkComplexGoHyperscript(b *testing.B) {
-	bb := bytebufferpool.Get()
+	var bb bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		golang.Index2(bb, testComplexUser, testComplexNav, testComplexTitle)
+		golang.Index2(&bb, testComplexUser, testComplexNav, testComplexTitle)
 		bb.Reset()
 	}
-	bytebufferpool.Put(bb)
 }
 
 func BenchmarkComplexGoStaticString(b *testing.B) {
-	bb := bytebufferpool.Get()
+	var bb bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		golang.Index3(bb, testComplexUser, testComplexNav, testComplexTitle)
+		golang.Index3(&bb, testComplexUser, testComplexNav, testComplexTitle)
 		bb.Reset()
 	}
-	bytebufferpool.Put(bb)
 }
 
 func BenchmarkComplexEscapeHTML(b *testing.B) {
-	bb := bytebufferpool.Get()
+	var bb bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		golang.EscapeHTML(testComplexData.User.EscapedContent, bb)
+		golang.EscapeHTML(testComplexData.User.EscapedContent, &bb)
 		bb.Reset()
 	}
-	bytebufferpool.Put(bb)
 }
 
 func BenchmarkComplexEscape(b *testing.B) {
-	bb := bytebufferpool.Get()
+	var bb bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		golang.Escape(bb, golang.UnsafeStrToBytes(testComplexData.User.EscapedContent))
+		golang.Escape(&bb, golang.UnsafeStrToBytes(testComplexData.User.EscapedContent))
 		bb.Reset()
 	}
-	bytebufferpool.Put(bb)
 }
 
 func BenchmarkComplexEscapeGo(b *testing.B) {
-	bb := bytebufferpool.Get()
+	var bb bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
 		bb.WriteString(html.EscapeString(testComplexData.User.EscapedContent))
 		bb.Reset()
 	}
-	bytebufferpool.Put(bb)
 }
 
 func BenchmarkComplexEscapeHTMLNoop(b *testing.B) {
-	bb := bytebufferpool.Get()
+	var bb bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		golang.EscapeHTML(testComplexData.User.FirstName, bb)
+		golang.EscapeHTML(testComplexData.User.FirstName, &bb)
 		bb.Reset()
 	}
-	bytebufferpool.Put(bb)
 }
 
 func BenchmarkComplexEscapeNoop(b *testing.B) {
-	bb := bytebufferpool.Get()
+	var bb bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		golang.Escape(bb, golang.UnsafeStrToBytes(testComplexData.User.FirstName))
+		golang.Escape(&bb, golang.UnsafeStrToBytes(testComplexData.User.FirstName))
 		bb.Reset()
 	}
-	bytebufferpool.Put(bb)
 }
 
 func BenchmarkComplexEscapeGoNoop(b *testing.B) {
-	bb := bytebufferpool.Get()
+	var bb bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
 		bb.WriteString(html.EscapeString(testComplexData.User.FirstName))
 		bb.Reset()
 	}
-	bytebufferpool.Put(bb)
 }

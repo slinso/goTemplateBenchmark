@@ -14,7 +14,6 @@ import (
 	"github.com/SlinSo/goTemplateBenchmark/htmlbuilder"
 	"github.com/SlinSo/goTemplateBenchmark/model"
 	"github.com/SlinSo/goTemplateBenchmark/templbench"
-	"github.com/valyala/bytebufferpool"
 
 	"github.com/SlinSo/goTemplateBenchmark/ego"
 	"github.com/SlinSo/goTemplateBenchmark/ftmpl"
@@ -128,42 +127,40 @@ func BenchmarkGolangText(b *testing.B) {
 ** GoFunctions
 ******************************************************************************/
 func TestGoFunc(t *testing.T) {
-	bb := bytebufferpool.Get()
-	golang.WriteSimpleGolang(bb, testData)
+	var bb bytes.Buffer
+	golang.WriteSimpleGolang(&bb, testData)
 
 	if msg, ok := linesEquals(bb.String(), expectedtResult); !ok {
 		t.Error(msg)
 	}
 	bb.Reset()
-	g := golang.NewGoFunc(bb)
+	g := golang.NewGoFunc(&bb)
 
 	golang.GoFuncElem(g, testData)
 	if msg, ok := linesEquals(bb.String(), expectedtResult); !ok {
 		t.Error(msg)
 	}
 	bb.Reset()
-	g = golang.NewGoFunc(bb)
+	g = golang.NewGoFunc(&bb)
 
 	golang.GoFuncFunc(g, testData)
 	if msg, ok := linesEquals(bb.String(), expectedtResult); !ok {
 		t.Error(msg)
 	}
-
-	bytebufferpool.Put(bb)
 }
 
 func BenchmarkGoDirectBuffer(b *testing.B) {
-	bb := bytebufferpool.Get()
+	var bb bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		golang.WriteSimpleGolang(bb, testData)
+		golang.WriteSimpleGolang(&bb, testData)
 		bb.Reset()
 	}
 }
 
 func BenchmarkGoCustomHtmlAPI(b *testing.B) {
-	buf := bytebufferpool.Get()
-	g := golang.NewGoFunc(buf)
+	var buf bytes.Buffer
+	g := golang.NewGoFunc(&buf)
 
 	for i := 0; i < b.N; i++ {
 		golang.GoFuncElem(g, testData)
@@ -172,8 +169,8 @@ func BenchmarkGoCustomHtmlAPI(b *testing.B) {
 }
 
 func BenchmarkGoFunc3(b *testing.B) {
-	buf := bytebufferpool.Get()
-	g := golang.NewGoFunc(buf)
+	var buf bytes.Buffer
+	g := golang.NewGoFunc(&buf)
 
 	for i := 0; i < b.N; i++ {
 		golang.GoFuncFunc(g, testData)
@@ -575,9 +572,9 @@ func BenchmarkHero(b *testing.B) {
 ** Jade
 ******************************************************************************/
 func TestJade(t *testing.T) {
-	buf := bytebufferpool.Get()
+	var buf bytes.Buffer
 
-	jade.Simple(testData, buf)
+	jade.Simple(testData, &buf)
 
 	if msg, ok := linesEquals(buf.String(), expectedtResult); !ok {
 		t.Error(msg)
@@ -585,10 +582,10 @@ func TestJade(t *testing.T) {
 }
 
 func BenchmarkJade(b *testing.B) {
-	buf := bytebufferpool.Get()
+	var buf bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		jade.Simple(testData, buf)
+		jade.Simple(testData, &buf)
 		buf.Reset()
 	}
 }
@@ -619,9 +616,9 @@ func BenchmarkTempl(b *testing.B) {
 ** Gomponents
 ******************************************************************************/
 func TestGomponents(t *testing.T) {
-	buf := bytebufferpool.Get()
+	var buf bytes.Buffer
 
-	err := gomponents.Page(testData).Render(buf)
+	err := gomponents.Page(testData).Render(&buf)
 	if err != nil {
 		t.Error(err)
 	}
@@ -632,10 +629,10 @@ func TestGomponents(t *testing.T) {
 }
 
 func BenchmarkGomponents(b *testing.B) {
-	buf := bytebufferpool.Get()
+	var buf bytes.Buffer
 
 	for i := 0; i < b.N; i++ {
-		gomponents.Page(testData).Render(buf)
+		gomponents.Page(testData).Render(&buf)
 		buf.Reset()
 	}
 }

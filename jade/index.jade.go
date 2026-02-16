@@ -3,8 +3,9 @@
 package jade
 
 import (
+	"bytes"
+
 	"github.com/SlinSo/goTemplateBenchmark/model"
-	pool "github.com/valyala/bytebufferpool"
 )
 
 const (
@@ -24,7 +25,7 @@ const (
 	index__15 = ` messages</p>`
 )
 
-func Index(u *model.User, nav []*model.Navigation, title string, buffer *pool.ByteBuffer) {
+func Index(u *model.User, nav []*model.Navigation, title string, buffer *bytes.Buffer) {
 
 	buffer.WriteString(index__0)
 	WriteEscString(title, buffer)

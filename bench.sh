@@ -134,8 +134,8 @@ _updateDeps() {
     # update jade manually
     go install -v github.com/Joker/jade/cmd/jade@latest
 
-    jade -d jade/ jade/simple.jade
-    jade -d jade/ jade/index.jade
+    jade -stdbuf -d jade/ jade/simple.jade
+    jade -stdbuf -d jade/ jade/index.jade
 
     go install github.com/OblivionOcean/Goh@main
 

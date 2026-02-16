@@ -1,11 +1,11 @@
 package golang
 
 import (
+	"bytes"
 	"html"
 	"net/http"
 
 	"github.com/SlinSo/goTemplateBenchmark/model"
-	"github.com/valyala/bytebufferpool"
 )
 
 type TemplateFunc func(string)
@@ -21,10 +21,10 @@ type Me http.Handler
 type Me2 http.HandlerFunc
 
 type GoFunc struct {
-	bb *bytebufferpool.ByteBuffer
+	bb *bytes.Buffer
 }
 
-func NewGoFunc(buf *bytebufferpool.ByteBuffer) *GoFunc {
+func NewGoFunc(buf *bytes.Buffer) *GoFunc {
 	return &GoFunc{bb: buf}
 }
 
@@ -138,7 +138,7 @@ func GoFuncFunc(g *GoFunc, u *model.User) {
 }
 
 // WriteSimpleGolang golang funcion based template
-func WriteSimpleGolang(bb *bytebufferpool.ByteBuffer, u *model.User) {
+func WriteSimpleGolang(bb *bytes.Buffer, u *model.User) {
 	_, _ = bb.WriteString(`
 <html>
     <body>

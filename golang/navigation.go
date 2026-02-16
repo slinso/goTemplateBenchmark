@@ -1,13 +1,13 @@
 package golang
 
 import (
+	"bytes"
 	"html"
 
 	"github.com/SlinSo/goTemplateBenchmark/model"
-	"github.com/valyala/bytebufferpool"
 )
 
-func Navigation(bb *bytebufferpool.ByteBuffer, nav []*model.Navigation) {
+func Navigation(bb *bytes.Buffer, nav []*model.Navigation) {
 	_, _ = bb.WriteString(`<ul class="navigation">`)
 	for _, item := range nav {
 		_, _ = bb.WriteString(`<li><a href="`)
