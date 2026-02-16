@@ -7,7 +7,7 @@ import (
 	"io"
 
 	"github.com/SlinSo/goTemplateBenchmark/model"
-	"github.com/gouniverse/hb"
+	"github.com/dracory/hb"
 )
 
 func HbSimple(w io.Writer, u *model.User) {

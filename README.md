@@ -24,7 +24,7 @@ comparing the performance of different template engines
 - [Jade](https://github.com/Joker/jade)
 - [templ](https://github.com/a-h/templ)
 - [gomponents](https://github.com/maragudk/gomponents)
-- [hb](https://github.com/gouniverse/hb)
+- [hb](https://github.com/dracory/hb)
 
 ## baseline benchmarks for comparison
 
