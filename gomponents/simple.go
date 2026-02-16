@@ -9,11 +9,11 @@ import (
 func Page(u *model.User) g.Node {
 	return HTML(
 		Body(
-			H1(g.Raw(u.FirstName)),
-			P(g.Raw("Here's a list of your favorite colors:")),
+			H1(g.Text(u.FirstName)),
+			P(g.Text("Here's a list of your favorite colors:")),
 			Ul(
 				g.Map(u.FavoriteColors, func(colorname string) g.Node {
-					return Li(g.Raw(colorname))
+					return Li(g.Text(colorname))
 				}),
 			),
 		),
